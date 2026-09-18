@@ -1,0 +1,82 @@
+version: 2
+
+sources:
+  - name: salesforce_fsc
+    database: "{{ var('source_database') }}"
+    schema: SALESFORCE_FSC
+    description: "Salesforce Financial Services Cloud - CRM and client relationship data"
+    tables:
+      - name: account
+        description: "Client accounts - households, individuals, trusts, businesses"
+        columns:
+          - name: account_id
+            tests: [unique, not_null]
+      - name: contact
+        description: "People linked to accounts - demographics, risk tolerance"
+        columns:
+          - name: contact_id
+            tests: [unique, not_null]
+      - name: financial_account
+        description: "Investment accounts (IRA, brokerage, trust, etc.)"
+        columns:
+          - name: financial_account_id
+            tests: [unique, not_null]
+      - name: opportunity
+        description: "Sales pipeline - new assets, rollovers, referrals"
+      - name: task
+        description: "Advisor activities - calls, meetings, reviews"
+      - name: financial_goal
+        description: "Client financial goals - retirement, education, wealth transfer"
+      - name: advisor
+        description: "Financial advisors with CRD, rep code, branch"
+        columns:
+          - name: advisor_id
+            tests: [unique, not_null]
+      - name: advisor_team
+        description: "Named advisor teams with lead and region"
+      - name: advisor_team_member
+        description: "Advisor-to-team assignments with role"
+
+  - name: performance_system
+    database: "{{ var('source_database') }}"
+    schema: PERFORMANCE_SYSTEM
+    description: "Portfolio performance, benchmarks, and model portfolios"
+    tables:
+      - name: account
+        description: "Performance-tracked accounts with model and custodian linkage"
+        columns:
+          - name: account_number
+            tests: [unique, not_null]
+      - name: portfolio_return
+        description: "Monthly TWR/IRR returns by account vs benchmark"
+      - name: portfolio_holdings
+        description: "Current security-level holdings per account"
+      - name: benchmark
+        description: "Benchmark definitions (index, blended, custom)"
+      - name: benchmark_return
+        description: "Monthly benchmark return series"
+      - name: model_portfolio
+        description: "Model portfolios with target allocations and risk profiles"
+      - name: model_allocation
+        description: "Security-level target weights within each model"
+
+  - name: custodian
+    database: "{{ var('source_database') }}"
+    schema: CUSTODIAN
+    description: "Custodial back-office data - positions, transactions, fees"
+    tables:
+      - name: custodial_account
+        description: "Custodial account registrations with rep and branch codes"
+        columns:
+          - name: account_number
+            tests: [unique, not_null]
+      - name: position
+        description: "Daily security positions with cost basis"
+      - name: transaction
+        description: "Trades, dividends, fees, transfers over 12 months"
+      - name: cash_balance
+        description: "Cash and money market balances per account"
+      - name: fee_billing
+        description: "Quarterly advisory fee calculations and debits"
+      - name: tax_lot
+        description: "Tax lot detail with holding period and wash sale flags"

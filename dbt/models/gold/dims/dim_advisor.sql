@@ -1,0 +1,21 @@
+select
+    advisor_id as advisor_key,
+    advisor_id,
+    advisor_name,
+    first_name,
+    last_name,
+    email,
+    role,
+    crd_number,
+    rep_code,
+    branch_name,
+    team_id,
+    team_name,
+    region,
+    role_in_team,
+    client_count,
+    total_aum,
+    avg_aum_per_client,
+    is_active,
+    hire_date
+from {{ ref('slv_advisor_book') }}
