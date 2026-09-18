@@ -1,0 +1,9 @@
+manifest_version: 2
+type: DCM_PROJECT
+default_target: 'DEV'
+
+targets:
+  DEV:
+    account_identifier: LTA38753
+    project_name: 'KEVANS_WH_RIA_AI_READY.PUBLIC.RIA_INFRASTRUCTURE'
+    project_owner: ACCOUNTADMIN
