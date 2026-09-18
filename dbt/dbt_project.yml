@@ -1,0 +1,51 @@
+name: 'cowork_wm_ria'
+version: '1.0.0'
+
+profile: 'cowork_wm_ria'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+vars:
+  source_database: KEVANS_WH_RIA
+  target_database: KEVANS_WH_RIA_AI_READY
+
+models:
+  cowork_wm_ria:
+    bronze:
+      +materialized: view
+      +schema: BRONZE
+    silver:
+      intermediary:
+        +materialized: table
+        +schema: SILVER
+      canonical:
+        +materialized: table
+        +schema: SILVER
+    gold:
+      cortex_ready:
+        dims:
+          +materialized: table
+          +schema: GOLD
+        facts:
+          +materialized: table
+          +schema: GOLD
+      cortex_agent:
+        +materialized: table
+        +schema: GOLD_AGENT
+      visual:
+        +materialized: table
+        +schema: GOLD_VISUAL
+
+snapshots:
+  cowork_wm_ria:
+    +target_database: KEVANS_WH_RIA_AI_READY
+    +target_schema: SNAPSHOTS

@@ -1,0 +1,32 @@
+definition_version: "2"
+mixins:
+  snowflake_connection:
+    project_definition:
+      default_connection: default
+
+entities:
+  dcm:
+    type: database-change-management
+    path: dcm/
+
+  dbt:
+    type: dbt
+    path: dbt/
+
+  advisor_dashboard:
+    type: streamlit
+    path: streamlit/advisor_dashboard/
+    main_file: streamlit_app.py
+    query_warehouse: COMPUTE_WH
+
+  client_portal:
+    type: streamlit
+    path: streamlit/client_portal/
+    main_file: streamlit_app.py
+    query_warehouse: COMPUTE_WH
+
+  portfolio_analytics:
+    type: streamlit
+    path: streamlit/portfolio_analytics/
+    main_file: streamlit_app.py
+    query_warehouse: COMPUTE_WH
