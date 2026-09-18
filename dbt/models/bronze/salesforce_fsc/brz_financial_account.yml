@@ -1,0 +1,29 @@
+version: 2
+models:
+  - name: brz_financial_account
+    description: "Salesforce FSC Financial Account - investment accounts (IRA, brokerage, trust)"
+    columns:
+      - name: record_pk
+        description: "Surrogate key (MD5 of financial_account_id)"
+        tests: [unique, not_null]
+      - name: financial_account_id
+        description: "Salesforce Financial Account ID (natural key)"
+        tests: [unique, not_null]
+      - name: account_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('brz_account')
+              field: account_id
+      - name: contact_id
+        tests:
+          - relationships:
+              to: ref('brz_contact')
+              field: contact_id
+      - name: account_type
+        tests:
+          - accepted_values:
+              values: ['Brokerage', 'Traditional IRA', 'Roth IRA', 'SEP IRA', '401k Rollover', 'Trust']
+      - name: change_key
+        description: "MD5 hash of all non-key columns for change detection"
+        tests: [not_null]

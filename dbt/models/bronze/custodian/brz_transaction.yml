@@ -1,0 +1,24 @@
+version: 2
+models:
+  - name: brz_transaction
+    description: "Custodian transactions - buys, sells, dividends, fees, transfers (12 months)"
+    columns:
+      - name: record_pk
+        description: "Surrogate key (MD5 of transaction_id)"
+        tests: [unique, not_null]
+      - name: transaction_id
+        description: "Transaction record ID (natural key)"
+        tests: [unique, not_null]
+      - name: account_number
+        tests:
+          - not_null
+          - relationships:
+              to: ref('brz_custodial_account')
+              field: account_number
+      - name: transaction_type
+        tests:
+          - accepted_values:
+              values: ['Buy', 'Sell', 'Dividend', 'Interest', 'Fee', 'Transfer In', 'Transfer Out']
+      - name: change_key
+        description: "MD5 hash of all non-key columns for change detection"
+        tests: [not_null]

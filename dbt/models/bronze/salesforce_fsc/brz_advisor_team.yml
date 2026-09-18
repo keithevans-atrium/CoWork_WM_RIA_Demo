@@ -1,0 +1,19 @@
+version: 2
+models:
+  - name: brz_advisor_team
+    description: "Salesforce FSC Advisor Team - named teams with lead advisor and region"
+    columns:
+      - name: record_pk
+        description: "Surrogate key (MD5 of team_id)"
+        tests: [unique, not_null]
+      - name: team_id
+        description: "Salesforce Team ID (natural key)"
+        tests: [unique, not_null]
+      - name: team_lead_advisor_id
+        tests:
+          - relationships:
+              to: ref('brz_advisor')
+              field: advisor_id
+      - name: change_key
+        description: "MD5 hash of all non-key columns for change detection"
+        tests: [not_null]
