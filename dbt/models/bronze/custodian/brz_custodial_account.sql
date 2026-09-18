@@ -1,4 +1,5 @@
 select
+    {{ generate_pk(['account_number']) }} as record_pk,
     custodial_account_id,
     account_number,
     account_title,
@@ -12,5 +13,9 @@ select
     date_closed,
     margin_approved,
     options_level,
-    loaded_at
+    loaded_at,
+    {{ generate_change_key([
+        'account_title', 'registration_type', 'custodian_code', 'rep_code', 'branch_code',
+        'status', 'date_opened', 'date_closed', 'margin_approved', 'options_level'
+    ]) }} as change_key
 from {{ source('custodian', 'custodial_account') }}

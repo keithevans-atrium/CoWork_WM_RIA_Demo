@@ -1,4 +1,5 @@
 select
+    {{ generate_pk(['contact_id']) }} as record_pk,
     contact_id,
     account_id,
     first_name,
@@ -19,5 +20,11 @@ select
     investment_experience,
     is_primary_contact,
     created_date,
-    last_modified_date
+    last_modified_date,
+    {{ generate_change_key([
+        'account_id', 'first_name', 'last_name', 'email', 'phone', 'mobile_phone',
+        'mailing_state', 'mailing_city', 'mailing_zip', 'date_of_birth',
+        'employment_status', 'employer_name', 'occupation', 'risk_tolerance',
+        'investment_experience', 'is_primary_contact'
+    ]) }} as change_key
 from {{ source('salesforce_fsc', 'contact') }}
