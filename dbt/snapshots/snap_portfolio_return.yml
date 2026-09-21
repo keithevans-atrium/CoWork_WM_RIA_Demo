@@ -1,0 +1,11 @@
+snapshots:
+  - name: snap_portfolio_return
+    description: "SCD Type 2 history for portfolio return changes (MTD, YTD, 1yr returns)"
+    relation: ref('brz_portfolio_return')
+    config:
+      schema: SNAPSHOTS
+      unique_key: record_pk
+      strategy: check
+      check_cols:
+        - change_key
+      hard_deletes: new_record

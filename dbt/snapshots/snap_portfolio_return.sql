@@ -1,0 +1,20 @@
+select
+    record_pk,
+    return_id,
+    account_number,
+    portfolio_id,
+    as_of_date,
+    mtd_return,
+    qtd_return,
+    ytd_return,
+    itd_return,
+    one_year_return,
+    three_year_return,
+    five_year_return,
+    benchmark_id,
+    benchmark_mtd_return,
+    benchmark_ytd_return,
+    benchmark_one_year_return,
+    return_method,
+    change_key
+from {{ ref('brz_portfolio_return') }}

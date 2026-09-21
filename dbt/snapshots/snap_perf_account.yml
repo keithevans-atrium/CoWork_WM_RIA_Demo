@@ -1,0 +1,11 @@
+snapshots:
+  - name: snap_perf_account
+    description: "SCD Type 2 history for performance account changes (market value, model, status)"
+    relation: ref('brz_perf_account')
+    config:
+      schema: SNAPSHOTS
+      unique_key: record_pk
+      strategy: check
+      check_cols:
+        - change_key
+      hard_deletes: new_record

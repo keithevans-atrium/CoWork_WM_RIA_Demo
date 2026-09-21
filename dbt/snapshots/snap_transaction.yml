@@ -1,0 +1,11 @@
+snapshots:
+  - name: snap_transaction
+    description: "SCD Type 2 history for transaction changes (amounts, cancel status)"
+    relation: ref('brz_transaction')
+    config:
+      schema: SNAPSHOTS
+      unique_key: record_pk
+      strategy: check
+      check_cols:
+        - change_key
+      hard_deletes: new_record
