@@ -1,5 +1,5 @@
 snapshots:
-  - name: snap_portfolio_holdings
+  - name: snap_perf_portfolio_holdings
     description: "SCD Type 2 history for holdings changes (quantity, value, weight, cost basis)"
     relation: ref('raw_portfolio_holdings')
     config:

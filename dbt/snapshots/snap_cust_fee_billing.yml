@@ -1,7 +1,7 @@
 snapshots:
-  - name: snap_position
-    description: "SCD Type 2 history for position changes (quantity, price, market value, cost basis)"
-    relation: ref('raw_position')
+  - name: snap_cust_fee_billing
+    description: "SCD Type 2 history for fee billing changes (amount, rate, status)"
+    relation: ref('raw_fee_billing')
     config:
       schema: SNAPSHOTS
       unique_key: record_pk

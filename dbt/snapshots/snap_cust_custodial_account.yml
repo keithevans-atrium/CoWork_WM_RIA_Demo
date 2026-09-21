@@ -1,5 +1,5 @@
 snapshots:
-  - name: snap_custodial_account
+  - name: snap_cust_custodial_account
     description: "SCD Type 2 history for custodial account changes (status, rep code, branch, margin/options)"
     relation: ref('raw_custodial_account')
     config:

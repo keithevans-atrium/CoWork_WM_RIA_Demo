@@ -1,1 +1,1 @@
-{{ stage_snapshot(ref('snap_position'), 'record_pk') }}
+{{ stage_snapshot(ref('snap_cust_position'), 'record_pk') }}

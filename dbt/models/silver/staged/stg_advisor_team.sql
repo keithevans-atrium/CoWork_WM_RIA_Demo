@@ -1,1 +1,1 @@
-{{ stage_snapshot(ref('snap_advisor_team'), 'record_pk') }}
+{{ stage_snapshot(ref('snap_fsc_advisor_team'), 'record_pk') }}

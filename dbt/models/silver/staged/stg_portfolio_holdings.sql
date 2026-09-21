@@ -1,1 +1,1 @@
-{{ stage_snapshot(ref('snap_portfolio_holdings'), 'record_pk') }}
+{{ stage_snapshot(ref('snap_perf_portfolio_holdings'), 'record_pk') }}

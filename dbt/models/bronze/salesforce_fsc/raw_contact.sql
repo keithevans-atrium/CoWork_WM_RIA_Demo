@@ -21,6 +21,9 @@ select
     is_primary_contact,
     created_date,
     last_modified_date,
+    'salesforce_fsc' as _source_system,
+    current_timestamp() as _loaded_at,
+    'CONTACT' as _record_source,
     {{ generate_change_key([
         'account_id', 'first_name', 'last_name', 'email', 'phone', 'mobile_phone',
         'mailing_state', 'mailing_city', 'mailing_zip', 'date_of_birth',

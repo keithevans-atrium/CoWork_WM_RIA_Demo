@@ -17,6 +17,9 @@ select
     is_discretionary,
     created_date,
     last_modified_date,
+    'salesforce_fsc' as _source_system,
+    current_timestamp() as _loaded_at,
+    'FINANCIAL_ACCOUNT' as _record_source,
     {{ generate_change_key([
         'account_id', 'contact_id', 'financial_account_name', 'financial_account_number',
         'account_type', 'registration_type', 'custodian_name', 'status', 'balance',

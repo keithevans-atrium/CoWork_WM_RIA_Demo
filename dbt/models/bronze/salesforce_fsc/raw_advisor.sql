@@ -16,6 +16,9 @@ select
     termination_date,
     created_date,
     last_modified_date,
+    'salesforce_fsc' as _source_system,
+    current_timestamp() as _loaded_at,
+    'ADVISOR' as _record_source,
     {{ generate_change_key([
         'first_name', 'last_name', 'email', 'phone', 'role', 'crd_number',
         'rep_code', 'branch_name', 'manager_id', 'is_active', 'hire_date', 'termination_date'

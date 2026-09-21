@@ -1,1 +1,1 @@
-{{ stage_snapshot(ref('snap_benchmark'), 'record_pk') }}
+{{ stage_snapshot(ref('snap_perf_benchmark'), 'record_pk') }}

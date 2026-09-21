@@ -22,56 +22,56 @@ select
     fsc_account.account_id,
     fin_acct.financial_account_number as account_number,
 
-    -- first_name: all sources + resolved
-    fsc_contact.first_name as fsc_first_name,
-    null as perf_first_name,
-    null as cust_first_name,
-    {{ resolve_attribute([('fsc_contact', 'first_name')], 'resolved_first_name') }},
+    -- first_name: source attribution + resolved
+    fsc_contact.first_name                          as fsc_first_name,
+    null                                            as perf_first_name,
+    null                                            as cust_first_name,
+    coalesce(fsc_contact.first_name)                as resolved_first_name,
 
-    -- last_name: all sources + resolved
-    fsc_contact.last_name as fsc_last_name,
-    null as perf_last_name,
-    null as cust_last_name,
-    {{ resolve_attribute([('fsc_contact', 'last_name')], 'resolved_last_name') }},
+    -- last_name: source attribution + resolved
+    fsc_contact.last_name                           as fsc_last_name,
+    null                                            as perf_last_name,
+    null                                            as cust_last_name,
+    coalesce(fsc_contact.last_name)                 as resolved_last_name,
 
-    -- email: all sources + resolved
-    fsc_contact.email as fsc_email,
-    fsc_account.email as fsc_account_email,
-    {{ resolve_attribute([('fsc_contact', 'email'), ('fsc_account', 'email')], 'resolved_email') }},
+    -- email: source attribution + resolved
+    fsc_contact.email                               as fsc_contact_email,
+    fsc_account.email                               as fsc_account_email,
+    coalesce(fsc_contact.email, fsc_account.email)  as resolved_email,
 
-    -- phone: all sources + resolved
-    fsc_contact.phone as fsc_contact_phone,
-    fsc_account.phone as fsc_account_phone,
-    {{ resolve_attribute([('fsc_contact', 'phone'), ('fsc_account', 'phone')], 'resolved_phone') }},
+    -- phone: source attribution + resolved
+    fsc_contact.phone                               as fsc_contact_phone,
+    fsc_account.phone                               as fsc_account_phone,
+    coalesce(fsc_contact.phone, fsc_account.phone)  as resolved_phone,
 
-    -- address: FSC is source of truth
-    fsc_account.billing_state as fsc_state,
-    fsc_contact.mailing_state as fsc_contact_state,
-    {{ resolve_attribute([('fsc_account', 'billing_state'), ('fsc_contact', 'mailing_state')], 'resolved_state') }},
+    -- address: source attribution + resolved
+    fsc_account.billing_state                       as fsc_billing_state,
+    fsc_contact.mailing_state                       as fsc_mailing_state,
+    coalesce(fsc_account.billing_state, fsc_contact.mailing_state) as resolved_state,
 
-    fsc_account.billing_city as fsc_city,
-    {{ resolve_attribute([('fsc_account', 'billing_city')], 'resolved_city') }},
+    fsc_account.billing_city                        as fsc_city,
+    coalesce(fsc_account.billing_city)              as resolved_city,
 
-    fsc_account.billing_zip as fsc_zip,
-    {{ resolve_attribute([('fsc_account', 'billing_zip')], 'resolved_zip') }},
+    fsc_account.billing_zip                         as fsc_zip,
+    coalesce(fsc_account.billing_zip)               as resolved_zip,
 
     -- account_name: FSC vs custodian
-    fsc_account.account_name as fsc_account_name,
-    cust.account_title as cust_account_name,
-    {{ resolve_attribute([('fsc_account', 'account_name'), ('cust', 'account_title')], 'resolved_account_name') }},
+    fsc_account.account_name                        as fsc_account_name,
+    cust.account_title                              as cust_account_name,
+    coalesce(fsc_account.account_name, cust.account_title) as resolved_account_name,
 
     -- registration: FSC vs custodian
-    fin_acct.registration_type as fsc_registration_type,
-    cust.registration_type as cust_registration_type,
-    {{ resolve_attribute([('fin_acct', 'registration_type'), ('cust', 'registration_type')], 'resolved_registration_type') }},
+    fin_acct.registration_type                      as fsc_registration_type,
+    cust.registration_type                          as cust_registration_type,
+    coalesce(fin_acct.registration_type, cust.registration_type) as resolved_registration_type,
 
-    -- status: all sources
-    fsc_account.is_active as fsc_is_active,
-    fin_acct.status as fsc_account_status,
-    perf.status as perf_status,
-    cust.status as cust_status,
+    -- status: all sources exposed
+    fsc_account.is_active                           as fsc_is_active,
+    fin_acct.status                                 as fsc_account_status,
+    perf.status                                     as perf_status,
+    cust.status                                     as cust_status,
 
-    -- client attributes (FSC only)
+    -- client attributes (FSC only, no resolution needed)
     fsc_account.account_type,
     fsc_account.client_segment,
     fsc_account.service_model,
@@ -91,7 +91,7 @@ select
     -- performance-specific
     perf.model_id,
     perf.total_market_value,
-    perf.advisor_code as perf_advisor_code,
+    perf.advisor_code                               as perf_advisor_code,
 
     -- resolution metadata
     case

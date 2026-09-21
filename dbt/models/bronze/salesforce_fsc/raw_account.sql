@@ -19,6 +19,9 @@ select
     is_active,
     created_date,
     last_modified_date,
+    'salesforce_fsc' as _source_system,
+    current_timestamp() as _loaded_at,
+    'ACCOUNT' as _record_source,
     {{ generate_change_key([
         'account_name', 'account_type', 'record_type', 'owner_id', 'parent_account_id',
         'financial_account_count', 'aum', 'billing_state', 'billing_city', 'billing_zip',

@@ -1,7 +1,7 @@
 snapshots:
-  - name: snap_portfolio_return
-    description: "SCD Type 2 history for portfolio return changes (MTD, YTD, 1yr returns)"
-    relation: ref('raw_portfolio_return')
+  - name: snap_fsc_advisor_team
+    description: "SCD Type 2 history for advisor team changes (lead, branch, region)"
+    relation: ref('raw_advisor_team')
     config:
       schema: SNAPSHOTS
       unique_key: record_pk

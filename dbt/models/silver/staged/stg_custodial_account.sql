@@ -1,1 +1,1 @@
-{{ stage_snapshot(ref('snap_custodial_account'), 'record_pk') }}
+{{ stage_snapshot(ref('snap_cust_custodial_account'), 'record_pk') }}

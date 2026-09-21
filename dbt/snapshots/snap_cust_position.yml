@@ -1,7 +1,7 @@
 snapshots:
-  - name: snap_account
-    description: "SCD Type 2 history for FSC account changes (segment, AUM, advisor, service model)"
-    relation: ref('raw_account')
+  - name: snap_cust_position
+    description: "SCD Type 2 history for position changes (quantity, price, market value, cost basis)"
+    relation: ref('raw_position')
     config:
       schema: SNAPSHOTS
       unique_key: record_pk

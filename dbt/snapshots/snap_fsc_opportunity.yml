@@ -1,5 +1,5 @@
 snapshots:
-  - name: snap_opportunity
+  - name: snap_fsc_opportunity
     description: "SCD Type 2 history for opportunity changes (stage, amount, probability)"
     relation: ref('raw_opportunity')
     config:
