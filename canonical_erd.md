@@ -362,24 +362,24 @@ All history tables include `version_number`, `valid_from`, `valid_to`, `is_curre
 
 | Canonical Table | dbt Model | Layer |
 |----------------|-----------|-------|
-| CLIENT | `slv_client` | silver/canonical |
-| ADVISOR | `slv_advisor` | silver/canonical |
-| ACCOUNT | `slv_account` | silver/canonical |
-| SECURITY | `slv_security` | silver/canonical |
-| POSITION | `slv_position` | silver/canonical |
-| FEE | `slv_fee` | silver/canonical |
-| CLIENT_ADVISOR | `slv_client_advisor` | silver/canonical |
-| CLIENT_ACCOUNT | `slv_client_account` | silver/canonical |
-| ADVISOR_TEAM | `slv_advisor_team` | silver/canonical |
-| ACCOUNT_MODEL | `slv_account_model` | silver/canonical |
-| CLIENT_HISTORY | `slv_client_history` | silver/canonical |
-| ADVISOR_HISTORY | `slv_advisor_history` | silver/canonical |
-| ACCOUNT_HISTORY | `slv_account_history` | silver/canonical |
-| POSITION_HISTORY | `slv_position_history` | silver/canonical |
-| TRANSACTION | `slv_transaction` | silver/canonical |
-| RETURN_RECORD | `slv_return_record` | silver/canonical |
-| OPPORTUNITY | `slv_opportunity` | silver/canonical |
-| FINANCIAL_GOAL | `slv_financial_goal` | silver/canonical |
-| BENCHMARK | `slv_benchmark` | silver/canonical |
-| MODEL_PORTFOLIO | `slv_model_portfolio` | silver/canonical |
-| MODEL_BENCHMARK | `slv_model_benchmark` | silver/canonical |
+| CLIENT | `client` | silver/canonical |
+| ADVISOR | `advisor` | silver/canonical |
+| ACCOUNT | `account` | silver/canonical |
+| SECURITY | `security` | silver/canonical |
+| POSITION | `position` | silver/canonical |
+| FEE | `fee` | silver/canonical |
+| CLIENT_ADVISOR | `client_advisor` | silver/canonical |
+| CLIENT_ACCOUNT | `client_account` | silver/canonical |
+| ADVISOR_TEAM | `advisor_team` | silver/canonical |
+| ACCOUNT_MODEL | `account_model` | silver/canonical |
+| CLIENT_HISTORY | `client_history` | silver/canonical |
+| ADVISOR_HISTORY | `advisor_history` | silver/canonical |
+| ACCOUNT_HISTORY | `account_history` | silver/canonical |
+| POSITION_HISTORY | `position_history` | silver/canonical |
+| TRANSACTION | `transaction` | silver/canonical |
+| RETURN_RECORD | `return_record` | silver/canonical |
+| OPPORTUNITY | `opportunity` | silver/canonical |
+| FINANCIAL_GOAL | `financial_goal` | silver/canonical |
+| BENCHMARK | `benchmark` | silver/canonical |
+| MODEL_PORTFOLIO | `model_portfolio` | silver/canonical |
+| MODEL_BENCHMARK | `model_benchmark` | silver/canonical |

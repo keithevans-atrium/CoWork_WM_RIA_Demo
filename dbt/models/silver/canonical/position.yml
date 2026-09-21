@@ -1,6 +1,6 @@
 version: 2
 models:
-  - name: slv_position
+  - name: position
     description: "Canonical position entity - holdings enriched with custodian pricing and benchmark"
     columns:
       - name: holding_id

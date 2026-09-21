@@ -109,12 +109,12 @@ FINANCIAL_ACCOUNT  ─────────► ACCOUNT  ◄──────
 
 | Ontology Entity | Canonical Model | Gold Model |
 |----------------|-----------------|------------|
-| CLIENT | `slv_client` | `dim_client` |
-| ADVISOR | `slv_advisor_book` | `dim_advisor` |
-| ACCOUNT | `slv_account_value` | `dim_account` |
-| POSITION | `slv_position` | — |
+| CLIENT | `client` | `dim_client` |
+| ADVISOR | `advisor_book` | `dim_advisor` |
+| ACCOUNT | `account_value` | `dim_account` |
+| POSITION | `position` | — |
 | SECURITY | — | `dim_security` |
 | TRANSACTION | — | `fct_transaction` |
-| FEE | `slv_fee_detail` | `fct_fee_billing` |
+| FEE | `fee_detail` | `fct_fee_billing` |
 | RETURN | — | `fct_portfolio_return` |
 | AUM (aggregate) | — | `agg_aum_summary` |

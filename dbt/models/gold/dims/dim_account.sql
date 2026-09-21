@@ -24,4 +24,4 @@ select
     cash_balance,
     total_cash,
     available_to_trade
-from {{ ref('slv_account_value') }}
+from {{ ref('account_value') }}

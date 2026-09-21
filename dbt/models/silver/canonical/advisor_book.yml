@@ -1,6 +1,6 @@
 version: 2
 models:
-  - name: slv_advisor_book
+  - name: advisor_book
     description: "Canonical advisor entity - advisor + team + aggregated book metrics"
     columns:
       - name: advisor_id

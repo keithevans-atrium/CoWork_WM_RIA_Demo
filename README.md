@@ -17,8 +17,8 @@ KEVANS_WH_RIA (Source)                    KEVANS_WH_RIA_AI_READY (Target)
 ### Data Flow (DAG)
 
 ```
-raw_ ──► snap_ ──► stg_ ──► res_ ──► slv_ ──► dim_ / fct_ / agg_
-(bronze)  (snapshot) (staged)  (resolved) (canonical) (gold)
+raw_ ──► snap_ ──► stg_ ──► res_ ──► {domain} ──► dim_ / fct_ / agg_
+(bronze)  (snapshot) (staged)  (resolved) (canonical)    (gold)
    │                    │          │           │            │
    │                    │          │           │            └─ Consumption: dims, facts, KPIs
    │                    │          │           └─ Canonical business entities
@@ -62,7 +62,7 @@ CoWork_WM_RIA_Demo/
 │   │   │   ├── resolved/                  # Layer 2b: Attribution resolution
 │   │   │   │                              #   res_client (source values + golden record)
 │   │   │   └── canonical/                 # Layer 2c: Normalized business entities
-│   │   │                                  #   slv_client, slv_account_value, slv_position, ...
+│   │   │                                  #   client, account_value, position, ...
 │   │   │
 │   │   └── gold/                          # Layer 3: Consumption
 │   │       ├── dims/                      #   dim_client, dim_advisor, dim_account, dim_security
@@ -92,7 +92,7 @@ CoWork_WM_RIA_Demo/
 | Snapshots | 14 | `snap_{src}_` | SCD Type 2 with `hard_deletes: new_record`, check strategy on `change_key` |
 | Staged | 14 | `stg_{src}_` | Adds `version_number`, `reverse_version_number`, `is_current` |
 | Resolved | 1 | `res_` | Attribution resolution — exposes each source's value + resolved golden record |
-| Canonical | 5 | `slv_` | Normalized business entities (Client, Account Value, Position, Advisor Book, Fee Detail) |
+| Canonical | 5 | `` | Normalized business entities (Client, Account Value, Position, Advisor Book, Fee Detail) |
 | Gold Dims | 4 | `dim_` | `dim_client`, `dim_advisor`, `dim_account`, `dim_security` |
 | Gold Facts | 3 | `fct_` | `fct_portfolio_return`, `fct_transaction`, `fct_fee_billing` |
 | Gold Agg | 1 | `agg_` | `agg_aum_summary` |

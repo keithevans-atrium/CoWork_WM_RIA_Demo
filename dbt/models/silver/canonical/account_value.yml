@@ -1,6 +1,6 @@
 version: 2
 models:
-  - name: slv_account_value
+  - name: account_value
     description: "Canonical account value entity - financial account + performance + custodian + cash"
     columns:
       - name: financial_account_id

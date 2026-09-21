@@ -1,6 +1,6 @@
 version: 2
 models:
-  - name: slv_client
+  - name: client
     description: "Canonical client entity - FSC account + primary contact + advisor + team"
     columns:
       - name: account_id

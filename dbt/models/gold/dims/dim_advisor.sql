@@ -18,4 +18,4 @@ select
     avg_aum_per_client,
     is_active,
     hire_date
-from {{ ref('slv_advisor_book') }}
+from {{ ref('advisor_book') }}

@@ -22,4 +22,4 @@ select
     is_active,
     created_date,
     last_modified_date
-from {{ ref('slv_client') }}
+from {{ ref('client') }}

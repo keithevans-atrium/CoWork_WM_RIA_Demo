@@ -14,4 +14,4 @@ select
     f.sfdc_account_id,
     f.custodian_name,
     round(f.fee_amount * 4, 2) as annualized_fee
-from {{ ref('slv_fee_detail') }} f
+from {{ ref('fee_detail') }} f

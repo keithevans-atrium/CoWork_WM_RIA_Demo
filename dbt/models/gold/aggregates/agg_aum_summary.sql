@@ -12,7 +12,7 @@ select
     avg(av.total_market_value) as avg_account_value,
     sum(case when av.is_discretionary then av.total_market_value else 0 end) as discretionary_aum,
     sum(case when not av.is_discretionary then av.total_market_value else 0 end) as non_discretionary_aum
-from {{ ref('slv_client') }} c
-left join {{ ref('slv_account_value') }} av
+from {{ ref('client') }} c
+left join {{ ref('account_value') }} av
     on av.sfdc_account_id = c.account_id
 group by 1, 2, 3, 4, 5

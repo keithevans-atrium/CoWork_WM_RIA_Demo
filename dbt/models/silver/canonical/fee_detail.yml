@@ -1,6 +1,6 @@
 version: 2
 models:
-  - name: slv_fee_detail
+  - name: fee_detail
     description: "Canonical fee entity - custodian billing joined with FSC account metadata"
     columns:
       - name: fee_id
