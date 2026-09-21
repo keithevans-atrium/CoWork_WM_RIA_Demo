@@ -1,0 +1,84 @@
+version: 2
+
+seeds:
+  - name: seed_client_segment
+    description: "Client wealth segmentation (UHNW, HNW, Mass Affluent, Emerging)"
+    columns: &seed_columns
+      - name: code
+        tests: [unique, not_null]
+      - name: label
+        tests: [not_null]
+      - name: is_active
+        tests: [not_null]
+
+  - name: seed_service_model
+    description: "Client service delivery model"
+    columns: *seed_columns
+
+  - name: seed_risk_tolerance
+    description: "Client risk tolerance spectrum (Conservative to Aggressive)"
+    columns: *seed_columns
+
+  - name: seed_investment_experience
+    description: "Client investment knowledge level"
+    columns: *seed_columns
+
+  - name: seed_account_type
+    description: "Account entity type (Individual, Household, Joint, Trust, Business)"
+    columns: *seed_columns
+
+  - name: seed_registration_type
+    description: "Custodial account registration type (IRA, Roth, Joint WROS, Trust, etc.)"
+    columns: *seed_columns
+
+  - name: seed_account_status
+    description: "Account lifecycle status (Open, Closed, Pending)"
+    columns: *seed_columns
+
+  - name: seed_custodian
+    description: "Custodian platform codes (SCHW, PERS, FIDL)"
+    columns: *seed_columns
+
+  - name: seed_fee_schedule
+    description: "Fee schedule tier (Standard, Premium, Custom)"
+    columns: *seed_columns
+
+  - name: seed_asset_class
+    description: "Investment asset class classification"
+    columns: *seed_columns
+
+  - name: seed_sector
+    description: "Security sector classification"
+    columns: *seed_columns
+
+  - name: seed_security_type
+    description: "Security instrument type (Equity, ETF, Mutual Fund, etc.)"
+    columns: *seed_columns
+
+  - name: seed_transaction_type
+    description: "Custodian transaction type (Buy, Sell, Dividend, Fee, Transfer)"
+    columns: *seed_columns
+
+  - name: seed_opportunity_stage
+    description: "Sales pipeline stage (Prospecting to Closed Won/Lost)"
+    columns: *seed_columns
+
+  - name: seed_task_type
+    description: "Advisor activity type (Call, Meeting, Email, Review)"
+    columns: *seed_columns
+
+  - name: seed_fee_type
+    description: "Advisory fee type (Management, Financial Planning, Performance)"
+    columns: *seed_columns
+
+  - name: seed_model_risk_profile
+    description: "Model portfolio risk classification"
+    columns: *seed_columns
+
+  - name: seed_benchmark_type
+    description: "Benchmark construction type (Index, Blended, Custom)"
+    columns: *seed_columns
+
+  - name: seed_return_method
+    description: "Portfolio return calculation methodology (TWR, IRR)"
+    columns: *seed_columns

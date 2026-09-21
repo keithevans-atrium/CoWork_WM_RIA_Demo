@@ -1,0 +1,3 @@
+code,label,description,sort_order,is_active
+TWR,Time-Weighted Return,Eliminates impact of cash flows for manager comparison,1,true
+IRR,Internal Rate of Return,Includes impact of cash flow timing for investor experience,2,true

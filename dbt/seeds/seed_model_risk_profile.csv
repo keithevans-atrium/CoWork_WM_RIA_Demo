@@ -1,0 +1,6 @@
+code,label,description,sort_order,is_active
+CONSERVATIVE,Conservative,Low risk - preservation of capital,1,true
+MODERATE,Moderate,Balanced growth and income,2,true
+MODERATE_GROWTH,Moderate Growth,Growth-tilted balanced,3,true
+GROWTH,Growth,Primarily equity-focused,4,true
+AGGRESSIVE,Aggressive,Maximum growth tolerance for high volatility,5,true

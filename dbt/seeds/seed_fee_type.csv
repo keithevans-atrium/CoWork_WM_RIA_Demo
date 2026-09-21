@@ -1,0 +1,4 @@
+code,label,description,sort_order,is_active
+MANAGEMENT_FEE,Management Fee,Percentage-of-AUM advisory fee,1,true
+FINANCIAL_PLANNING,Financial Planning,Flat or hourly financial planning fee,2,true
+PERFORMANCE_FEE,Performance Fee,Fee based on performance above a hurdle rate,3,true

@@ -1,0 +1,4 @@
+code,label,description,sort_order,is_active
+INDEX,Index,Single market index (e.g. S&P 500),1,true
+BLENDED,Blended,Weighted mix of multiple indices,2,true
+CUSTOM,Custom,Custom-built benchmark for specific strategy,3,true

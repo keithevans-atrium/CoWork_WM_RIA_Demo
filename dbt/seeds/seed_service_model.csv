@@ -1,0 +1,5 @@
+code,label,description,sort_order,is_active
+FULL_SERVICE,Full Service,Comprehensive wealth management with dedicated advisor,1,true
+ADVISORY,Advisory,Investment advisory with periodic reviews,2,true
+DIGITAL,Digital,Self-directed with digital tools and robo-advice,3,true
+HYBRID,Hybrid,Combination of digital and advisor-led services,4,true

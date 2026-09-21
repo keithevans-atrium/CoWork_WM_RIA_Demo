@@ -1,0 +1,8 @@
+code,label,description,sort_order,is_active
+BUY,Buy,Purchase of securities,1,true
+SELL,Sell,Sale of securities,2,true
+DIVIDEND,Dividend,Dividend distribution received,3,true
+INTEREST,Interest,Interest income received,4,true
+FEE,Fee,Advisory or custodial fee debit,5,true
+TRANSFER_IN,Transfer In,Assets transferred into the account,6,true
+TRANSFER_OUT,Transfer Out,Assets transferred out of the account,7,true

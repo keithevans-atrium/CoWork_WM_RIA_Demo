@@ -1,0 +1,7 @@
+code,label,description,sort_order,is_active
+PROSPECTING,Prospecting,Initial identification of potential client,1,true
+DISCOVERY,Discovery,Needs analysis and fact-finding,2,true
+PROPOSAL,Proposal,Investment proposal presented,3,true
+NEGOTIATION,Negotiation,Terms and fees under discussion,4,true
+CLOSED_WON,Closed Won,Client signed and assets incoming,5,true
+CLOSED_LOST,Closed Lost,Opportunity did not convert,6,true

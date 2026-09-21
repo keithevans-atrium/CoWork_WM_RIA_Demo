@@ -1,0 +1,4 @@
+code,label,description,sort_order,is_active
+OPEN,Open,Active and in good standing,1,true
+CLOSED,Closed,Account closed and fully liquidated,2,true
+PENDING,Pending,Account opened but not yet funded,3,true

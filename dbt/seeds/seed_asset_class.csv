@@ -1,0 +1,8 @@
+code,label,description,sort_order,is_active
+US_EQUITY,US Equity,Domestic equities and equity funds,1,true
+INTERNATIONAL_EQUITY,International Equity,Developed market international equities,2,true
+EMERGING_MARKETS,Emerging Markets,Emerging market equities and funds,3,true
+FIXED_INCOME,Fixed Income,Bonds and fixed income instruments,4,true
+ALTERNATIVES,Alternatives,Alternative investments including commodities,5,true
+REAL_ESTATE,Real Estate,REITs and real estate funds,6,true
+CASH,Cash,Cash and cash equivalents,7,true

@@ -1,0 +1,5 @@
+code,label,description,sort_order,is_active
+UHNW,Ultra High Net Worth,Assets over $5M,1,true
+HNW,High Net Worth,Assets $1M - $5M,2,true
+MASS_AFFLUENT,Mass Affluent,Assets $250K - $1M,3,true
+EMERGING,Emerging,Assets under $250K,4,true

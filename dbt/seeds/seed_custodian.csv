@@ -1,0 +1,4 @@
+code,label,description,sort_order,is_active
+SCHW,Charles Schwab,Schwab Advisor Services custodian,1,true
+PERS,Pershing,BNY Pershing custodian,2,true
+FIDL,Fidelity,Fidelity Institutional custodian,3,true

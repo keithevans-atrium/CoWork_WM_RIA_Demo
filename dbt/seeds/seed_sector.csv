@@ -1,0 +1,9 @@
+code,label,description,sort_order,is_active
+TECHNOLOGY,Technology,Information technology and software,1,true
+HEALTHCARE,Healthcare,Healthcare and pharmaceuticals,2,true
+FINANCIALS,Financials,Banks and financial services,3,true
+BROAD_MARKET,Broad Market,Diversified broad market exposure,4,true
+REIT,REIT,Real estate investment trusts,5,true
+COMMODITIES,Commodities,Physical commodities and commodity funds,6,true
+INFLATION_PROTECTED,Inflation Protected,TIPS and inflation-linked bonds,7,true
+CASH,Cash,Money market and cash equivalents,8,true

@@ -1,0 +1,5 @@
+code,label,description,sort_order,is_active
+BEGINNER,Beginner,Limited investment knowledge,1,true
+INTERMEDIATE,Intermediate,Basic understanding of markets and products,2,true
+EXPERIENCED,Experienced,Strong knowledge of investment strategies,3,true
+SOPHISTICATED,Sophisticated,Deep expertise including alternatives and derivatives,4,true

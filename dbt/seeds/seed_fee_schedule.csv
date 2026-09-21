@@ -1,0 +1,4 @@
+code,label,description,sort_order,is_active
+STANDARD,Standard,Standard fee schedule up to 1% AUM,1,true
+PREMIUM,Premium,Reduced fee for HNW and UHNW clients,2,true
+CUSTOM,Custom,Negotiated fee schedule,3,true

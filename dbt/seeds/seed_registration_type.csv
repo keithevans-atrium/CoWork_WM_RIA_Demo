@@ -1,0 +1,9 @@
+code,label,description,sort_order,is_active
+INDIVIDUAL,Individual,Single owner non-retirement account,1,true
+JOINT_WROS,Joint WROS,Joint with right of survivorship,2,true
+REVOCABLE_TRUST,Revocable Trust,Revocable living trust,3,true
+IRA,Traditional IRA,Traditional individual retirement account,4,true
+ROTH_IRA,Roth IRA,Roth individual retirement account,5,true
+SEP_IRA,SEP IRA,Simplified employee pension IRA,6,true
+401K_ROLLOVER,401k Rollover,Rolled over employer retirement plan,7,true
+CUSTODIAL,Custodial,UTMA/UGMA custodial account for minor,8,true

@@ -1,0 +1,6 @@
+code,label,description,sort_order,is_active
+CALL,Call,Phone call with client or prospect,1,true
+MEETING,Meeting,In-person or virtual meeting,2,true
+EMAIL,Email,Email correspondence,3,true
+REVIEW,Review,Portfolio or account review,4,true
+ADMINISTRATIVE,Administrative,Internal administrative task,5,true

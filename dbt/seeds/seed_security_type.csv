@@ -1,0 +1,6 @@
+code,label,description,sort_order,is_active
+EQUITY,Equity,Individual stocks,1,true
+ETF,ETF,Exchange-traded funds,2,true
+MUTUAL_FUND,Mutual Fund,Open-end mutual funds,3,true
+FIXED_INCOME,Fixed Income,Individual bonds and notes,4,true
+CASH,Cash,Cash and money market instruments,5,true

@@ -1,0 +1,6 @@
+code,label,description,sort_order,is_active
+INDIVIDUAL,Individual,Single person account,1,true
+HOUSEHOLD,Household,Family or household grouping,2,true
+JOINT,Joint,Joint account with multiple owners,3,true
+TRUST,Trust,Trust entity account,4,true
+BUSINESS,Business,Business or corporate account,5,true
