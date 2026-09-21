@@ -24,7 +24,7 @@ models:
       +materialized: view
       +schema: BRONZE
     silver:
-      intermediary:
+      staged:
         +materialized: table
         +schema: SILVER
       canonical:
