@@ -1,6 +1,6 @@
 version: 2
 models:
-  - name: brz_portfolio_return
+  - name: raw_portfolio_return
     description: "Monthly TWR/IRR portfolio returns vs benchmark"
     columns:
       - name: record_pk
@@ -13,7 +13,7 @@ models:
         tests:
           - not_null
           - relationships:
-              to: ref('brz_perf_account')
+              to: ref('raw_perf_account')
               field: account_number
       - name: as_of_date
         tests: [not_null]

@@ -1,6 +1,6 @@
 version: 2
 models:
-  - name: brz_contact
+  - name: raw_contact
     description: "Salesforce FSC Contact - people linked to accounts with demographics and risk profile"
     columns:
       - name: record_pk
@@ -13,7 +13,7 @@ models:
         tests:
           - not_null
           - relationships:
-              to: ref('brz_account')
+              to: ref('raw_account')
               field: account_id
       - name: risk_tolerance
         tests:

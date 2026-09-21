@@ -1,7 +1,7 @@
 snapshots:
   - name: snap_financial_account
     description: "SCD Type 2 history for financial account changes (balance, model, fee rate, status)"
-    relation: ref('brz_financial_account')
+    relation: ref('raw_financial_account')
     config:
       schema: SNAPSHOTS
       unique_key: record_pk

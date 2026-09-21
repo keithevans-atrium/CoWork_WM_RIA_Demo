@@ -12,4 +12,4 @@ select
     management_fee_rate,
     is_discretionary,
     change_key
-from {{ ref('brz_financial_account') }}
+from {{ ref('raw_financial_account') }}

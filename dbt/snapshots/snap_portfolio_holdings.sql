@@ -16,4 +16,4 @@ select
     unrealized_gain_loss,
     weight_pct,
     change_key
-from {{ ref('brz_portfolio_holdings') }}
+from {{ ref('raw_portfolio_holdings') }}

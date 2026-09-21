@@ -1,6 +1,6 @@
 version: 2
 models:
-  - name: brz_benchmark
+  - name: raw_benchmark
     description: "Benchmark definitions - index, blended, custom"
     columns:
       - name: record_pk

@@ -11,4 +11,4 @@ select
     debit_date,
     status,
     change_key
-from {{ ref('brz_fee_billing') }}
+from {{ ref('raw_fee_billing') }}

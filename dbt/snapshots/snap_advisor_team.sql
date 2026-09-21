@@ -7,4 +7,4 @@ select
     region,
     is_active,
     change_key
-from {{ ref('brz_advisor_team') }}
+from {{ ref('raw_advisor_team') }}

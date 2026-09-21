@@ -13,4 +13,4 @@ select
     total_market_value,
     as_of_date,
     change_key
-from {{ ref('brz_perf_account') }}
+from {{ ref('raw_perf_account') }}

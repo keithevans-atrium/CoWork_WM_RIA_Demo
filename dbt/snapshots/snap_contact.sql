@@ -14,4 +14,4 @@ select
     investment_experience,
     is_primary_contact,
     change_key
-from {{ ref('brz_contact') }}
+from {{ ref('raw_contact') }}

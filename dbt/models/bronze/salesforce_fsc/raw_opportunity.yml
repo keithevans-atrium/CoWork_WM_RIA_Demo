@@ -1,6 +1,6 @@
 version: 2
 models:
-  - name: brz_opportunity
+  - name: raw_opportunity
     description: "Salesforce FSC Opportunity - sales pipeline (new assets, rollovers, referrals)"
     columns:
       - name: record_pk
@@ -12,7 +12,7 @@ models:
       - name: account_id
         tests:
           - relationships:
-              to: ref('brz_account')
+              to: ref('raw_account')
               field: account_id
       - name: stage
         tests:

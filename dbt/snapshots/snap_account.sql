@@ -14,4 +14,4 @@ select
     relationship_start_date,
     is_active,
     change_key
-from {{ ref('brz_account') }}
+from {{ ref('raw_account') }}

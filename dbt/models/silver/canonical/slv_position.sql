@@ -19,15 +19,15 @@ select
     p.accrued_income,
     b.benchmark_name,
     b.benchmark_type
-from {{ ref('brz_portfolio_holdings') }} h
-left join {{ ref('brz_position') }} p
+from {{ ref('raw_portfolio_holdings') }} h
+left join {{ ref('raw_position') }} p
     on p.account_number = h.account_number
     and p.cusip = h.cusip
     and p.as_of_date = h.as_of_date
-left join {{ ref('brz_benchmark') }} b
+left join {{ ref('raw_benchmark') }} b
     on b.benchmark_id = (
         select pa.model_id
-        from {{ ref('brz_perf_account') }} pa
+        from {{ ref('raw_perf_account') }} pa
         where pa.account_number = h.account_number
         limit 1
     )

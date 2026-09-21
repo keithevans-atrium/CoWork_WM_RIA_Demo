@@ -1,6 +1,6 @@
 version: 2
 models:
-  - name: brz_transaction
+  - name: raw_transaction
     description: "Custodian transactions - buys, sells, dividends, fees, transfers (12 months)"
     columns:
       - name: record_pk
@@ -13,7 +13,7 @@ models:
         tests:
           - not_null
           - relationships:
-              to: ref('brz_custodial_account')
+              to: ref('raw_custodial_account')
               field: account_number
       - name: transaction_type
         tests:

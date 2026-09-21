@@ -14,4 +14,4 @@ select
     cost_basis_method,
     accrued_income,
     change_key
-from {{ ref('brz_position') }}
+from {{ ref('raw_position') }}

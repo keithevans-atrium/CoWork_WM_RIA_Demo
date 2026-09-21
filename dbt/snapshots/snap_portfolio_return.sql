@@ -17,4 +17,4 @@ select
     benchmark_one_year_return,
     return_method,
     change_key
-from {{ ref('brz_portfolio_return') }}
+from {{ ref('raw_portfolio_return') }}

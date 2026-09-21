@@ -1,7 +1,7 @@
 snapshots:
   - name: snap_portfolio_holdings
     description: "SCD Type 2 history for holdings changes (quantity, value, weight, cost basis)"
-    relation: ref('brz_portfolio_holdings')
+    relation: ref('raw_portfolio_holdings')
     config:
       schema: SNAPSHOTS
       unique_key: record_pk

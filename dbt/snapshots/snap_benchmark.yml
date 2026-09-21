@@ -1,7 +1,7 @@
 snapshots:
   - name: snap_benchmark
     description: "SCD Type 2 history for benchmark definition changes (name, type, asset class)"
-    relation: ref('brz_benchmark')
+    relation: ref('raw_benchmark')
     config:
       schema: SNAPSHOTS
       unique_key: record_pk

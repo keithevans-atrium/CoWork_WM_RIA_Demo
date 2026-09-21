@@ -12,4 +12,4 @@ select
     margin_approved,
     options_level,
     change_key
-from {{ ref('brz_custodial_account') }}
+from {{ ref('raw_custodial_account') }}

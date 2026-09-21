@@ -12,4 +12,4 @@ select
     hire_date,
     termination_date,
     change_key
-from {{ ref('brz_advisor') }}
+from {{ ref('raw_advisor') }}

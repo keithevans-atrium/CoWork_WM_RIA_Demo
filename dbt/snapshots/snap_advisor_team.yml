@@ -1,7 +1,7 @@
 snapshots:
   - name: snap_advisor_team
     description: "SCD Type 2 history for advisor team changes (lead, branch, region)"
-    relation: ref('brz_advisor_team')
+    relation: ref('raw_advisor_team')
     config:
       schema: SNAPSHOTS
       unique_key: record_pk

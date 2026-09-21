@@ -17,6 +17,6 @@ select
     t.cancel_status,
     ca.custodian_code,
     ca.rep_code
-from {{ ref('brz_transaction') }} t
-left join {{ ref('brz_custodial_account') }} ca
+from {{ ref('raw_transaction') }} t
+left join {{ ref('raw_custodial_account') }} ca
     on ca.account_number = t.account_number

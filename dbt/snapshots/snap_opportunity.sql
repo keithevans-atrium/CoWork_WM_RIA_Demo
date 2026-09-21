@@ -12,4 +12,4 @@ select
     lead_source,
     advisor_id,
     change_key
-from {{ ref('brz_opportunity') }}
+from {{ ref('raw_opportunity') }}

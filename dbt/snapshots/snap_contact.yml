@@ -1,7 +1,7 @@
 snapshots:
   - name: snap_contact
     description: "SCD Type 2 history for FSC contact changes (demographics, risk tolerance, employment)"
-    relation: ref('brz_contact')
+    relation: ref('raw_contact')
     config:
       schema: SNAPSHOTS
       unique_key: record_pk

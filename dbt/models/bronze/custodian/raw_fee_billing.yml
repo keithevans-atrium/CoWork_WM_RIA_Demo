@@ -1,6 +1,6 @@
 version: 2
 models:
-  - name: brz_fee_billing
+  - name: raw_fee_billing
     description: "Quarterly advisory fee calculations and debit records"
     columns:
       - name: record_pk
@@ -13,7 +13,7 @@ models:
         tests:
           - not_null
           - relationships:
-              to: ref('brz_custodial_account')
+              to: ref('raw_custodial_account')
               field: account_number
       - name: fee_type
         tests:

@@ -7,4 +7,4 @@ select
     asset_class,
     is_active,
     change_key
-from {{ ref('brz_benchmark') }}
+from {{ ref('raw_benchmark') }}

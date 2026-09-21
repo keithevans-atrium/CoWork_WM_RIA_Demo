@@ -28,10 +28,10 @@ select
     t.region,
     a.created_date,
     a.last_modified_date
-from {{ ref('brz_account') }} a
-left join {{ ref('brz_contact') }} c
+from {{ ref('raw_account') }} a
+left join {{ ref('raw_contact') }} c
     on c.account_id = a.account_id and c.is_primary_contact = true
-left join {{ ref('brz_advisor') }} adv
+left join {{ ref('raw_advisor') }} adv
     on adv.advisor_id = a.advisor_id
-left join {{ ref('brz_advisor_team') }} t
+left join {{ ref('raw_advisor_team') }} t
     on t.team_lead_advisor_id = adv.advisor_id

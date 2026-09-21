@@ -1,6 +1,6 @@
 version: 2
 models:
-  - name: brz_advisor
+  - name: raw_advisor
     description: "Salesforce FSC Advisor - financial advisors with CRD, rep code, branch"
     columns:
       - name: record_pk

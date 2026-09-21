@@ -13,8 +13,8 @@ select
     ca.rep_code,
     fa.account_id as sfdc_account_id,
     fa.custodian_name
-from {{ ref('brz_fee_billing') }} fb
-left join {{ ref('brz_custodial_account') }} ca
+from {{ ref('raw_fee_billing') }} fb
+left join {{ ref('raw_custodial_account') }} ca
     on ca.account_number = fb.account_number
-left join {{ ref('brz_financial_account') }} fa
+left join {{ ref('raw_financial_account') }} fa
     on fa.financial_account_number = fb.account_number

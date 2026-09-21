@@ -1,7 +1,7 @@
 snapshots:
   - name: snap_fee_billing
     description: "SCD Type 2 history for fee billing changes (amount, rate, status)"
-    relation: ref('brz_fee_billing')
+    relation: ref('raw_fee_billing')
     config:
       schema: SNAPSHOTS
       unique_key: record_pk

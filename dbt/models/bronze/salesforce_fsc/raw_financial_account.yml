@@ -1,6 +1,6 @@
 version: 2
 models:
-  - name: brz_financial_account
+  - name: raw_financial_account
     description: "Salesforce FSC Financial Account - investment accounts (IRA, brokerage, trust)"
     columns:
       - name: record_pk
@@ -13,12 +13,12 @@ models:
         tests:
           - not_null
           - relationships:
-              to: ref('brz_account')
+              to: ref('raw_account')
               field: account_id
       - name: contact_id
         tests:
           - relationships:
-              to: ref('brz_contact')
+              to: ref('raw_contact')
               field: contact_id
       - name: account_type
         tests:

@@ -1,7 +1,7 @@
 snapshots:
   - name: snap_position
     description: "SCD Type 2 history for position changes (quantity, price, market value, cost basis)"
-    relation: ref('brz_position')
+    relation: ref('raw_position')
     config:
       schema: SNAPSHOTS
       unique_key: record_pk

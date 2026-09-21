@@ -1,7 +1,7 @@
 snapshots:
   - name: snap_opportunity
     description: "SCD Type 2 history for opportunity changes (stage, amount, probability)"
-    relation: ref('brz_opportunity')
+    relation: ref('raw_opportunity')
     config:
       schema: SNAPSHOTS
       unique_key: record_pk

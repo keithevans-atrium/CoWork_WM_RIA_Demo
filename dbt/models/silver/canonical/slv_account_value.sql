@@ -26,10 +26,10 @@ select
     cb.money_market_balance,
     cb.total_cash,
     cb.available_to_trade
-from {{ ref('brz_financial_account') }} fa
-left join {{ ref('brz_perf_account') }} pa
+from {{ ref('raw_financial_account') }} fa
+left join {{ ref('raw_perf_account') }} pa
     on pa.account_number = fa.financial_account_number
-left join {{ ref('brz_custodial_account') }} ca
+left join {{ ref('raw_custodial_account') }} ca
     on ca.account_number = fa.financial_account_number
 left join {{ source('custodian', 'cash_balance') }} cb
     on cb.account_number = fa.financial_account_number

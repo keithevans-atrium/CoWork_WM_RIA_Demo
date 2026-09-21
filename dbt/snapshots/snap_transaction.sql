@@ -16,4 +16,4 @@ select
     fees,
     cancel_status,
     change_key
-from {{ ref('brz_transaction') }}
+from {{ ref('raw_transaction') }}

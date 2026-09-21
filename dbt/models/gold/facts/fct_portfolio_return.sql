@@ -19,6 +19,6 @@ select
     r.ytd_return - r.benchmark_ytd_return as ytd_excess_return,
     r.one_year_return - r.benchmark_one_year_return as one_year_excess_return,
     r.return_method
-from {{ ref('brz_portfolio_return') }} r
-left join {{ ref('brz_benchmark') }} b
+from {{ ref('raw_portfolio_return') }} r
+left join {{ ref('raw_benchmark') }} b
     on b.benchmark_id = r.benchmark_id
