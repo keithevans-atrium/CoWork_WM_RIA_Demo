@@ -1,0 +1,21 @@
+version: 2
+models:
+  - name: res_return_record
+    description: "Attribution resolution for returns - Performance returns enriched with benchmark names and FSC context"
+    columns:
+      - name: return_id
+        tests: [unique, not_null]
+      - name: account_number
+        tests: [not_null]
+      - name: as_of_date
+        tests: [not_null]
+      - name: mtd_excess_return
+        description: "MTD portfolio return minus benchmark"
+      - name: ytd_excess_return
+        description: "YTD portfolio return minus benchmark"
+      - name: match_status
+        tests:
+          - accepted_values:
+              values: ['PERF_FSC_MATCHED', 'PERF_ONLY', 'UNMATCHED']
+      - name: resolved_at
+        tests: [not_null]

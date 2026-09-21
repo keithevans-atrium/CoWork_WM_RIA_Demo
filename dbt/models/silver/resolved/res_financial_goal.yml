@@ -1,0 +1,19 @@
+version: 2
+models:
+  - name: res_financial_goal
+    description: "Attribution resolution for financial goal - FSC only (single source), with progress calculation"
+    columns:
+      - name: goal_id
+        tests: [unique, not_null]
+      - name: client_id
+        tests: [not_null]
+      - name: resolved_goal_type
+        tests: [not_null]
+      - name: progress_pct
+        description: "Percent of target achieved (current_amount / target_amount * 100)"
+      - name: match_status
+        tests:
+          - accepted_values:
+              values: ['FSC_ONLY']
+      - name: resolved_at
+        tests: [not_null]

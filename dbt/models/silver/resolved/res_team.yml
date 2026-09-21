@@ -1,0 +1,15 @@
+version: 2
+models:
+  - name: res_team
+    description: "Attribution resolution for team - FSC only (single source)"
+    columns:
+      - name: team_id
+        tests: [unique, not_null]
+      - name: resolved_team_name
+        tests: [not_null]
+      - name: match_status
+        tests:
+          - accepted_values:
+              values: ['FSC_ONLY']
+      - name: resolved_at
+        tests: [not_null]

@@ -1,0 +1,17 @@
+version: 2
+models:
+  - name: res_transaction
+    description: "Attribution resolution for transaction - Custodian transactions enriched with FSC account context"
+    columns:
+      - name: transaction_id
+        tests: [unique, not_null]
+      - name: account_number
+        tests: [not_null]
+      - name: resolved_transaction_type
+        tests: [not_null]
+      - name: match_status
+        tests:
+          - accepted_values:
+              values: ['CUST_FSC_MATCHED', 'CUST_ONLY', 'UNMATCHED']
+      - name: resolved_at
+        tests: [not_null]

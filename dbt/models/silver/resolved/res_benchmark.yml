@@ -1,0 +1,15 @@
+version: 2
+models:
+  - name: res_benchmark
+    description: "Attribution resolution for benchmark - Performance system only (single source)"
+    columns:
+      - name: benchmark_id
+        tests: [unique, not_null]
+      - name: resolved_benchmark_name
+        tests: [not_null]
+      - name: match_status
+        tests:
+          - accepted_values:
+              values: ['PERF_ONLY']
+      - name: resolved_at
+        tests: [not_null]

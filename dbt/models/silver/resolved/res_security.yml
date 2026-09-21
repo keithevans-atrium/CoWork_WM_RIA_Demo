@@ -1,0 +1,15 @@
+version: 2
+models:
+  - name: res_security
+    description: "Attribution resolution for security - Performance holdings vs Custodian position security data"
+    columns:
+      - name: resolved_ticker
+        tests: [unique, not_null]
+      - name: resolved_cusip
+        tests: [not_null]
+      - name: match_status
+        tests:
+          - accepted_values:
+              values: ['BOTH_MATCHED', 'PERF_ONLY', 'CUST_ONLY', 'UNMATCHED']
+      - name: resolved_at
+        tests: [not_null]

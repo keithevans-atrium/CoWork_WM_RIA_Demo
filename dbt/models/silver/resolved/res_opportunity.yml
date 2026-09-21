@@ -1,0 +1,19 @@
+version: 2
+models:
+  - name: res_opportunity
+    description: "Attribution resolution for opportunity - FSC only (single source)"
+    columns:
+      - name: opportunity_id
+        tests: [unique, not_null]
+      - name: client_id
+        tests: [not_null]
+      - name: resolved_stage
+        tests:
+          - accepted_values:
+              values: ['Prospecting', 'Discovery', 'Proposal', 'Negotiation', 'Closed Won', 'Closed Lost']
+      - name: match_status
+        tests:
+          - accepted_values:
+              values: ['FSC_ONLY']
+      - name: resolved_at
+        tests: [not_null]

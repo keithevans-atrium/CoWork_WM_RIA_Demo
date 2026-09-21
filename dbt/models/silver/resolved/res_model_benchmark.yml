@@ -1,0 +1,13 @@
+version: 2
+models:
+  - name: res_model_benchmark
+    description: "Relationship: which model portfolio is measured by which benchmark (temporal)"
+    columns:
+      - name: model_benchmark_id
+        tests: [unique, not_null]
+      - name: model_id
+        tests: [not_null]
+      - name: benchmark_id
+        tests: [not_null]
+      - name: is_current
+        tests: [not_null]
