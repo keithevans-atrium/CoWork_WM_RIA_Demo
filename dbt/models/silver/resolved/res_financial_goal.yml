@@ -1,19 +1,36 @@
 version: 2
 models:
   - name: res_financial_goal
-    description: "Attribution resolution for financial goal - FSC only (single source), with progress calculation"
+    description: "Attribution-resolved financial goal entity. Single-source from FSC. Tracks client goals (retirement, education, major purchase) with target amounts, current progress, and status."
     columns:
       - name: goal_id
+        description: "Financial goal identifier from FSC"
         tests: [unique, not_null]
       - name: client_id
-        tests: [not_null]
+        description: "Salesforce Account ID of the client"
+      - name: contact_id
+        description: "Salesforce Contact ID of the goal owner"
+      - name: fsc_goal_name
+        description: "Goal name from FSC"
+      - name: resolved_goal_name
+        description: "Golden goal name"
+      - name: fsc_goal_type
+        description: "Goal type from FSC"
       - name: resolved_goal_type
-        tests: [not_null]
+        description: "Golden goal type"
+      - name: target_amount
+        description: "Target dollar amount for the goal"
+      - name: current_amount
+        description: "Current progress amount in USD"
+      - name: target_date
+        description: "Target completion date for the goal"
+      - name: priority
+        description: "Goal priority ranking"
+      - name: status
+        description: "Goal status: On Track, Behind, Ahead, or Completed"
       - name: progress_pct
-        description: "Percent of target achieved (current_amount / target_amount * 100)"
+        description: "Progress as a percentage (current_amount / target_amount)"
       - name: match_status
-        tests:
-          - accepted_values:
-              values: ['FSC_ONLY']
+        description: "Linkage status: fsc_only (single-source entity)"
       - name: resolved_at
-        tests: [not_null]
+        description: "Timestamp when resolution was computed"

@@ -1,26 +1,90 @@
 version: 2
 models:
   - name: res_account_value
-    description: "Attribution resolution for account value - FSC balance vs Performance market value vs Custodian, with resolved golden record"
+    description: "Attribution-resolved account value entity. Merges FSC Financial Account, Performance System account, and Custodian account into a unified investment account view. Reconciles balances, fees, statuses, and operational details across all three systems."
     columns:
       - name: financial_account_id
-        description: "FSC Financial Account ID (master key)"
+        description: "Salesforce Financial Account ID"
         tests: [not_null]
       - name: account_number
-        description: "Cross-system account number"
+        description: "Custodian account number. Cross-system join key."
+      - name: fsc_account_name
+        description: "Account name from FSC"
+      - name: cust_account_name
+        description: "Account title from Custodian"
       - name: resolved_account_name
-        description: "Golden account name (priority: FSC > Custodian)"
+        description: "Golden account name: coalesce(fsc, cust)"
+      - name: fsc_registration_type
+        description: "Registration type from FSC"
+      - name: cust_registration_type
+        description: "Registration type from Custodian"
+      - name: resolved_registration_type
+        description: "Golden registration type"
+      - name: fsc_account_type
+        description: "Account type from FSC (IRA, Brokerage, etc.)"
+      - name: resolved_account_type
+        description: "Golden account type"
+      - name: fsc_balance
+        description: "Account balance from FSC"
+      - name: perf_market_value
+        description: "Total market value from Performance System"
       - name: resolved_market_value
-        description: "Golden market value (priority: Performance > FSC balance)"
+        description: "Golden market value: coalesce(perf, fsc)"
+      - name: fsc_custodian_name
+        description: "Custodian name from FSC"
+      - name: cust_custodian_code
+        description: "Custodian code from Custodian system"
       - name: resolved_custodian_code
-        description: "Golden custodian code (priority: Custodian > FSC name mapped)"
+        description: "Golden custodian code"
+      - name: fsc_status
+        description: "Account status from FSC"
+      - name: perf_status
+        description: "Account status from Performance System"
+      - name: cust_status
+        description: "Account status from Custodian"
       - name: resolved_status
-        description: "Golden status (priority: FSC > Performance > Custodian)"
+        description: "Golden status: coalesce(cust, perf, fsc)"
+      - name: fsc_fee_rate
+        description: "Management fee rate from FSC"
+      - name: perf_fee_schedule
+        description: "Fee schedule code from Performance System"
+      - name: resolved_fee_rate
+        description: "Golden fee rate"
+      - name: fsc_model_id
+        description: "Model portfolio ID from FSC"
+      - name: perf_model_id
+        description: "Model portfolio ID from Performance System"
       - name: resolved_model_id
-        description: "Golden model assignment (priority: Performance > FSC)"
+        description: "Golden model ID: coalesce(perf, fsc)"
+      - name: fsc_is_discretionary
+        description: "Discretionary flag from FSC"
+      - name: perf_is_discretionary
+        description: "Discretionary flag from Performance System"
+      - name: resolved_is_discretionary
+        description: "Golden discretionary flag"
+      - name: fsc_inception_date
+        description: "Inception date from FSC"
+      - name: cust_date_opened
+        description: "Date opened from Custodian"
+      - name: resolved_inception_date
+        description: "Golden inception date: coalesce(cust, fsc)"
+      - name: rep_code
+        description: "Advisor rep code from Custodian"
+      - name: branch_code
+        description: "Branch code from Custodian"
+      - name: margin_approved
+        description: "Margin approval status from Custodian"
+      - name: options_level
+        description: "Options trading level from Custodian"
+      - name: portfolio_id
+        description: "Portfolio ID from Performance System"
+      - name: perf_advisor_code
+        description: "Advisor code from Performance System"
+      - name: sfdc_account_id
+        description: "Salesforce Account ID (client household)"
+      - name: sfdc_contact_id
+        description: "Salesforce Contact ID (primary account holder)"
       - name: match_status
-        tests:
-          - accepted_values:
-              values: ['ALL_MATCHED', 'FSC_PERF', 'FSC_CUST', 'FSC_ONLY', 'UNMATCHED']
+        description: "Cross-system linkage quality: full_match, partial_match, or single-system"
       - name: resolved_at
-        tests: [not_null]
+        description: "Timestamp when resolution was computed"

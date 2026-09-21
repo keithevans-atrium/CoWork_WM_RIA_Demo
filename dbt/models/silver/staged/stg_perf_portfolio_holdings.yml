@@ -1,16 +1,64 @@
 version: 2
 models:
   - name: stg_perf_portfolio_holdings
-    description: "Staged snapshot with version tracking"
+    description: "Staged SCD2 history of Performance System portfolio holdings records. Tracks historical position-level snapshots including quantities, market values, cost basis, and asset allocation."
     columns:
       - name: record_pk
+        description: "MD5 surrogate key generated from holding_id"
         tests: [not_null]
+      - name: holding_id
+        description: "Unique holding record identifier"
+      - name: account_number
+        description: "Custodian-assigned account number"
+      - name: portfolio_id
+        description: "Portfolio identifier"
+      - name: as_of_date
+        description: "Date the holding snapshot was taken"
+      - name: security_id
+        description: "Performance system internal security identifier"
+      - name: ticker
+        description: "Exchange ticker symbol"
+      - name: cusip
+        description: "CUSIP identifier (9-character)"
+      - name: security_description
+        description: "Human-readable security name"
+      - name: asset_class
+        description: "Broad asset classification"
+      - name: sector
+        description: "Industry sector"
+      - name: quantity
+        description: "Number of shares or units held"
+      - name: market_value
+        description: "Current market value in USD"
+      - name: cost_basis
+        description: "Original purchase cost in USD"
+      - name: unrealized_gain_loss
+        description: "Unrealized gain or loss in USD"
+      - name: weight_pct
+        description: "Position weight as a percentage of total portfolio"
+      - name: loaded_at
+        description: "Source system load timestamp"
+      - name: _source_system
+        description: "Source system identifier: 'performance_system'"
+      - name: _loaded_at
+        description: "Bronze layer load timestamp"
+      - name: _record_source
+        description: "Source table name: 'PORTFOLIO_HOLDINGS'"
+      - name: change_key
+        description: "MD5 hash of business columns for change detection"
+      - name: dbt_scd_id
+        description: "dbt-generated unique ID for this SCD2 version row"
+      - name: dbt_updated_at
+        description: "Timestamp when this snapshot version was captured"
+      - name: dbt_valid_from
+        description: "Start of the validity window for this version"
+      - name: dbt_valid_to
+        description: "End of the validity window. NULL for current version."
+      - name: dbt_is_deleted
+        description: "Hard-delete flag"
       - name: version_number
-        description: "Ascending version (1 = original)"
-        tests: [not_null]
+        description: "Sequential version counter per record_pk (1 = first version)"
       - name: reverse_version_number
-        description: "Descending version (1 = latest)"
-        tests: [not_null]
+        description: "Reverse-ordered version counter (1 = most recent version)"
       - name: is_current
-        description: "True if this is the active, non-deleted version"
-        tests: [not_null]
+        description: "True if this is the active version"

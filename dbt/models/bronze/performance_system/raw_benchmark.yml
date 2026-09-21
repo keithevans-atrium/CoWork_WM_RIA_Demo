@@ -1,18 +1,30 @@
 version: 2
 models:
   - name: raw_benchmark
-    description: "Benchmark definitions - index, blended, custom"
+    description: "Raw Performance System benchmark reference records. Master list of market benchmarks used for portfolio performance comparison — S&P 500, Bloomberg Agg, MSCI EAFE, etc. Linked to portfolios via benchmark_id."
     columns:
       - name: record_pk
-        description: "Surrogate key (MD5 of benchmark_id)"
+        description: "MD5 surrogate key generated from benchmark_id"
         tests: [unique, not_null]
       - name: benchmark_id
-        description: "Benchmark ID (natural key)"
+        description: "Unique benchmark identifier from the performance system (e.g. 'BM001')"
         tests: [unique, not_null]
+      - name: benchmark_name
+        description: "Full name of the benchmark (e.g. 'S&P 500 Total Return', 'Bloomberg US Aggregate Bond')"
+      - name: benchmark_ticker
+        description: "Ticker symbol for the benchmark index (e.g. 'SPX', 'AGG', 'EFA')"
       - name: benchmark_type
-        tests:
-          - accepted_values:
-              values: ['Index', 'Blended', 'Custom']
+        description: "Classification: Equity, Fixed Income, Balanced, or Specialty"
+      - name: asset_class
+        description: "Primary asset class the benchmark represents: US Equity, International Equity, Fixed Income, or Multi-Asset"
+      - name: is_active
+        description: "Whether the benchmark is currently in use (true/false)"
+      - name: _source_system
+        description: "Source system identifier: 'performance_system'"
+      - name: _loaded_at
+        description: "Timestamp when this record was loaded into the bronze layer"
+      - name: _record_source
+        description: "Source table name: 'BENCHMARK'"
       - name: change_key
-        description: "MD5 hash of all non-key columns for change detection"
+        description: "MD5 hash of all non-key business columns for SCD2 change detection"
         tests: [not_null]

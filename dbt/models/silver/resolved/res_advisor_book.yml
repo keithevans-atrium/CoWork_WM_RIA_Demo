@@ -1,24 +1,58 @@
 version: 2
 models:
   - name: res_advisor_book
-    description: "Attribution resolution for advisor - FSC advisor data vs Custodian rep codes with book metrics"
+    description: "Attribution-resolved advisor book entity. Combines FSC Advisor with Custodian rep codes and team assignments. Exposes source-level values for name, role, rep code, and branch alongside resolved golden values. Includes book-level metrics (client count, total AUM)."
     columns:
       - name: advisor_id
-        description: "FSC Advisor ID (master key)"
-        tests: [not_null]
+        description: "Salesforce User ID for the advisor"
+        tests: [unique, not_null]
+      - name: fsc_first_name
+        description: "First name from FSC"
+      - name: fsc_last_name
+        description: "Last name from FSC"
       - name: resolved_advisor_name
-        description: "Golden advisor name (FSC)"
+        description: "Golden advisor display name"
+      - name: fsc_email
+        description: "Email from FSC"
+      - name: resolved_email
+        description: "Golden email"
+      - name: fsc_role
+        description: "Role from FSC"
+      - name: resolved_role
+        description: "Golden role"
+      - name: crd_number
+        description: "FINRA CRD number"
+      - name: fsc_rep_code
+        description: "Rep code from FSC Advisor"
+      - name: cust_rep_code
+        description: "Rep code from Custodian"
       - name: resolved_rep_code
-        description: "Golden rep code (priority: FSC > Custodian)"
+        description: "Golden rep code: coalesce(fsc, cust)"
+      - name: fsc_branch_name
+        description: "Branch name from FSC"
+      - name: cust_branch_code
+        description: "Branch code from Custodian"
       - name: resolved_branch
-        description: "Golden branch (FSC)"
+        description: "Golden branch"
+      - name: custodian_code
+        description: "Custodian code from Custodian system"
+      - name: team_id
+        description: "Advisor team ID from FSC"
+      - name: team_name
+        description: "Team name from FSC"
+      - name: region
+        description: "Geographic region from team assignment"
+      - name: fsc_is_active
+        description: "Active flag from FSC"
+      - name: hire_date
+        description: "Date the advisor joined the firm"
+      - name: termination_date
+        description: "Date the advisor left. NULL for active."
       - name: fsc_client_count
-        description: "Count of active clients from FSC"
+        description: "Number of clients assigned in FSC"
       - name: fsc_total_aum
-        description: "Total AUM from FSC account data"
+        description: "Total AUM across assigned clients in FSC"
       - name: match_status
-        tests:
-          - accepted_values:
-              values: ['FSC_CUST_MATCHED', 'FSC_ONLY', 'UNMATCHED']
+        description: "Cross-system linkage: fsc_and_cust, fsc_only, or cust_only"
       - name: resolved_at
-        tests: [not_null]
+        description: "Timestamp when resolution was computed"

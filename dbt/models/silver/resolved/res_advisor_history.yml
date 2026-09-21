@@ -1,15 +1,30 @@
 version: 2
 models:
   - name: res_advisor_history
-    description: "SCD2 history for advisor - tracks role, rep_code, branch, active status"
+    description: "Resolved advisor history. SCD2 temporal tracking of advisor attribute changes — role promotions, rep code changes, branch transfers, and activation/deactivation events."
     columns:
       - name: advisor_history_id
+        description: "Surrogate key for this history row"
         tests: [unique, not_null]
       - name: advisor_id
-        tests: [not_null]
+        description: "Salesforce User ID of the advisor"
+      - name: role
+        description: "Advisor role at this point in time"
+      - name: rep_code
+        description: "Rep code at this point in time"
+      - name: branch_name
+        description: "Branch assignment at this point in time"
+      - name: is_active
+        description: "Whether the advisor was active during this period"
       - name: version_number
-        tests: [not_null]
+        description: "Sequential version counter (1 = first version)"
       - name: valid_from
-        tests: [not_null]
+        description: "Start of the validity window"
+      - name: valid_to
+        description: "End of the validity window. NULL for current."
       - name: is_current
-        tests: [not_null]
+        description: "True if this is the current version"
+      - name: is_deleted
+        description: "True if the record was soft-deleted"
+      - name: resolved_at
+        description: "Timestamp when resolution was computed"

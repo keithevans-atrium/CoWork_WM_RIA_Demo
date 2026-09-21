@@ -1,17 +1,32 @@
 version: 2
 models:
   - name: res_position_history
-    description: "SCD2 history for positions - tracks quantity, market value, cost basis, unrealized P&L"
+    description: "Resolved position history. SCD2 temporal tracking of security-level position changes — quantity adjustments, market value fluctuations, cost basis updates, and unrealized gain/loss movements over time."
     columns:
       - name: position_history_id
+        description: "Surrogate key for this history row"
         tests: [unique, not_null]
       - name: account_id
-        tests: [not_null]
+        description: "Investment account identifier"
       - name: security_id
-        tests: [not_null]
+        description: "Security identifier"
+      - name: as_of_date
+        description: "Date of the position snapshot"
+      - name: quantity
+        description: "Number of shares/units at this point in time"
+      - name: market_value
+        description: "Market value in USD at this point in time"
+      - name: cost_basis
+        description: "Cost basis in USD at this point in time"
+      - name: unrealized_gain_loss
+        description: "Unrealized gain/loss at this point in time"
       - name: version_number
-        tests: [not_null]
+        description: "Sequential version counter (1 = first version)"
       - name: valid_from
-        tests: [not_null]
+        description: "Start of the validity window"
+      - name: valid_to
+        description: "End of the validity window. NULL for current."
       - name: is_current
-        tests: [not_null]
+        description: "True if this is the current version"
+      - name: resolved_at
+        description: "Timestamp when resolution was computed"

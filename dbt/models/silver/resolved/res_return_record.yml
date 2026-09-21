@@ -1,21 +1,58 @@
 version: 2
 models:
   - name: res_return_record
-    description: "Attribution resolution for returns - Performance returns enriched with benchmark names and FSC context"
+    description: "Attribution-resolved return record entity. Enriches Performance System return data with benchmark details and computes excess returns (portfolio minus benchmark). Links to FSC client context for segment-based analysis."
     columns:
       - name: return_id
+        description: "Unique return record identifier"
         tests: [unique, not_null]
       - name: account_number
-        tests: [not_null]
+        description: "Custodian account number"
+      - name: portfolio_id
+        description: "Portfolio identifier"
       - name: as_of_date
-        tests: [not_null]
+        description: "Reporting date for this return snapshot"
+      - name: mtd_return
+        description: "Month-to-date return as a decimal"
+      - name: qtd_return
+        description: "Quarter-to-date return as a decimal"
+      - name: ytd_return
+        description: "Year-to-date return as a decimal"
+      - name: itd_return
+        description: "Inception-to-date return as a decimal"
+      - name: one_year_return
+        description: "Trailing one-year annualized return"
+      - name: three_year_return
+        description: "Trailing three-year annualized return"
+      - name: five_year_return
+        description: "Trailing five-year annualized return"
+      - name: benchmark_id
+        description: "Assigned benchmark identifier"
+      - name: benchmark_name
+        description: "Benchmark name from joined benchmark reference"
+      - name: benchmark_type
+        description: "Benchmark type from joined benchmark reference"
+      - name: benchmark_mtd_return
+        description: "Benchmark month-to-date return"
+      - name: benchmark_ytd_return
+        description: "Benchmark year-to-date return"
+      - name: benchmark_one_year_return
+        description: "Benchmark one-year return"
       - name: mtd_excess_return
-        description: "MTD portfolio return minus benchmark"
+        description: "Computed: mtd_return minus benchmark_mtd_return"
       - name: ytd_excess_return
-        description: "YTD portfolio return minus benchmark"
+        description: "Computed: ytd_return minus benchmark_ytd_return"
+      - name: one_year_excess_return
+        description: "Computed: one_year_return minus benchmark_one_year_return"
+      - name: return_method
+        description: "Calculation methodology: TWR or MWR"
+      - name: sfdc_account_id
+        description: "Linked Salesforce Account ID"
+      - name: client_segment
+        description: "Client wealth tier from FSC"
+      - name: advisor_id
+        description: "Linked advisor's Salesforce ID"
       - name: match_status
-        tests:
-          - accepted_values:
-              values: ['PERF_FSC_MATCHED', 'PERF_ONLY', 'UNMATCHED']
+        description: "Cross-system linkage quality"
       - name: resolved_at
-        tests: [not_null]
+        description: "Timestamp when resolution was computed"

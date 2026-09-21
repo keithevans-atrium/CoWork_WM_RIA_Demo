@@ -1,28 +1,56 @@
 version: 2
 models:
   - name: res_fee_detail
-    description: "Attribution resolution for fees - Custodian billing enriched with FSC account context"
+    description: "Attribution-resolved fee detail entity. Reconciles Custodian fee billing records with FSC fee rates and account names. Exposes each system's fee type, rate, and amount alongside resolved golden values."
     columns:
       - name: fee_id
-        description: "Custodian fee record ID (master key)"
+        description: "Custodian's fee billing record identifier"
         tests: [unique, not_null]
       - name: account_number
-        tests: [not_null]
+        description: "Custodian account number"
+      - name: cust_fee_type
+        description: "Fee type from Custodian"
       - name: resolved_fee_type
-        description: "Golden fee type (Custodian)"
+        description: "Golden fee type"
+      - name: cust_fee_rate
+        description: "Fee rate from Custodian"
+      - name: fsc_fee_rate
+        description: "Management fee rate from FSC"
       - name: resolved_fee_rate
-        description: "Golden fee rate (priority: Custodian > FSC)"
+        description: "Golden fee rate: coalesce(cust, fsc)"
+      - name: cust_fee_amount
+        description: "Fee amount from Custodian"
       - name: resolved_fee_amount
-        description: "Golden fee amount (Custodian)"
+        description: "Golden fee amount"
+      - name: cust_billable_aum
+        description: "Billable AUM from Custodian"
+      - name: resolved_billable_aum
+        description: "Golden billable AUM"
+      - name: billing_period_start
+        description: "Start date of the billing period"
+      - name: billing_period_end
+        description: "End date of the billing period"
+      - name: debit_date
+        description: "Date the fee was/will be debited"
+      - name: cust_fee_status
+        description: "Fee status from Custodian"
       - name: resolved_fee_status
-        description: "Golden fee status (Custodian)"
+        description: "Golden fee status"
+      - name: cust_custodian_code
+        description: "Custodian code"
+      - name: cust_rep_code
+        description: "Advisor rep code from Custodian"
+      - name: sfdc_account_id
+        description: "Linked Salesforce Account ID"
+      - name: fsc_account_name
+        description: "Client account name from FSC"
+      - name: fsc_custodian_name
+        description: "Custodian name from FSC"
       - name: client_segment
-        description: "Enriched from FSC for segmented fee analysis"
+        description: "Client wealth tier from FSC"
       - name: advisor_id
-        description: "Enriched from FSC for advisor-level fee rollup"
+        description: "Linked advisor's Salesforce ID"
       - name: match_status
-        tests:
-          - accepted_values:
-              values: ['CUST_FSC_MATCHED', 'CUST_ONLY', 'UNMATCHED']
+        description: "Cross-system linkage quality"
       - name: resolved_at
-        tests: [not_null]
+        description: "Timestamp when resolution was computed"

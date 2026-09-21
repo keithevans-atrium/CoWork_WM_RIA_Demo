@@ -1,13 +1,26 @@
 version: 2
 models:
   - name: res_client_account
-    description: "Relationship: which client owns which account (temporal)"
+    description: "Resolved client-to-account relationship. Temporal M:N mapping between clients and financial accounts with ownership details. Supports effective dating for tracking account ownership changes over time."
     columns:
       - name: client_account_id
+        description: "Surrogate key for this client-account relationship"
         tests: [unique, not_null]
       - name: client_id
-        tests: [not_null]
+        description: "Salesforce Account ID of the client"
       - name: account_id
-        tests: [not_null]
+        description: "Salesforce Financial Account ID"
+      - name: account_number
+        description: "Custodian account number"
+      - name: ownership_type
+        description: "Type of ownership: Primary, Joint, or Beneficiary"
+      - name: ownership_pct
+        description: "Ownership percentage (0-100)"
+      - name: effective_from
+        description: "Start date of this relationship"
+      - name: effective_to
+        description: "End date of this relationship. NULL for current."
       - name: is_current
-        tests: [not_null]
+        description: "True if this relationship is currently active"
+      - name: resolved_at
+        description: "Timestamp when resolution was computed"

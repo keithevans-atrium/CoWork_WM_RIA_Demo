@@ -1,27 +1,72 @@
 version: 2
 models:
   - name: res_position
-    description: "Attribution resolution for positions - Performance holdings vs Custodian positions with resolved golden record"
+    description: "Attribution-resolved position entity. Reconciles security-level holdings from Performance System and Custodian. Exposes each system's quantities, market values, and cost basis with resolved golden values. Performance System provides asset class/sector; Custodian provides authoritative cost basis."
     columns:
       - name: holding_id
-        description: "Performance holding ID"
-      - name: account_number
-        description: "Cross-system account number"
-      - name: resolved_ticker
-        description: "Golden ticker (priority: Performance > Custodian)"
-      - name: resolved_cusip
-        description: "Golden CUSIP (priority: Performance > Custodian)"
-      - name: resolved_quantity
-        description: "Golden quantity (priority: Custodian > Performance)"
-      - name: resolved_market_value
-        description: "Golden market value (priority: Custodian > Performance)"
-      - name: resolved_cost_basis
-        description: "Golden cost basis (priority: Custodian > Performance)"
-      - name: resolved_unrealized_gain_loss
-        description: "Golden P&L (priority: Custodian calc > Performance)"
-      - name: match_status
-        tests:
-          - accepted_values:
-              values: ['BOTH_MATCHED', 'PERF_ONLY', 'CUST_ONLY', 'UNMATCHED']
-      - name: resolved_at
+        description: "Performance System holding identifier"
         tests: [not_null]
+      - name: account_number
+        description: "Custodian account number"
+      - name: as_of_date
+        description: "Date of the position snapshot"
+      - name: perf_ticker
+        description: "Ticker from Performance System"
+      - name: cust_ticker
+        description: "Ticker from Custodian"
+      - name: resolved_ticker
+        description: "Golden ticker: coalesce(perf, cust)"
+      - name: perf_cusip
+        description: "CUSIP from Performance System"
+      - name: cust_cusip
+        description: "CUSIP from Custodian"
+      - name: resolved_cusip
+        description: "Golden CUSIP: coalesce(perf, cust)"
+      - name: perf_security_description
+        description: "Security name from Performance System"
+      - name: cust_security_description
+        description: "Security description from Custodian"
+      - name: resolved_security_description
+        description: "Golden security description"
+      - name: asset_class
+        description: "Asset class from Performance System"
+      - name: sector
+        description: "Industry sector from Performance System"
+      - name: security_type
+        description: "Security type from Custodian"
+      - name: perf_quantity
+        description: "Quantity from Performance System"
+      - name: cust_quantity
+        description: "Quantity from Custodian (authoritative)"
+      - name: resolved_quantity
+        description: "Golden quantity: coalesce(cust, perf)"
+      - name: cust_price
+        description: "Price from Custodian"
+      - name: resolved_price
+        description: "Golden price"
+      - name: perf_market_value
+        description: "Market value from Performance System"
+      - name: cust_market_value
+        description: "Market value from Custodian"
+      - name: resolved_market_value
+        description: "Golden market value: coalesce(cust, perf)"
+      - name: perf_cost_basis
+        description: "Cost basis from Performance System"
+      - name: cust_cost_basis
+        description: "Cost basis from Custodian (authoritative for tax)"
+      - name: resolved_cost_basis
+        description: "Golden cost basis: coalesce(cust, perf)"
+      - name: perf_unrealized_gain_loss
+        description: "Unrealized gain/loss from Performance System"
+      - name: resolved_unrealized_gain_loss
+        description: "Golden unrealized gain/loss"
+      - name: weight_pct
+        description: "Portfolio weight percentage from Performance System"
+      - name: cost_basis_method
+        description: "Tax lot accounting method from Custodian"
+      - name: accrued_income
+        description: "Accrued income from Custodian"
+      - name: match_status
+        description: "Cross-system linkage quality"
+      - name: resolved_at
+        description: "Timestamp when resolution was computed"

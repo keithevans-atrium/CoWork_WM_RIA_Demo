@@ -1,13 +1,32 @@
 version: 2
 models:
   - name: agg_aum_summary
-    description: "AUM summary aggregated by advisor, team, region, and client segment"
+    description: "Gold-layer AUM summary aggregate. Pre-computed advisor-level and segment-level AUM rollups including client counts, account counts, discretionary vs non-discretionary splits, and average account values. Optimized for dashboard and agent consumption."
     columns:
       - name: advisor_id
+        description: "Salesforce User ID of the advisor"
         tests: [not_null]
+      - name: advisor_name
+        description: "Advisor's full name"
+      - name: team_name
+        description: "Advisor's team name"
+      - name: region
+        description: "Geographic region"
+      - name: client_segment
+        description: "Wealth tier: UHNW, HNW, Mass Affluent, or Emerging"
+      - name: client_count
+        description: "Number of unique clients in this advisor-segment cohort"
+      - name: account_count
+        description: "Number of investment accounts in this cohort"
       - name: total_aum
-        description: "Sum of total_market_value across all accounts"
+        description: "Total AUM in USD for this cohort"
+      - name: total_cash
+        description: "Total cash holdings in USD"
       - name: total_assets
-        description: "Total AUM + total cash"
+        description: "Total assets (AUM + cash)"
+      - name: avg_account_value
+        description: "Average account value: total_aum / account_count"
       - name: discretionary_aum
-        description: "AUM in discretionary accounts only"
+        description: "AUM in discretionary accounts"
+      - name: non_discretionary_aum
+        description: "AUM in non-discretionary accounts"

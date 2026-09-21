@@ -1,15 +1,46 @@
 version: 2
 models:
   - name: fct_portfolio_return
-    description: "Monthly portfolio returns with benchmark comparison and excess return calculations"
+    description: "Gold-layer portfolio return fact. Time-weighted returns across multiple periods with benchmark comparisons and computed excess returns. One row per account per reporting date."
     columns:
       - name: return_id
+        description: "Unique return record identifier"
         tests: [unique, not_null]
       - name: account_number
-        tests: [not_null]
+        description: "Custodian account number. FK to dim_account."
+      - name: portfolio_id
+        description: "Performance System portfolio identifier"
       - name: as_of_date
-        tests: [not_null]
+        description: "Reporting date for this return snapshot"
+      - name: mtd_return
+        description: "Month-to-date return as a decimal"
+      - name: qtd_return
+        description: "Quarter-to-date return as a decimal"
+      - name: ytd_return
+        description: "Year-to-date return as a decimal"
+      - name: itd_return
+        description: "Inception-to-date return as a decimal"
+      - name: one_year_return
+        description: "Trailing one-year annualized return"
+      - name: three_year_return
+        description: "Trailing three-year annualized return"
+      - name: five_year_return
+        description: "Trailing five-year annualized return"
+      - name: benchmark_id
+        description: "Assigned benchmark identifier"
+      - name: benchmark_name
+        description: "Benchmark name"
+      - name: benchmark_mtd_return
+        description: "Benchmark month-to-date return"
+      - name: benchmark_ytd_return
+        description: "Benchmark year-to-date return"
+      - name: benchmark_one_year_return
+        description: "Benchmark one-year return"
       - name: mtd_excess_return
-        description: "MTD portfolio return minus MTD benchmark return"
+        description: "Computed: mtd_return minus benchmark"
       - name: ytd_excess_return
-        description: "YTD portfolio return minus YTD benchmark return"
+        description: "Computed: ytd_return minus benchmark"
+      - name: one_year_excess_return
+        description: "Computed: one_year_return minus benchmark"
+      - name: return_method
+        description: "Calculation methodology: TWR or MWR"

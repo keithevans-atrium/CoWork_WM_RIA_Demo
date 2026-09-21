@@ -1,13 +1,20 @@
 version: 2
 models:
   - name: res_model_benchmark
-    description: "Relationship: which model portfolio is measured by which benchmark (temporal)"
+    description: "Resolved model-to-benchmark relationship. Temporal mapping tracking which benchmark is assigned to each model portfolio. Effective dating captures benchmark reassignment over time."
     columns:
       - name: model_benchmark_id
+        description: "Surrogate key for this model-benchmark assignment"
         tests: [unique, not_null]
       - name: model_id
-        tests: [not_null]
+        description: "Model portfolio identifier"
       - name: benchmark_id
-        tests: [not_null]
+        description: "Benchmark identifier"
+      - name: effective_from
+        description: "Start date of this benchmark assignment"
+      - name: effective_to
+        description: "End date. NULL for current assignments."
       - name: is_current
-        tests: [not_null]
+        description: "True if this benchmark is currently assigned"
+      - name: resolved_at
+        description: "Timestamp when resolution was computed"

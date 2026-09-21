@@ -1,29 +1,64 @@
 version: 2
 models:
   - name: raw_financial_account
-    description: "Salesforce FSC Financial Account - investment accounts (IRA, brokerage, trust)"
+    description: "Raw Salesforce FSC Financial Account records. Represents investment accounts (IRA, brokerage, trust, etc.) held at custodians. Links clients to their custodial and performance-tracked accounts via financial_account_number."
     columns:
       - name: record_pk
-        description: "Surrogate key (MD5 of financial_account_id)"
+        description: "MD5 surrogate key generated from financial_account_id"
         tests: [unique, not_null]
       - name: financial_account_id
-        description: "Salesforce Financial Account ID (natural key)"
+        description: "Salesforce 18-character Financial Account ID. Natural primary key."
         tests: [unique, not_null]
       - name: account_id
+        description: "Salesforce Account ID of the owning client. Foreign key to ACCOUNT."
         tests:
           - not_null
           - relationships:
               to: ref('raw_account')
               field: account_id
       - name: contact_id
+        description: "Salesforce Contact ID of the primary account holder. Foreign key to CONTACT."
         tests:
           - relationships:
               to: ref('raw_contact')
               field: contact_id
+      - name: financial_account_name
+        description: "Display name (e.g. 'Smith - Traditional IRA', 'Jones - Joint Brokerage')"
+      - name: financial_account_number
+        description: "Custodian-assigned account number. Cross-system join key to Performance and Custodian schemas."
       - name: account_type
+        description: "Investment account type: Brokerage, Traditional IRA, Roth IRA, SEP IRA, 401k Rollover, or Trust"
         tests:
           - accepted_values:
               values: ['Brokerage', 'Traditional IRA', 'Roth IRA', 'SEP IRA', '401k Rollover', 'Trust']
+      - name: registration_type
+        description: "Legal registration: Individual, Joint, Trust, or Custodial"
+      - name: custodian_name
+        description: "Name of the custodian holding the assets: Schwab, Pershing, or Fidelity"
+      - name: status
+        description: "Account lifecycle status: Open, Closed, or Pending"
+      - name: balance
+        description: "Current account balance in USD as reported in Salesforce"
+      - name: inception_date
+        description: "Date the account was originally opened"
+      - name: close_date
+        description: "Date the account was closed. NULL for open accounts."
+      - name: model_portfolio
+        description: "Model portfolio assignment code (e.g. 'MOD001'). Links to MODEL_PORTFOLIO in Performance System."
+      - name: management_fee_rate
+        description: "Annual advisory fee rate as a decimal (e.g. 0.0100 = 1.00%)"
+      - name: is_discretionary
+        description: "Whether the advisor has discretionary trading authority (true/false)"
+      - name: created_date
+        description: "Timestamp when the record was created in Salesforce"
+      - name: last_modified_date
+        description: "Timestamp of the most recent modification in Salesforce"
+      - name: _source_system
+        description: "Source system identifier: 'salesforce_fsc'"
+      - name: _loaded_at
+        description: "Timestamp when this record was loaded into the bronze layer"
+      - name: _record_source
+        description: "Source table name: 'FINANCIAL_ACCOUNT'"
       - name: change_key
-        description: "MD5 hash of all non-key columns for change detection"
+        description: "MD5 hash of all non-key business columns for SCD2 change detection"
         tests: [not_null]

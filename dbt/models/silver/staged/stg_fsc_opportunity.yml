@@ -1,16 +1,60 @@
 version: 2
 models:
   - name: stg_fsc_opportunity
-    description: "Staged snapshot with version tracking"
+    description: "Staged SCD2 history of Salesforce FSC Opportunity records. Tracks pipeline stage progression, probability changes, and amount updates over time."
     columns:
       - name: record_pk
+        description: "MD5 surrogate key generated from opportunity_id"
         tests: [not_null]
+      - name: opportunity_id
+        description: "Salesforce Opportunity ID"
+      - name: account_id
+        description: "Salesforce Account ID of the prospect or client"
+      - name: contact_id
+        description: "Salesforce Contact ID of the primary person"
+      - name: opportunity_name
+        description: "Display name describing the opportunity"
+      - name: stage
+        description: "Pipeline stage: Prospecting, Discovery, Proposal, Negotiation, Closed Won, or Closed Lost"
+      - name: opportunity_type
+        description: "Category: New Account, Additional Investment, Rollover, or Plan Conversion"
+      - name: amount
+        description: "Expected total value in USD"
+      - name: expected_revenue
+        description: "Probability-weighted expected revenue"
+      - name: close_date
+        description: "Projected or actual close date"
+      - name: probability
+        description: "Win probability as a percentage (0-100)"
+      - name: lead_source
+        description: "Origin: Referral, Website, Seminar, COI Introduction, or Existing Client"
+      - name: advisor_id
+        description: "Assigned advisor's Salesforce ID"
+      - name: created_date
+        description: "Salesforce record creation timestamp"
+      - name: last_modified_date
+        description: "Salesforce last modification timestamp"
+      - name: _source_system
+        description: "Source system identifier: 'salesforce_fsc'"
+      - name: _loaded_at
+        description: "Bronze layer load timestamp"
+      - name: _record_source
+        description: "Source table name: 'OPPORTUNITY'"
+      - name: change_key
+        description: "MD5 hash of business columns for change detection"
+      - name: dbt_scd_id
+        description: "dbt-generated unique ID for this SCD2 version row"
+      - name: dbt_updated_at
+        description: "Timestamp when this snapshot version was captured"
+      - name: dbt_valid_from
+        description: "Start of the validity window for this version"
+      - name: dbt_valid_to
+        description: "End of the validity window. NULL for current version."
+      - name: dbt_is_deleted
+        description: "Hard-delete flag"
       - name: version_number
-        description: "Ascending version (1 = original)"
-        tests: [not_null]
+        description: "Sequential version counter per record_pk (1 = first version)"
       - name: reverse_version_number
-        description: "Descending version (1 = latest)"
-        tests: [not_null]
+        description: "Reverse-ordered version counter (1 = most recent version)"
       - name: is_current
-        description: "True if this is the active, non-deleted version"
-        tests: [not_null]
+        description: "True if this is the active version"

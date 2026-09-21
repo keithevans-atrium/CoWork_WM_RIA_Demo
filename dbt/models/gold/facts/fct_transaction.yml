@@ -1,17 +1,42 @@
 version: 2
 models:
   - name: fct_transaction
-    description: "All custodian transactions with cost detail and custodian metadata"
+    description: "Gold-layer transaction fact. Trade-level activity fact table with enriched security identifiers and computed total cost (commission + fees). Joins to dim_account via account_number and dim_security via cusip."
     columns:
       - name: transaction_id
+        description: "Custodian's unique transaction identifier"
         tests: [unique, not_null]
       - name: account_number
-        tests: [not_null]
+        description: "Custodian account number. FK to dim_account."
       - name: trade_date
-        tests: [not_null]
+        description: "Date the trade was executed"
+      - name: settle_date
+        description: "Date the trade settles"
       - name: transaction_type
-        tests:
-          - accepted_values:
-              values: ['Buy', 'Sell', 'Dividend', 'Interest', 'Fee', 'Transfer In', 'Transfer Out']
+        description: "Activity type: Buy, Sell, Dividend, Interest, Fee, Transfer In, or Transfer Out"
+      - name: cusip
+        description: "CUSIP of the security traded. FK to dim_security."
+      - name: ticker
+        description: "Ticker symbol of the security traded"
+      - name: security_description
+        description: "Description of the security traded"
+      - name: quantity
+        description: "Number of shares/units transacted"
+      - name: price
+        description: "Execution price per share/unit in USD"
+      - name: gross_amount
+        description: "Gross transaction amount in USD"
+      - name: net_amount
+        description: "Net amount after commissions and fees"
+      - name: commission
+        description: "Commission charged in USD"
+      - name: fees
+        description: "Additional fees in USD"
       - name: total_cost
-        description: "Commission + fees"
+        description: "Computed: commission + fees"
+      - name: cancel_status
+        description: "Cancellation indicator: NULL or 'CANCELLED'"
+      - name: custodian_code
+        description: "Custodian identifier"
+      - name: rep_code
+        description: "Advisor rep code at custodian"

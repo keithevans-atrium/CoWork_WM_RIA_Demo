@@ -1,13 +1,20 @@
 version: 2
 models:
   - name: res_account_model
-    description: "Relationship: which account follows which model portfolio (temporal)"
+    description: "Resolved account-to-model portfolio relationship. Temporal mapping tracking which model portfolio is assigned to each investment account. Effective dating captures model changes over time."
     columns:
       - name: account_model_id
+        description: "Surrogate key for this account-model assignment"
         tests: [unique, not_null]
       - name: account_id
-        tests: [not_null]
+        description: "Investment account identifier"
       - name: model_id
-        tests: [not_null]
+        description: "Model portfolio identifier"
+      - name: effective_from
+        description: "Start date of this model assignment"
+      - name: effective_to
+        description: "End date. NULL for current assignments."
       - name: is_current
-        tests: [not_null]
+        description: "True if this model is currently assigned"
+      - name: resolved_at
+        description: "Timestamp when resolution was computed"

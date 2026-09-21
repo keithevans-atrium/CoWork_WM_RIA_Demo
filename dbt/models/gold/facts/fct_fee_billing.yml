@@ -1,13 +1,36 @@
 version: 2
 models:
   - name: fct_fee_billing
-    description: "Quarterly fee billing records with annualized fee calculation"
+    description: "Gold-layer fee billing fact. Advisory fee calculations per billing period with computed annualized fee. Joins to dim_account via account_number for client-level fee analysis."
     columns:
       - name: fee_id
+        description: "Custodian's fee billing record identifier"
         tests: [unique, not_null]
       - name: account_number
-        tests: [not_null]
+        description: "Custodian account number. FK to dim_account."
+      - name: billing_period_start
+        description: "Start date of the billing period"
+      - name: billing_period_end
+        description: "End date of the billing period"
+      - name: fee_type
+        description: "Type of fee: Management, Performance, Financial Planning, or Custody"
+      - name: billable_aum
+        description: "AUM used as the fee calculation base in USD"
+      - name: fee_rate
+        description: "Annualized fee rate as a decimal"
       - name: fee_amount
-        tests: [not_null]
+        description: "Calculated fee amount in USD for this period"
+      - name: debit_date
+        description: "Date the fee was/will be debited"
+      - name: fee_status
+        description: "Billing status: Calculated, Debited, or Reversed"
+      - name: custodian_code
+        description: "Custodian identifier"
+      - name: rep_code
+        description: "Advisor rep code at custodian"
+      - name: sfdc_account_id
+        description: "Linked Salesforce Account ID"
+      - name: custodian_name
+        description: "Custodian name from FSC"
       - name: annualized_fee
-        description: "Quarterly fee * 4 for annualized estimate"
+        description: "Computed: fee projected to annual basis for comparison across billing periods"

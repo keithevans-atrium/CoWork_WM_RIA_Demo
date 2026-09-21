@@ -1,10 +1,45 @@
 version: 2
 models:
   - name: dim_advisor
-    description: "Advisor dimension with team assignment and book metrics (client count, AUM)"
+    description: "Gold-layer advisor dimension. Consumption-ready view of financial advisors with denormalized team assignments and book-level metrics (client count, total AUM, average AUM per client)."
     columns:
       - name: advisor_key
-        description: "Surrogate key (advisor_id)"
+        description: "MD5 surrogate key for the advisor dimension"
         tests: [unique, not_null]
+      - name: advisor_id
+        description: "Salesforce User ID. Business key."
+        tests: [unique, not_null]
+      - name: advisor_name
+        description: "Advisor's full name"
+      - name: first_name
+        description: "First/given name"
+      - name: last_name
+        description: "Last/family name"
+      - name: email
+        description: "Business email"
+      - name: role
+        description: "Functional role: Lead Advisor, Associate Advisor, or Paraplanner"
+      - name: crd_number
+        description: "FINRA CRD number"
+      - name: rep_code
+        description: "Custodian rep code"
+      - name: branch_name
+        description: "Office branch"
+      - name: team_id
+        description: "Advisor team ID"
+      - name: team_name
+        description: "Team name (denormalized)"
+      - name: region
+        description: "Geographic region"
+      - name: role_in_team
+        description: "Role within the team: Lead, Member, or Support"
+      - name: client_count
+        description: "Number of clients in the advisor's book"
+      - name: total_aum
+        description: "Total AUM across all clients in USD"
+      - name: avg_aum_per_client
+        description: "Average AUM per client in USD"
       - name: is_active
-        tests: [not_null]
+        description: "Whether the advisor is currently active"
+      - name: hire_date
+        description: "Date the advisor joined the firm"

@@ -1,14 +1,48 @@
 version: 2
 models:
   - name: raw_perf_account
-    description: "Performance System Account - performance-tracked accounts with model and custodian linkage"
+    description: "Raw Performance System account records. Represents the performance-tracking view of investment accounts — portfolio assignments, model allocations, market values, and fee schedules. Joined to FSC Financial Account via account_number."
     columns:
       - name: record_pk
-        description: "Surrogate key (MD5 of account_number)"
+        description: "MD5 surrogate key generated from account_number"
         tests: [unique, not_null]
       - name: account_number
-        description: "Account number (natural key, links to custodian)"
+        description: "Custodian-assigned account number. Cross-system join key to FSC and Custodian."
         tests: [unique, not_null]
+      - name: account_name
+        description: "Display name of the account in the performance system"
+      - name: portfolio_id
+        description: "Unique portfolio identifier assigned by the performance system"
+      - name: registration_type
+        description: "Legal registration type: Individual, Joint, Trust, or Custodial"
+      - name: inception_date
+        description: "Date the account was opened per performance system records"
+      - name: close_date
+        description: "Date the account was closed. NULL for open accounts."
+      - name: status
+        description: "Account status in the performance system: Active, Closed, or Pending"
+      - name: model_id
+        description: "Model portfolio identifier (e.g. 'MOD001'). Links to the assigned investment model."
+      - name: advisor_code
+        description: "Advisor rep code in the performance system. Cross-system join key to FSC advisor."
+      - name: custodian_code
+        description: "Custodian identifier code: SCHWAB, PERSHING, or FIDELITY"
+      - name: fee_schedule
+        description: "Fee schedule code determining the billing rate tier"
+      - name: is_discretionary
+        description: "Whether the account has discretionary management authority (true/false)"
+      - name: total_market_value
+        description: "Total account market value in USD as of the as_of_date"
+      - name: as_of_date
+        description: "Date the market value was last computed"
+      - name: loaded_at
+        description: "Source system load timestamp from PERFORMANCE_SYSTEM schema"
+      - name: _source_system
+        description: "Source system identifier: 'performance_system'"
+      - name: _loaded_at
+        description: "Timestamp when this record was loaded into the bronze layer"
+      - name: _record_source
+        description: "Source table name: 'PERFORMANCE_ACCOUNT'"
       - name: change_key
-        description: "MD5 hash of all non-key columns for change detection"
+        description: "MD5 hash of all non-key business columns for SCD2 change detection"
         tests: [not_null]

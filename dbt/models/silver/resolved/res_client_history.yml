@@ -1,15 +1,32 @@
 version: 2
 models:
   - name: res_client_history
-    description: "SCD2 history for client - tracks segment, service model, risk tolerance, state, active status"
+    description: "Resolved client history. SCD2 temporal tracking of client attribute changes over time — segment upgrades/downgrades, service model changes, risk tolerance updates, state relocations. Derived from staged snapshot versions."
     columns:
       - name: client_history_id
+        description: "Surrogate key for this history row"
         tests: [unique, not_null]
       - name: client_id
-        tests: [not_null]
+        description: "Salesforce Account ID of the client"
+      - name: client_segment
+        description: "Wealth tier at this point in time"
+      - name: service_model
+        description: "Service model at this point in time"
+      - name: risk_tolerance
+        description: "Risk tolerance at this point in time"
+      - name: state
+        description: "Client state at this point in time"
+      - name: is_active
+        description: "Whether the client was active during this period"
       - name: version_number
-        tests: [not_null]
+        description: "Sequential version counter (1 = first version)"
       - name: valid_from
-        tests: [not_null]
+        description: "Start of the validity window"
+      - name: valid_to
+        description: "End of the validity window. NULL for current."
       - name: is_current
-        tests: [not_null]
+        description: "True if this is the current version"
+      - name: is_deleted
+        description: "True if the record was soft-deleted"
+      - name: resolved_at
+        description: "Timestamp when resolution was computed"

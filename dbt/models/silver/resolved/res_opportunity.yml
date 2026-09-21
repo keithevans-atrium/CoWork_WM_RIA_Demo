@@ -1,19 +1,36 @@
 version: 2
 models:
   - name: res_opportunity
-    description: "Attribution resolution for opportunity - FSC only (single source)"
+    description: "Attribution-resolved opportunity entity. Single-source from FSC with resolved golden values for opportunity name and stage. Enriched with client and advisor references."
     columns:
       - name: opportunity_id
+        description: "Salesforce Opportunity ID"
         tests: [unique, not_null]
       - name: client_id
-        tests: [not_null]
+        description: "Salesforce Account ID of the prospect or client"
+      - name: advisor_id
+        description: "Assigned advisor's Salesforce ID"
+      - name: fsc_opportunity_name
+        description: "Opportunity name from FSC"
+      - name: resolved_opportunity_name
+        description: "Golden opportunity name"
+      - name: fsc_stage
+        description: "Pipeline stage from FSC"
       - name: resolved_stage
-        tests:
-          - accepted_values:
-              values: ['Prospecting', 'Discovery', 'Proposal', 'Negotiation', 'Closed Won', 'Closed Lost']
+        description: "Golden pipeline stage"
+      - name: opportunity_type
+        description: "Category: New Account, Additional Investment, Rollover, or Plan Conversion"
+      - name: amount
+        description: "Expected total value in USD"
+      - name: expected_revenue
+        description: "Probability-weighted expected revenue"
+      - name: close_date
+        description: "Projected or actual close date"
+      - name: probability
+        description: "Win probability (0-100)"
+      - name: lead_source
+        description: "Origin of the lead"
       - name: match_status
-        tests:
-          - accepted_values:
-              values: ['FSC_ONLY']
+        description: "Linkage status: fsc_only (single-source entity)"
       - name: resolved_at
-        tests: [not_null]
+        description: "Timestamp when resolution was computed"

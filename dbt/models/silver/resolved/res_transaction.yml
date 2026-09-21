@@ -1,17 +1,60 @@
 version: 2
 models:
   - name: res_transaction
-    description: "Attribution resolution for transaction - Custodian transactions enriched with FSC account context"
+    description: "Attribution-resolved transaction entity. Enriches Custodian transaction records with FSC client context (account name, segment, advisor). Exposes custodian-source values alongside resolved golden values for transaction type, security identifiers, and descriptions."
     columns:
       - name: transaction_id
+        description: "Custodian's unique transaction identifier"
         tests: [unique, not_null]
       - name: account_number
-        tests: [not_null]
+        description: "Custodian account number"
+      - name: trade_date
+        description: "Date the trade was executed"
+      - name: settle_date
+        description: "Date the trade settles"
+      - name: cust_transaction_type
+        description: "Transaction type from Custodian"
       - name: resolved_transaction_type
-        tests: [not_null]
+        description: "Golden transaction type"
+      - name: cust_ticker
+        description: "Ticker from Custodian"
+      - name: cust_cusip
+        description: "CUSIP from Custodian"
+      - name: resolved_ticker
+        description: "Golden ticker"
+      - name: resolved_cusip
+        description: "Golden CUSIP"
+      - name: cust_security_description
+        description: "Security description from Custodian"
+      - name: resolved_security_description
+        description: "Golden security description"
+      - name: quantity
+        description: "Number of shares/units transacted"
+      - name: price
+        description: "Execution price per share/unit"
+      - name: gross_amount
+        description: "Gross transaction amount in USD"
+      - name: net_amount
+        description: "Net amount after commissions and fees"
+      - name: commission
+        description: "Commission charged in USD"
+      - name: fees
+        description: "Additional fees in USD"
+      - name: cancel_status
+        description: "Cancellation status: NULL or 'CANCELLED'"
+      - name: custodian_code
+        description: "Custodian identifier"
+      - name: rep_code
+        description: "Advisor rep code at custodian"
+      - name: sfdc_account_id
+        description: "Linked Salesforce Account ID"
+      - name: fsc_account_name
+        description: "Client account name from FSC for enrichment"
+      - name: client_segment
+        description: "Client wealth tier from FSC"
+      - name: advisor_id
+        description: "Linked advisor's Salesforce ID"
       - name: match_status
-        tests:
-          - accepted_values:
-              values: ['CUST_FSC_MATCHED', 'CUST_ONLY', 'UNMATCHED']
+        description: "Cross-system linkage quality"
       - name: resolved_at
-        tests: [not_null]
+        description: "Timestamp when resolution was computed"

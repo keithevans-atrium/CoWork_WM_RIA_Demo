@@ -1,32 +1,108 @@
 version: 2
 models:
   - name: res_client
-    description: "Attribution resolution for client - exposes each source system's value plus resolved golden record"
+    description: "Attribution-resolved client entity. Combines Salesforce FSC Account/Contact, Performance System account, and Custodian account into a single client record. Exposes each source system's attribute values side by side (fsc_, perf_, cust_ prefixes) with resolved_* golden values using priority-based coalesce. match_status indicates cross-system linkage quality."
     columns:
       - name: account_id
-        description: "FSC Account ID (master key)"
-        tests: [not_null]
+        description: "Salesforce Account ID. Primary identifier from FSC."
+        tests: [unique, not_null]
       - name: account_number
-        description: "Custodian/Performance account number (cross-system join)"
+        description: "Custodian account number. Cross-system join key linking FSC, Performance, and Custodian."
+      - name: fsc_first_name
+        description: "First name from Salesforce FSC Contact"
+      - name: perf_first_name
+        description: "First name from Performance System (NULL — not stored in perf)"
+      - name: cust_first_name
+        description: "First name from Custodian (NULL — not stored in custodian)"
       - name: resolved_first_name
-        description: "Golden first name (priority: FSC Contact)"
+        description: "Golden first name: coalesce(fsc, perf, cust)"
+      - name: fsc_last_name
+        description: "Last name from Salesforce FSC Contact"
+      - name: perf_last_name
+        description: "Last name from Performance System (NULL)"
+      - name: cust_last_name
+        description: "Last name from Custodian (NULL)"
       - name: resolved_last_name
-        description: "Golden last name (priority: FSC Contact)"
+        description: "Golden last name: coalesce(fsc, perf, cust)"
+      - name: fsc_contact_email
+        description: "Email from FSC Contact record"
+      - name: fsc_account_email
+        description: "Email from FSC Account record"
       - name: resolved_email
-        description: "Golden email (priority: FSC Contact > FSC Account)"
+        description: "Golden email: coalesce(contact email, account email)"
+      - name: fsc_contact_phone
+        description: "Phone from FSC Contact record"
+      - name: fsc_account_phone
+        description: "Phone from FSC Account record"
       - name: resolved_phone
-        description: "Golden phone (priority: FSC Contact > FSC Account)"
+        description: "Golden phone: coalesce(contact phone, account phone)"
+      - name: fsc_billing_state
+        description: "State from FSC Account billing address"
+      - name: fsc_mailing_state
+        description: "State from FSC Contact mailing address"
       - name: resolved_state
-        description: "Golden state (priority: FSC Account billing > FSC Contact mailing)"
+        description: "Golden state: coalesce(billing, mailing)"
+      - name: fsc_city
+        description: "City from FSC Account billing address"
+      - name: resolved_city
+        description: "Golden city"
+      - name: fsc_zip
+        description: "ZIP from FSC Account billing address"
+      - name: resolved_zip
+        description: "Golden ZIP code"
+      - name: fsc_account_name
+        description: "Account name from Salesforce FSC"
+      - name: cust_account_name
+        description: "Account title from Custodian"
       - name: resolved_account_name
-        description: "Golden account name (priority: FSC > Custodian)"
+        description: "Golden account name: coalesce(fsc, custodian)"
+      - name: fsc_registration_type
+        description: "Registration type from FSC Financial Account"
+      - name: cust_registration_type
+        description: "Registration type from Custodian"
       - name: resolved_registration_type
-        description: "Golden registration (priority: FSC > Custodian)"
+        description: "Golden registration type: coalesce(fsc, cust)"
+      - name: fsc_is_active
+        description: "Active flag from FSC Account"
+      - name: fsc_account_status
+        description: "Status from FSC Financial Account"
+      - name: perf_status
+        description: "Status from Performance System"
+      - name: cust_status
+        description: "Status from Custodian"
+      - name: account_type
+        description: "Investment account type from FSC"
+      - name: client_segment
+        description: "Wealth tier: UHNW, HNW, Mass Affluent, or Emerging"
+      - name: service_model
+        description: "Service model: Full Service, Advisory, Digital, or Hybrid"
+      - name: risk_tolerance
+        description: "Stated risk tolerance from FSC Contact"
+      - name: investment_experience
+        description: "Investment knowledge level from FSC Contact"
+      - name: date_of_birth
+        description: "Client date of birth from FSC Contact"
+      - name: employment_status
+        description: "Employment status from FSC Contact"
+      - name: occupation
+        description: "Occupation from FSC Contact"
+      - name: advisor_id
+        description: "Assigned advisor's Salesforce ID"
+      - name: relationship_start_date
+        description: "Date the client relationship began"
+      - name: custodian_code
+        description: "Custodian identifier from Custodian system"
+      - name: rep_code
+        description: "Advisor rep code from Custodian"
+      - name: branch_code
+        description: "Branch code from Custodian"
+      - name: model_id
+        description: "Assigned model portfolio ID from Performance System"
+      - name: total_market_value
+        description: "Total account market value from Performance System"
+      - name: perf_advisor_code
+        description: "Advisor code from Performance System"
       - name: match_status
-        description: "Cross-system match result (ALL_MATCHED, FSC_PERF, FSC_CUST, FSC_ONLY, UNMATCHED)"
-        tests:
-          - accepted_values:
-              values: ['ALL_MATCHED', 'FSC_PERF', 'FSC_CUST', 'FSC_ONLY', 'UNMATCHED']
+        description: "Cross-system linkage quality: full_match (all 3 systems), partial_match (2 systems), fsc_only, perf_only, cust_only"
       - name: resolved_at
         description: "Timestamp when resolution was computed"
-        tests: [not_null]

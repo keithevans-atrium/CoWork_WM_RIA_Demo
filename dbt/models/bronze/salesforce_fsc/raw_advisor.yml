@@ -1,18 +1,50 @@
 version: 2
 models:
   - name: raw_advisor
-    description: "Salesforce FSC Advisor - financial advisors with CRD, rep code, branch"
+    description: "Raw Salesforce FSC Advisor records. Represents registered investment advisors and their professional details — CRD numbers, rep codes, branch assignments, and employment dates. Central to advisor-book attribution."
     columns:
       - name: record_pk
-        description: "Surrogate key (MD5 of advisor_id)"
+        description: "MD5 surrogate key generated from advisor_id"
         tests: [unique, not_null]
       - name: advisor_id
-        description: "Salesforce Advisor ID (natural key)"
+        description: "Salesforce 18-character User ID for the advisor. Natural primary key."
         tests: [unique, not_null]
+      - name: first_name
+        description: "Advisor's first/given name"
+      - name: last_name
+        description: "Advisor's last/family name"
+      - name: advisor_name
+        description: "Concatenated first_name + last_name for display"
+      - name: email
+        description: "Advisor's business email address"
+      - name: phone
+        description: "Advisor's business phone number"
       - name: role
-        tests:
-          - accepted_values:
-              values: ['Lead Advisor', 'Associate Advisor', 'Senior Advisor', 'Paraplanner']
+        description: "Advisor's functional role: Lead Advisor, Associate Advisor, or Paraplanner"
+      - name: crd_number
+        description: "FINRA Central Registration Depository number. Unique identifier for regulatory reporting."
+      - name: rep_code
+        description: "Custodian-assigned representative code. Cross-system join key to Custodian rep_code."
+      - name: branch_name
+        description: "Office branch where the advisor is based (e.g. 'San Francisco', 'New York')"
+      - name: manager_id
+        description: "Salesforce User ID of the advisor's manager. NULL for managing directors."
+      - name: is_active
+        description: "Whether the advisor is currently active with the firm (true/false)"
+      - name: hire_date
+        description: "Date the advisor joined the firm"
+      - name: termination_date
+        description: "Date the advisor left the firm. NULL for active advisors."
+      - name: created_date
+        description: "Timestamp when the record was created in Salesforce"
+      - name: last_modified_date
+        description: "Timestamp of the most recent modification in Salesforce"
+      - name: _source_system
+        description: "Source system identifier: 'salesforce_fsc'"
+      - name: _loaded_at
+        description: "Timestamp when this record was loaded into the bronze layer"
+      - name: _record_source
+        description: "Source table name: 'ADVISOR'"
       - name: change_key
-        description: "MD5 hash of all non-key columns for change detection"
+        description: "MD5 hash of all non-key business columns for SCD2 change detection"
         tests: [not_null]

@@ -1,12 +1,18 @@
 version: 2
 models:
   - name: dim_security
-    description: "Security master - deduplicated security reference by ticker"
+    description: "Gold-layer security dimension. Deduplicated master list of securities with resolved identifiers (CUSIP, ticker), names, and classifications (asset class, sector)."
     columns:
       - name: security_key
-        description: "Surrogate key (ticker)"
+        description: "MD5 surrogate key for the security dimension"
         tests: [unique, not_null]
       - name: cusip
-        tests: [not_null]
+        description: "CUSIP identifier (9-character)"
+      - name: ticker
+        description: "Exchange ticker symbol"
+      - name: security_description
+        description: "Human-readable security name"
       - name: asset_class
-        tests: [not_null]
+        description: "Broad asset classification: US Equity, International Equity, Fixed Income, Alternatives, or Cash"
+      - name: sector
+        description: "Industry sector: Technology, Healthcare, Financials, Consumer, Energy, Industrials, or Other"

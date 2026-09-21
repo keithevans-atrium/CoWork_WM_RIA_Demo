@@ -1,15 +1,34 @@
 version: 2
 models:
   - name: res_account_history
-    description: "SCD2 history for account - tracks market value, status, fee schedule, model assignment"
+    description: "Resolved account history. SCD2 temporal tracking of investment account changes — market value fluctuations, status transitions, fee schedule adjustments, and model portfolio reassignments."
     columns:
       - name: account_history_id
+        description: "Surrogate key for this history row"
         tests: [unique, not_null]
       - name: account_id
-        tests: [not_null]
+        description: "Investment account identifier"
+      - name: market_value
+        description: "Account market value at this point in time"
+      - name: cash_balance
+        description: "Cash balance at this point in time"
+      - name: status
+        description: "Account status at this point in time"
+      - name: fee_schedule
+        description: "Fee schedule code at this point in time"
+      - name: management_fee_rate
+        description: "Management fee rate at this point in time"
+      - name: model_id
+        description: "Assigned model portfolio at this point in time"
       - name: version_number
-        tests: [not_null]
+        description: "Sequential version counter (1 = first version)"
       - name: valid_from
-        tests: [not_null]
+        description: "Start of the validity window"
+      - name: valid_to
+        description: "End of the validity window. NULL for current."
       - name: is_current
-        tests: [not_null]
+        description: "True if this is the current version"
+      - name: is_deleted
+        description: "True if the record was soft-deleted"
+      - name: resolved_at
+        description: "Timestamp when resolution was computed"

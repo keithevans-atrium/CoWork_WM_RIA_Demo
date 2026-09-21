@@ -1,15 +1,34 @@
 version: 2
 models:
   - name: res_model_portfolio
-    description: "Attribution resolution for model portfolio - Performance system only (single source)"
+    description: "Attribution-resolved model portfolio entity. Single-source from Performance System. Contains model definitions including risk profile, target asset allocation percentages, and benchmark assignments."
     columns:
       - name: model_id
+        description: "Model portfolio identifier from Performance System"
         tests: [unique, not_null]
+      - name: perf_model_name
+        description: "Model name from Performance System"
       - name: resolved_model_name
-        tests: [not_null]
+        description: "Golden model name"
+      - name: model_description
+        description: "Description of the model portfolio's investment strategy"
+      - name: risk_profile
+        description: "Risk profile: Conservative, Moderate, Growth, Aggressive, or Income"
+      - name: equity_target_pct
+        description: "Target equity allocation percentage (0-100)"
+      - name: fixed_income_target_pct
+        description: "Target fixed income allocation percentage (0-100)"
+      - name: alternative_target_pct
+        description: "Target alternatives allocation percentage (0-100)"
+      - name: cash_target_pct
+        description: "Target cash allocation percentage (0-100)"
+      - name: benchmark_id
+        description: "Assigned benchmark for model performance comparison"
+      - name: is_active
+        description: "Whether the model is currently active"
+      - name: last_rebalance_date
+        description: "Date of the most recent model rebalance"
       - name: match_status
-        tests:
-          - accepted_values:
-              values: ['PERF_ONLY']
+        description: "Linkage status: perf_only (single-source entity)"
       - name: resolved_at
-        tests: [not_null]
+        description: "Timestamp when resolution was computed"

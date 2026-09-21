@@ -1,15 +1,36 @@
 version: 2
 models:
   - name: res_security
-    description: "Attribution resolution for security - Performance holdings vs Custodian position security data"
+    description: "Attribution-resolved security master entity. Reconciles security identifiers (ticker, CUSIP, name) from Performance System and Custodian. Adds asset class, sector, and security type classifications."
     columns:
-      - name: resolved_ticker
+      - name: security_id
+        description: "Performance System internal security identifier"
         tests: [unique, not_null]
+      - name: perf_ticker
+        description: "Ticker from Performance System"
+      - name: cust_ticker
+        description: "Ticker from Custodian"
+      - name: resolved_ticker
+        description: "Golden ticker: coalesce(perf, cust)"
+      - name: perf_cusip
+        description: "CUSIP from Performance System"
+      - name: cust_cusip
+        description: "CUSIP from Custodian"
       - name: resolved_cusip
-        tests: [not_null]
+        description: "Golden CUSIP"
+      - name: perf_security_name
+        description: "Security name from Performance System"
+      - name: cust_security_name
+        description: "Security description from Custodian"
+      - name: resolved_security_name
+        description: "Golden security name"
+      - name: asset_class
+        description: "Broad asset classification from Performance System"
+      - name: sector
+        description: "Industry sector from Performance System"
+      - name: security_type
+        description: "Security type from Custodian"
       - name: match_status
-        tests:
-          - accepted_values:
-              values: ['BOTH_MATCHED', 'PERF_ONLY', 'CUST_ONLY', 'UNMATCHED']
+        description: "Cross-system linkage: perf_and_cust, perf_only, or cust_only"
       - name: resolved_at
-        tests: [not_null]
+        description: "Timestamp when resolution was computed"

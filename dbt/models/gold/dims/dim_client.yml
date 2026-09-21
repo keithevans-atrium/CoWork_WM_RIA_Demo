@@ -1,14 +1,53 @@
 version: 2
 models:
   - name: dim_client
-    description: "Client dimension - one row per household/account with contact, advisor, and team"
+    description: "Gold-layer client dimension. Consumption-ready view of RIA clients with denormalized advisor, team, and contact details. Surfaces only resolved golden values — no source-system attribution. The Fort Knox boundary ensures AI agents only see this layer."
     columns:
       - name: client_key
-        description: "Surrogate key (account_id)"
+        description: "MD5 surrogate key for the client dimension"
         tests: [unique, not_null]
+      - name: account_id
+        description: "Salesforce Account ID. Business key."
+        tests: [unique, not_null]
+      - name: account_name
+        description: "Client display name (e.g. 'Smith Household')"
+      - name: account_type
+        description: "Entity type: Individual, Household, Joint, Trust, or Business"
       - name: client_segment
-        tests:
-          - accepted_values:
-              values: ['UHNW', 'HNW', 'Mass Affluent', 'Emerging']
+        description: "Wealth tier: UHNW (>$5M), HNW ($1M-$5M), Mass Affluent ($250K-$1M), Emerging (<$250K)"
+      - name: service_model
+        description: "Service delivery model: Full Service, Advisory, Digital, or Hybrid"
+      - name: primary_contact_name
+        description: "Full name of the primary contact for this account"
+      - name: primary_contact_email
+        description: "Email of the primary contact"
+      - name: risk_tolerance
+        description: "Stated risk tolerance: Conservative, Moderate, Moderate Growth, Growth, or Aggressive"
+      - name: investment_experience
+        description: "Investment knowledge: Beginner, Intermediate, Experienced, or Sophisticated"
+      - name: billing_state
+        description: "Two-letter US state code"
+      - name: billing_city
+        description: "City"
+      - name: billing_zip
+        description: "ZIP/postal code"
+      - name: advisor_id
+        description: "Assigned advisor's Salesforce ID"
+      - name: advisor_name
+        description: "Assigned advisor's full name (denormalized from dim_advisor)"
+      - name: team_id
+        description: "Advisor team ID"
+      - name: team_name
+        description: "Advisor team name (denormalized)"
+      - name: region
+        description: "Geographic region: West, East, Central, or Southeast"
+      - name: aum
+        description: "Assets Under Management in USD"
+      - name: relationship_start_date
+        description: "Date the client relationship began"
       - name: is_active
-        tests: [not_null]
+        description: "Whether the client is currently active"
+      - name: created_date
+        description: "Salesforce record creation timestamp"
+      - name: last_modified_date
+        description: "Salesforce last modification timestamp"

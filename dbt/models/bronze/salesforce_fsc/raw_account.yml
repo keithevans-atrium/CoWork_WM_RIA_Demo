@@ -1,29 +1,67 @@
 version: 2
 models:
   - name: raw_account
-    description: "Salesforce FSC Account - households, individuals, trusts, businesses"
+    description: "Raw Salesforce FSC Account records. Represents client households, individuals, trusts, and business entities. Central CRM entity linking contacts, financial accounts, opportunities, and advisor assignments."
     columns:
       - name: record_pk
-        description: "Surrogate key (MD5 of account_id)"
+        description: "MD5 surrogate key generated from account_id"
         tests: [unique, not_null]
       - name: account_id
-        description: "Salesforce Account ID (natural key)"
+        description: "Salesforce 18-character Account ID. Natural primary key from FSC."
         tests: [unique, not_null]
       - name: account_name
+        description: "Display name of the account (e.g. 'Smith Household', 'Jones Family Trust')"
         tests: [not_null]
       - name: account_type
+        description: "Entity classification: Individual, Household, Joint, Trust, or Business"
         tests:
           - accepted_values:
               values: ['Individual', 'Household', 'Joint', 'Trust', 'Business']
-      - name: client_segment
-        tests:
-          - accepted_values:
-              values: ['UHNW', 'HNW', 'Mass Affluent', 'Emerging']
+      - name: record_type
+        description: "Salesforce record type controlling page layout: PersonAccount, HouseholdAccount, or InstitutionalAccount"
       - name: advisor_id
+        description: "Salesforce ID of the assigned advisor (mapped from OWNER_ID). Foreign key to ADVISOR."
         tests:
           - relationships:
               to: ref('raw_advisor')
               field: advisor_id
+      - name: parent_account_id
+        description: "Salesforce ID of parent account for hierarchy rollups. NULL for top-level accounts."
+      - name: financial_account_count
+        description: "Count of financial accounts linked to this client in FSC"
+      - name: aum
+        description: "Assets Under Management in USD. Aggregated balance across all financial accounts."
+      - name: billing_state
+        description: "Two-letter US state code from the billing address (e.g. 'CA', 'NY', 'TX')"
+      - name: billing_city
+        description: "City from the billing address"
+      - name: billing_zip
+        description: "ZIP/postal code from the billing address"
+      - name: phone
+        description: "Primary phone number for the account"
+      - name: email
+        description: "Primary email address for the account"
+      - name: client_segment
+        description: "Wealth tier segmentation based on AUM: UHNW (>$5M), HNW ($1M-$5M), Mass Affluent ($250K-$1M), Emerging (<$250K)"
+        tests:
+          - accepted_values:
+              values: ['UHNW', 'HNW', 'Mass Affluent', 'Emerging']
+      - name: service_model
+        description: "Service delivery model: Full Service, Advisory, Digital, or Hybrid"
+      - name: relationship_start_date
+        description: "Date the client relationship began with the RIA"
+      - name: is_active
+        description: "Whether the account is currently active (true) or terminated (false)"
+      - name: created_date
+        description: "Timestamp when the record was created in Salesforce"
+      - name: last_modified_date
+        description: "Timestamp of the most recent modification in Salesforce"
+      - name: _source_system
+        description: "Source system identifier: 'salesforce_fsc'"
+      - name: _loaded_at
+        description: "Timestamp when this record was loaded into the bronze layer"
+      - name: _record_source
+        description: "Source table name: 'ACCOUNT'"
       - name: change_key
-        description: "MD5 hash of all non-key columns for change detection"
+        description: "MD5 hash of all non-key business columns. Changes when any attribute is modified. Used for SCD2 snapshot change detection."
         tests: [not_null]

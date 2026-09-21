@@ -1,13 +1,57 @@
 version: 2
 models:
   - name: dim_account
-    description: "Account dimension - financial account with custodian, performance, and cash details"
+    description: "Gold-layer account dimension. Consumption-ready view of investment accounts merging FSC, Performance, and Custodian data. Includes registration details, model assignments, fee structures, and operational attributes."
     columns:
       - name: account_key
-        description: "Surrogate key (financial_account_id)"
+        description: "MD5 surrogate key for the account dimension"
         tests: [unique, not_null]
+      - name: financial_account_id
+        description: "Salesforce Financial Account ID"
       - name: account_number
-        description: "Custodian account number"
+        description: "Custodian account number. Business key."
         tests: [not_null]
+      - name: financial_account_name
+        description: "Display name of the financial account"
+      - name: account_type
+        description: "Account type: Brokerage, Traditional IRA, Roth IRA, SEP IRA, 401k Rollover, or Trust"
+      - name: registration_type
+        description: "Legal registration: Individual, Joint, Trust, or Custodial"
+      - name: custodian_name
+        description: "Custodian name from FSC"
+      - name: custodian_code
+        description: "Custodian identifier code"
+      - name: sfdc_account_id
+        description: "Salesforce Account ID of the owning client"
+      - name: portfolio_id
+        description: "Performance System portfolio identifier"
+      - name: model_portfolio_id
+        description: "Assigned model portfolio ID"
+      - name: fee_schedule
+        description: "Fee schedule code"
+      - name: management_fee_rate
+        description: "Annual advisory fee rate as a decimal"
+      - name: is_discretionary
+        description: "Whether the advisor has discretionary trading authority"
       - name: status
-        tests: [not_null]
+        description: "Account lifecycle status"
+      - name: inception_date
+        description: "Date the account was originally opened"
+      - name: date_opened
+        description: "Date opened per custodian records"
+      - name: rep_code
+        description: "Advisor representative code at custodian"
+      - name: branch_code
+        description: "Custodian branch code"
+      - name: margin_approved
+        description: "Whether margin trading is approved"
+      - name: options_level
+        description: "Approved options trading level (0-4)"
+      - name: total_market_value
+        description: "Total account market value in USD"
+      - name: cash_balance
+        description: "Cash balance in the account"
+      - name: total_cash
+        description: "Total cash and cash equivalents"
+      - name: available_to_trade
+        description: "Available trading cash"

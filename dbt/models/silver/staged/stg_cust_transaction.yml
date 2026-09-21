@@ -1,16 +1,64 @@
 version: 2
 models:
   - name: stg_cust_transaction
-    description: "Staged snapshot with version tracking"
+    description: "Staged SCD2 history of Custodian transaction records. Tracks historical trade activity including buys, sells, dividends, and fees with cancellation tracking."
     columns:
       - name: record_pk
+        description: "MD5 surrogate key generated from transaction_id"
         tests: [not_null]
+      - name: transaction_id
+        description: "Custodian's unique transaction identifier"
+      - name: account_number
+        description: "Custodian-assigned account number"
+      - name: trade_date
+        description: "Date the trade was executed"
+      - name: settle_date
+        description: "Date the trade settles"
+      - name: transaction_type
+        description: "Activity type: Buy, Sell, Dividend, Interest, Fee, Transfer In, or Transfer Out"
+      - name: cusip
+        description: "CUSIP identifier of the security traded"
+      - name: ticker
+        description: "Exchange ticker symbol of the security traded"
+      - name: security_description
+        description: "Description of the security traded"
+      - name: quantity
+        description: "Number of shares/units transacted"
+      - name: price
+        description: "Execution price per share/unit in USD"
+      - name: gross_amount
+        description: "Total gross transaction amount in USD"
+      - name: net_amount
+        description: "Net transaction amount after commissions and fees"
+      - name: commission
+        description: "Commission charged in USD"
+      - name: fees
+        description: "Additional fees (SEC, TAF, exchange) in USD"
+      - name: cancel_status
+        description: "Cancellation indicator: NULL for normal, 'CANCELLED' for reversed"
+      - name: loaded_at
+        description: "Source system load timestamp"
+      - name: _source_system
+        description: "Source system identifier: 'custodian'"
+      - name: _loaded_at
+        description: "Bronze layer load timestamp"
+      - name: _record_source
+        description: "Source table name: 'TRANSACTION'"
+      - name: change_key
+        description: "MD5 hash of business columns for change detection"
+      - name: dbt_scd_id
+        description: "dbt-generated unique ID for this SCD2 version row"
+      - name: dbt_updated_at
+        description: "Timestamp when this snapshot version was captured"
+      - name: dbt_valid_from
+        description: "Start of the validity window for this version"
+      - name: dbt_valid_to
+        description: "End of the validity window. NULL for current version."
+      - name: dbt_is_deleted
+        description: "Hard-delete flag"
       - name: version_number
-        description: "Ascending version (1 = original)"
-        tests: [not_null]
+        description: "Sequential version counter per record_pk (1 = first version)"
       - name: reverse_version_number
-        description: "Descending version (1 = latest)"
-        tests: [not_null]
+        description: "Reverse-ordered version counter (1 = most recent version)"
       - name: is_current
-        description: "True if this is the active, non-deleted version"
-        tests: [not_null]
+        description: "True if this is the active version"

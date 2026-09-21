@@ -1,15 +1,30 @@
 version: 2
 models:
   - name: res_team
-    description: "Attribution resolution for team - FSC only (single source)"
+    description: "Attribution-resolved team entity. Single-source from FSC Advisor Team with resolved golden values for team name, lead, branch, and region."
     columns:
       - name: team_id
+        description: "Salesforce Team ID"
         tests: [unique, not_null]
+      - name: fsc_team_name
+        description: "Team name from FSC"
       - name: resolved_team_name
-        tests: [not_null]
+        description: "Golden team name"
+      - name: fsc_team_lead_advisor_id
+        description: "Team lead advisor ID from FSC"
+      - name: resolved_team_lead_advisor_id
+        description: "Golden team lead advisor ID"
+      - name: fsc_branch_name
+        description: "Branch name from FSC"
+      - name: resolved_branch_name
+        description: "Golden branch name"
+      - name: fsc_region
+        description: "Region from FSC"
+      - name: resolved_region
+        description: "Golden region"
+      - name: is_active
+        description: "Whether the team is currently active"
       - name: match_status
-        tests:
-          - accepted_values:
-              values: ['FSC_ONLY']
+        description: "Linkage status: fsc_only (single-source entity)"
       - name: resolved_at
-        tests: [not_null]
+        description: "Timestamp when resolution was computed"

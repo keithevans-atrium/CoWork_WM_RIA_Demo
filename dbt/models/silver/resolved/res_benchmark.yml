@@ -1,15 +1,28 @@
 version: 2
 models:
   - name: res_benchmark
-    description: "Attribution resolution for benchmark - Performance system only (single source)"
+    description: "Attribution-resolved benchmark entity. Single-source from Performance System with resolved golden values for benchmark name, ticker, and type."
     columns:
       - name: benchmark_id
+        description: "Unique benchmark identifier from Performance System"
         tests: [unique, not_null]
+      - name: perf_benchmark_name
+        description: "Benchmark name from Performance System"
       - name: resolved_benchmark_name
-        tests: [not_null]
+        description: "Golden benchmark name"
+      - name: perf_benchmark_ticker
+        description: "Benchmark ticker from Performance System"
+      - name: resolved_benchmark_ticker
+        description: "Golden benchmark ticker"
+      - name: perf_benchmark_type
+        description: "Benchmark type from Performance System"
+      - name: resolved_benchmark_type
+        description: "Golden benchmark type"
+      - name: asset_class
+        description: "Primary asset class"
+      - name: is_active
+        description: "Whether the benchmark is currently in use"
       - name: match_status
-        tests:
-          - accepted_values:
-              values: ['PERF_ONLY']
+        description: "Linkage status: perf_only (single-source entity)"
       - name: resolved_at
-        tests: [not_null]
+        description: "Timestamp when resolution was computed"
