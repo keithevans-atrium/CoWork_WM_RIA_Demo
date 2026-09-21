@@ -1,0 +1,27 @@
+version: 2
+models:
+  - name: res_position
+    description: "Attribution resolution for positions - Performance holdings vs Custodian positions with resolved golden record"
+    columns:
+      - name: holding_id
+        description: "Performance holding ID"
+      - name: account_number
+        description: "Cross-system account number"
+      - name: resolved_ticker
+        description: "Golden ticker (priority: Performance > Custodian)"
+      - name: resolved_cusip
+        description: "Golden CUSIP (priority: Performance > Custodian)"
+      - name: resolved_quantity
+        description: "Golden quantity (priority: Custodian > Performance)"
+      - name: resolved_market_value
+        description: "Golden market value (priority: Custodian > Performance)"
+      - name: resolved_cost_basis
+        description: "Golden cost basis (priority: Custodian > Performance)"
+      - name: resolved_unrealized_gain_loss
+        description: "Golden P&L (priority: Custodian calc > Performance)"
+      - name: match_status
+        tests:
+          - accepted_values:
+              values: ['BOTH_MATCHED', 'PERF_ONLY', 'CUST_ONLY', 'UNMATCHED']
+      - name: resolved_at
+        tests: [not_null]

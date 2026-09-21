@@ -1,0 +1,24 @@
+version: 2
+models:
+  - name: res_advisor_book
+    description: "Attribution resolution for advisor - FSC advisor data vs Custodian rep codes with book metrics"
+    columns:
+      - name: advisor_id
+        description: "FSC Advisor ID (master key)"
+        tests: [not_null]
+      - name: resolved_advisor_name
+        description: "Golden advisor name (FSC)"
+      - name: resolved_rep_code
+        description: "Golden rep code (priority: FSC > Custodian)"
+      - name: resolved_branch
+        description: "Golden branch (FSC)"
+      - name: fsc_client_count
+        description: "Count of active clients from FSC"
+      - name: fsc_total_aum
+        description: "Total AUM from FSC account data"
+      - name: match_status
+        tests:
+          - accepted_values:
+              values: ['FSC_CUST_MATCHED', 'FSC_ONLY', 'UNMATCHED']
+      - name: resolved_at
+        tests: [not_null]

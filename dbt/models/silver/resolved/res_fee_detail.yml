@@ -1,0 +1,28 @@
+version: 2
+models:
+  - name: res_fee_detail
+    description: "Attribution resolution for fees - Custodian billing enriched with FSC account context"
+    columns:
+      - name: fee_id
+        description: "Custodian fee record ID (master key)"
+        tests: [unique, not_null]
+      - name: account_number
+        tests: [not_null]
+      - name: resolved_fee_type
+        description: "Golden fee type (Custodian)"
+      - name: resolved_fee_rate
+        description: "Golden fee rate (priority: Custodian > FSC)"
+      - name: resolved_fee_amount
+        description: "Golden fee amount (Custodian)"
+      - name: resolved_fee_status
+        description: "Golden fee status (Custodian)"
+      - name: client_segment
+        description: "Enriched from FSC for segmented fee analysis"
+      - name: advisor_id
+        description: "Enriched from FSC for advisor-level fee rollup"
+      - name: match_status
+        tests:
+          - accepted_values:
+              values: ['CUST_FSC_MATCHED', 'CUST_ONLY', 'UNMATCHED']
+      - name: resolved_at
+        tests: [not_null]

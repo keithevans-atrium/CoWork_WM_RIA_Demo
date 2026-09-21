@@ -1,0 +1,26 @@
+version: 2
+models:
+  - name: res_account_value
+    description: "Attribution resolution for account value - FSC balance vs Performance market value vs Custodian, with resolved golden record"
+    columns:
+      - name: financial_account_id
+        description: "FSC Financial Account ID (master key)"
+        tests: [not_null]
+      - name: account_number
+        description: "Cross-system account number"
+      - name: resolved_account_name
+        description: "Golden account name (priority: FSC > Custodian)"
+      - name: resolved_market_value
+        description: "Golden market value (priority: Performance > FSC balance)"
+      - name: resolved_custodian_code
+        description: "Golden custodian code (priority: Custodian > FSC name mapped)"
+      - name: resolved_status
+        description: "Golden status (priority: FSC > Performance > Custodian)"
+      - name: resolved_model_id
+        description: "Golden model assignment (priority: Performance > FSC)"
+      - name: match_status
+        tests:
+          - accepted_values:
+              values: ['ALL_MATCHED', 'FSC_PERF', 'FSC_CUST', 'FSC_ONLY', 'UNMATCHED']
+      - name: resolved_at
+        tests: [not_null]
