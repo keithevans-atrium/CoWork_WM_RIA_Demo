@@ -1,6 +1,6 @@
 version: 2
 models:
-  - name: stg_advisor
+  - name: stg_fsc_contact
     description: "Staged snapshot with version tracking"
     columns:
       - name: record_pk

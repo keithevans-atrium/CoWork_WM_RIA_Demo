@@ -1,6 +1,6 @@
 version: 2
 models:
-  - name: stg_portfolio_holdings
+  - name: stg_cust_transaction
     description: "Staged snapshot with version tracking"
     columns:
       - name: record_pk

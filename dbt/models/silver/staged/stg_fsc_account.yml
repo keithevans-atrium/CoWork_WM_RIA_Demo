@@ -1,7 +1,7 @@
 version: 2
 models:
-  - name: stg_financial_account
-    description: "Staged snapshot with version tracking"
+  - name: stg_fsc_account
+    description: "Staged FSC account snapshot with version tracking"
     columns:
       - name: record_pk
         tests: [not_null]

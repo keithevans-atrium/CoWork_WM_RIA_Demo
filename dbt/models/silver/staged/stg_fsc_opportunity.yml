@@ -1,6 +1,6 @@
 version: 2
 models:
-  - name: stg_opportunity
+  - name: stg_fsc_opportunity
     description: "Staged snapshot with version tracking"
     columns:
       - name: record_pk

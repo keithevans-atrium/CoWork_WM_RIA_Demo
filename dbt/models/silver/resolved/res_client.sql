@@ -1,9 +1,9 @@
 with fsc_account as (
-    select * from {{ ref('stg_account') }} where is_current = true
+    select * from {{ ref('stg_fsc_account') }} where is_current = true
 ),
 
 fsc_contact as (
-    select * from {{ ref('stg_contact') }} where is_current = true and is_primary_contact = true
+    select * from {{ ref('stg_fsc_contact') }} where is_current = true and is_primary_contact = true
 ),
 
 perf as (
@@ -11,11 +11,11 @@ perf as (
 ),
 
 cust as (
-    select * from {{ ref('stg_custodial_account') }} where is_current = true
+    select * from {{ ref('stg_cust_custodial_account') }} where is_current = true
 ),
 
 fin_acct as (
-    select * from {{ ref('stg_financial_account') }} where is_current = true
+    select * from {{ ref('stg_fsc_financial_account') }} where is_current = true
 )
 
 select

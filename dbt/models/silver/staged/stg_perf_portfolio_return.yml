@@ -1,6 +1,6 @@
 version: 2
 models:
-  - name: stg_portfolio_return
+  - name: stg_perf_portfolio_return
     description: "Staged snapshot with version tracking"
     columns:
       - name: record_pk

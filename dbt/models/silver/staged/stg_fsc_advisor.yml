@@ -1,6 +1,6 @@
 version: 2
 models:
-  - name: stg_custodial_account
+  - name: stg_fsc_advisor
     description: "Staged snapshot with version tracking"
     columns:
       - name: record_pk

@@ -1,6 +1,6 @@
 version: 2
 models:
-  - name: stg_advisor_team
+  - name: stg_cust_fee_billing
     description: "Staged snapshot with version tracking"
     columns:
       - name: record_pk

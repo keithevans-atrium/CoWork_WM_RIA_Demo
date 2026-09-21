@@ -1,6 +1,6 @@
 version: 2
 models:
-  - name: stg_position
+  - name: stg_cust_position
     description: "Staged snapshot with version tracking"
     columns:
       - name: record_pk

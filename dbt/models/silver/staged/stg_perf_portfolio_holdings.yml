@@ -1,6 +1,6 @@
 version: 2
 models:
-  - name: stg_benchmark
+  - name: stg_perf_portfolio_holdings
     description: "Staged snapshot with version tracking"
     columns:
       - name: record_pk
