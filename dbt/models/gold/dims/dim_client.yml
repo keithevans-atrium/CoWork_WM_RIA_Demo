@@ -1,0 +1,14 @@
+version: 2
+models:
+  - name: dim_client
+    description: "Client dimension - one row per household/account with contact, advisor, and team"
+    columns:
+      - name: client_key
+        description: "Surrogate key (account_id)"
+        tests: [unique, not_null]
+      - name: client_segment
+        tests:
+          - accepted_values:
+              values: ['UHNW', 'HNW', 'Mass Affluent', 'Emerging']
+      - name: is_active
+        tests: [not_null]

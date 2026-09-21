@@ -1,0 +1,13 @@
+version: 2
+models:
+  - name: dim_account
+    description: "Account dimension - financial account with custodian, performance, and cash details"
+    columns:
+      - name: account_key
+        description: "Surrogate key (financial_account_id)"
+        tests: [unique, not_null]
+      - name: account_number
+        description: "Custodian account number"
+        tests: [not_null]
+      - name: status
+        tests: [not_null]

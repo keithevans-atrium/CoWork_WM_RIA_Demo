@@ -1,0 +1,14 @@
+version: 2
+models:
+  - name: slv_advisor_book
+    description: "Canonical advisor entity - advisor + team + aggregated book metrics"
+    columns:
+      - name: advisor_id
+        description: "Advisor natural key"
+        tests: [unique, not_null]
+      - name: advisor_name
+        tests: [not_null]
+      - name: client_count
+        description: "Number of active clients assigned"
+      - name: total_aum
+        description: "Total AUM across all assigned accounts"

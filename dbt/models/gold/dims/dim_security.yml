@@ -1,0 +1,12 @@
+version: 2
+models:
+  - name: dim_security
+    description: "Security master - deduplicated security reference by ticker"
+    columns:
+      - name: security_key
+        description: "Surrogate key (ticker)"
+        tests: [unique, not_null]
+      - name: cusip
+        tests: [not_null]
+      - name: asset_class
+        tests: [not_null]

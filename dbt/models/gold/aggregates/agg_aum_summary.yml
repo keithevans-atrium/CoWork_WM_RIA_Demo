@@ -1,0 +1,13 @@
+version: 2
+models:
+  - name: agg_aum_summary
+    description: "AUM summary aggregated by advisor, team, region, and client segment"
+    columns:
+      - name: advisor_id
+        tests: [not_null]
+      - name: total_aum
+        description: "Sum of total_market_value across all accounts"
+      - name: total_assets
+        description: "Total AUM + total cash"
+      - name: discretionary_aum
+        description: "AUM in discretionary accounts only"

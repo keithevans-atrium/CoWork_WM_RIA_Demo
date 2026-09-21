@@ -1,0 +1,16 @@
+version: 2
+models:
+  - name: stg_advisor_team
+    description: "Staged snapshot with version tracking"
+    columns:
+      - name: record_pk
+        tests: [not_null]
+      - name: version_number
+        description: "Ascending version (1 = original)"
+        tests: [not_null]
+      - name: reverse_version_number
+        description: "Descending version (1 = latest)"
+        tests: [not_null]
+      - name: is_current
+        description: "True if this is the active, non-deleted version"
+        tests: [not_null]

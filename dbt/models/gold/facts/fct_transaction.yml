@@ -1,0 +1,17 @@
+version: 2
+models:
+  - name: fct_transaction
+    description: "All custodian transactions with cost detail and custodian metadata"
+    columns:
+      - name: transaction_id
+        tests: [unique, not_null]
+      - name: account_number
+        tests: [not_null]
+      - name: trade_date
+        tests: [not_null]
+      - name: transaction_type
+        tests:
+          - accepted_values:
+              values: ['Buy', 'Sell', 'Dividend', 'Interest', 'Fee', 'Transfer In', 'Transfer Out']
+      - name: total_cost
+        description: "Commission + fees"

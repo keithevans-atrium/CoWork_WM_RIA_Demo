@@ -1,0 +1,14 @@
+version: 2
+models:
+  - name: slv_account_value
+    description: "Canonical account value entity - financial account + performance + custodian + cash"
+    columns:
+      - name: financial_account_id
+        description: "Financial account natural key"
+        tests: [not_null]
+      - name: account_number
+        description: "Custodian account number (cross-system join key)"
+      - name: total_market_value
+        description: "Current market value from performance system"
+      - name: total_cash
+        description: "Total cash and money market balance"

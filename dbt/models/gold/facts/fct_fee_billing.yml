@@ -1,0 +1,13 @@
+version: 2
+models:
+  - name: fct_fee_billing
+    description: "Quarterly fee billing records with annualized fee calculation"
+    columns:
+      - name: fee_id
+        tests: [unique, not_null]
+      - name: account_number
+        tests: [not_null]
+      - name: fee_amount
+        tests: [not_null]
+      - name: annualized_fee
+        description: "Quarterly fee * 4 for annualized estimate"

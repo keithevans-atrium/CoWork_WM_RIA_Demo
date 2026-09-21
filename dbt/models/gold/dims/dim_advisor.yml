@@ -1,0 +1,10 @@
+version: 2
+models:
+  - name: dim_advisor
+    description: "Advisor dimension with team assignment and book metrics (client count, AUM)"
+    columns:
+      - name: advisor_key
+        description: "Surrogate key (advisor_id)"
+        tests: [unique, not_null]
+      - name: is_active
+        tests: [not_null]

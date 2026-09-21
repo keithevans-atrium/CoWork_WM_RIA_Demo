@@ -1,0 +1,15 @@
+version: 2
+models:
+  - name: fct_portfolio_return
+    description: "Monthly portfolio returns with benchmark comparison and excess return calculations"
+    columns:
+      - name: return_id
+        tests: [unique, not_null]
+      - name: account_number
+        tests: [not_null]
+      - name: as_of_date
+        tests: [not_null]
+      - name: mtd_excess_return
+        description: "MTD portfolio return minus MTD benchmark return"
+      - name: ytd_excess_return
+        description: "YTD portfolio return minus YTD benchmark return"

@@ -1,0 +1,18 @@
+version: 2
+models:
+  - name: slv_fee_detail
+    description: "Canonical fee entity - custodian billing joined with FSC account metadata"
+    columns:
+      - name: fee_id
+        description: "Fee record natural key"
+        tests: [unique, not_null]
+      - name: account_number
+        tests: [not_null]
+      - name: fee_type
+        tests:
+          - accepted_values:
+              values: ['Management Fee', 'Financial Planning']
+      - name: fee_status
+        tests:
+          - accepted_values:
+              values: ['Calculated', 'Debited', 'Reversed']
