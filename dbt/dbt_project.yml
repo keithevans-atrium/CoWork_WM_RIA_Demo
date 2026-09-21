@@ -27,6 +27,9 @@ models:
       staged:
         +materialized: table
         +schema: SILVER
+      resolved:
+        +materialized: table
+        +schema: SILVER
       canonical:
         +materialized: table
         +schema: SILVER

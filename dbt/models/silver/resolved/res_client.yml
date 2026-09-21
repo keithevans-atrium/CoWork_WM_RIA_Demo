@@ -1,0 +1,32 @@
+version: 2
+models:
+  - name: res_client
+    description: "Attribution resolution for client - exposes each source system's value plus resolved golden record"
+    columns:
+      - name: account_id
+        description: "FSC Account ID (master key)"
+        tests: [not_null]
+      - name: account_number
+        description: "Custodian/Performance account number (cross-system join)"
+      - name: resolved_first_name
+        description: "Golden first name (priority: FSC Contact)"
+      - name: resolved_last_name
+        description: "Golden last name (priority: FSC Contact)"
+      - name: resolved_email
+        description: "Golden email (priority: FSC Contact > FSC Account)"
+      - name: resolved_phone
+        description: "Golden phone (priority: FSC Contact > FSC Account)"
+      - name: resolved_state
+        description: "Golden state (priority: FSC Account billing > FSC Contact mailing)"
+      - name: resolved_account_name
+        description: "Golden account name (priority: FSC > Custodian)"
+      - name: resolved_registration_type
+        description: "Golden registration (priority: FSC > Custodian)"
+      - name: match_status
+        description: "Cross-system match result (ALL_MATCHED, FSC_PERF, FSC_CUST, FSC_ONLY, UNMATCHED)"
+        tests:
+          - accepted_values:
+              values: ['ALL_MATCHED', 'FSC_PERF', 'FSC_CUST', 'FSC_ONLY', 'UNMATCHED']
+      - name: resolved_at
+        description: "Timestamp when resolution was computed"
+        tests: [not_null]
