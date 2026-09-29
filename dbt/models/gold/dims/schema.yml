@@ -1,0 +1,127 @@
+version: 2
+models:
+  - name: dim_client
+    description: "Client dimension. One row per client household/individual with demographics, segmentation, contact info, risk profile, and primary advisor linkage."
+    config:
+      domain: 'Client'
+    columns:
+      - name: client_key
+        description: "Surrogate key"
+        tests: [unique, not_null]
+      - name: client_id
+        description: "FSC account ID (natural key)"
+        tests: [unique, not_null]
+      - name: client_name
+        description: "Full name"
+      - name: client_segment
+        description: "HNW, UHNW, Mass Affluent, Institutional"
+      - name: service_model
+        description: "Service tier"
+      - name: risk_tolerance
+        description: "Risk tolerance profile"
+      - name: advisor_id
+        description: "Primary advisor FK"
+      - name: total_aum
+        description: "Total AUM across all accounts"
+
+  - name: dim_advisor
+    description: "Advisor dimension. One row per advisor with role, team, region, credentials, and book metrics."
+    config:
+      domain: 'Advisor'
+    columns:
+      - name: advisor_key
+        description: "Surrogate key"
+        tests: [unique, not_null]
+      - name: advisor_id
+        description: "FSC advisor ID (natural key)"
+        tests: [unique, not_null]
+      - name: advisor_name
+        description: "Full name"
+      - name: role
+        description: "Advisor role"
+      - name: team_name
+        description: "Team name"
+      - name: region
+        description: "Team region"
+      - name: client_count
+        description: "Active client count"
+      - name: total_aum
+        description: "Total book AUM"
+
+  - name: dim_account
+    description: "Account dimension. One row per financial account with registration, type, custodian, model, and status."
+    config:
+      domain: 'Account'
+    columns:
+      - name: account_key
+        description: "Surrogate key"
+        tests: [unique, not_null]
+      - name: financial_account_id
+        description: "FSC financial account ID (natural key)"
+        tests: [unique, not_null]
+      - name: account_number
+        description: "Custodian account number"
+      - name: account_name
+        description: "Display name"
+      - name: registration_type
+        description: "Individual, Joint, Trust, Custodial"
+      - name: account_type
+        description: "Brokerage, IRA, 401k, Trust, etc."
+      - name: status
+        description: "Current account status"
+      - name: custodian_code
+        description: "SCHW, PERS, or FIDL"
+      - name: client_id
+        description: "Client FK"
+      - name: advisor_id
+        description: "Advisor FK"
+
+  - name: dim_security
+    description: "Security dimension. One row per security with ticker, CUSIP, asset class, sector, and type."
+    config:
+      domain: 'Security'
+    columns:
+      - name: security_key
+        description: "Surrogate key"
+        tests: [unique, not_null]
+      - name: ticker
+        description: "Resolved ticker symbol"
+        tests: [unique, not_null]
+      - name: cusip
+        description: "Resolved CUSIP"
+      - name: isin
+        description: "International Securities Identification Number"
+      - name: security_name
+        description: "Security display name"
+      - name: asset_class
+        description: "Asset class (US Equity, Fixed Income, etc.)"
+      - name: sub_asset_class
+        description: "Sub-classification (Large Cap Growth, Broad Market, etc.)"
+      - name: sector
+        description: "Market sector"
+      - name: security_type
+        description: "Instrument type (Equity, ETF, Cash)"
+      - name: exchange
+        description: "Primary exchange"
+      - name: currency
+        description: "Trading currency"
+      - name: issuer
+        description: "Security issuer / fund manager"
+      - name: country
+        description: "Country of domicile"
+      - name: inception_date
+        description: "Security listing or fund inception date"
+      - name: expense_ratio
+        description: "Annual expense ratio (ETFs/funds)"
+      - name: dividend_yield
+        description: "Current dividend yield"
+      - name: market_cap_category
+        description: "Market cap bucket (Large Cap, Multi Cap, N/A)"
+      - name: is_esg
+        description: "ESG-screened flag"
+      - name: risk_rating
+        description: "Risk rating (1=Low to 5=High)"
+      - name: benchmark_index
+        description: "Primary benchmark index"
+      - name: is_active
+        description: "Whether the security is actively traded"

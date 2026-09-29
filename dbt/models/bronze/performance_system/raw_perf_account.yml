@@ -10,7 +10,7 @@ models:
         tests: [unique, not_null]
       - name: account_number
         description: "Custodian-assigned account number. Cross-system join key to FSC and Custodian."
-        tests: [unique, not_null]
+        tests: [not_null]
       - name: account_name
         description: "Display name of the account in the performance system"
       - name: portfolio_id

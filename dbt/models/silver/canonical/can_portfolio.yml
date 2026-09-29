@@ -1,0 +1,79 @@
+version: 2
+models:
+  - name: can_portfolio
+    description: "Canonical portfolio view. One row per financial account enriched with model portfolio details, latest month returns and benchmark comparison, and aggregated holdings summary. Joins can_account_value with res_model_portfolio, res_return_record, and res_position."
+    config:
+      domain: 'Account'
+    columns:
+      - name: portfolio_id
+        description: "Surrogate key for this canonical row"
+        tests: [unique, not_null]
+      - name: financial_account_id
+        description: "FSC financial account identifier"
+        tests: [unique, not_null]
+      - name: account_number
+        description: "Custodian-assigned account number"
+      - name: account_name
+        description: "Resolved account display name"
+      - name: market_value
+        description: "Resolved total market value"
+      - name: is_discretionary
+        description: "Whether the account has discretionary authority"
+      - name: client_id
+        description: "FSC account ID representing the client"
+      - name: client_name
+        description: "Client full name"
+      - name: client_segment
+        description: "Client segment: HNW, UHNW, Mass Affluent, Institutional"
+      - name: advisor_id
+        description: "Primary advisor identifier"
+      - name: advisor_name
+        description: "Primary advisor name"
+      - name: model_id
+        description: "Assigned model portfolio ID"
+      - name: model_name
+        description: "Model portfolio display name"
+      - name: risk_profile
+        description: "Model risk profile: Conservative, Moderate, Growth, Aggressive"
+      - name: equity_target_pct
+        description: "Model target equity allocation percentage"
+      - name: fixed_income_target_pct
+        description: "Model target fixed income allocation percentage"
+      - name: alternative_target_pct
+        description: "Model target alternative allocation percentage"
+      - name: cash_target_pct
+        description: "Model target cash allocation percentage"
+      - name: return_as_of_date
+        description: "Date of the latest return record"
+      - name: mtd_return
+        description: "Month-to-date portfolio return"
+      - name: qtd_return
+        description: "Quarter-to-date portfolio return"
+      - name: ytd_return
+        description: "Year-to-date portfolio return"
+      - name: itd_return
+        description: "Inception-to-date portfolio return"
+      - name: one_year_return
+        description: "Trailing 1-year portfolio return"
+      - name: three_year_return
+        description: "Trailing 3-year annualized portfolio return"
+      - name: five_year_return
+        description: "Trailing 5-year annualized portfolio return"
+      - name: benchmark_name
+        description: "Benchmark used for comparison"
+      - name: mtd_excess_return
+        description: "MTD return minus benchmark MTD return"
+      - name: ytd_excess_return
+        description: "YTD return minus benchmark YTD return"
+      - name: one_year_excess_return
+        description: "1-year return minus benchmark 1-year return"
+      - name: holding_count
+        description: "Number of distinct securities held"
+      - name: holdings_market_value
+        description: "Sum of position market values"
+      - name: holdings_cost_basis
+        description: "Sum of position cost basis"
+      - name: total_unrealized_gain_loss
+        description: "Sum of unrealized gain/loss across all positions"
+      - name: positions_as_of_date
+        description: "Latest date of position data"

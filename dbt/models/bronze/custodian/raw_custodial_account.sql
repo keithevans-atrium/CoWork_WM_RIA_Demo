@@ -1,5 +1,5 @@
 select
-    {{ generate_pk(['account_number']) }} as record_pk,
+    {{ generate_pk(['custodial_account_id']) }} as record_pk,
     custodial_account_id,
     account_number,
     account_title,

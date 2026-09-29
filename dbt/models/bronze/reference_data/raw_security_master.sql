@@ -1,0 +1,33 @@
+select
+    {{ generate_pk(['ticker']) }} as record_pk,
+    ticker,
+    cusip,
+    isin,
+    security_name,
+    asset_class,
+    sub_asset_class,
+    sector,
+    security_type,
+    exchange,
+    currency,
+    issuer,
+    country,
+    inception_date,
+    expense_ratio,
+    dividend_yield,
+    market_cap_category,
+    is_esg,
+    risk_rating,
+    benchmark_index,
+    description,
+    is_active,
+    'security_master' as _source_system,
+    current_timestamp() as _loaded_at,
+    'SEED_SECURITY_MASTER' as _record_source,
+    {{ generate_change_key([
+        'cusip', 'isin', 'security_name', 'asset_class', 'sub_asset_class',
+        'sector', 'security_type', 'exchange', 'currency', 'issuer', 'country',
+        'expense_ratio', 'dividend_yield', 'market_cap_category', 'is_esg',
+        'risk_rating', 'benchmark_index', 'is_active'
+    ]) }} as change_key
+from {{ ref('seed_security_master') }}

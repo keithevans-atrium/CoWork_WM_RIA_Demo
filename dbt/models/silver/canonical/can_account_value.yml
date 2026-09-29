@@ -1,0 +1,59 @@
+version: 2
+models:
+  - name: can_account_value
+    description: "Canonical account value table. One row per financial account enriched with client demographics and primary advisor details. Joins resolved account, client, and advisor entities through the client-account and client-advisor bridges."
+    config:
+      domain: 'Account'
+    columns:
+      - name: account_value_id
+        description: "Surrogate key for this canonical row"
+        tests: [unique, not_null]
+      - name: financial_account_id
+        description: "FSC financial account identifier (natural key)"
+        tests: [unique, not_null]
+      - name: account_number
+        description: "Custodian-assigned account number"
+      - name: account_name
+        description: "Resolved account display name (FSC > Custodian)"
+      - name: registration_type
+        description: "Legal registration: Individual, Joint, Trust, Custodial"
+      - name: account_type
+        description: "Account type: Brokerage, IRA, 401k, Trust, etc."
+      - name: status
+        description: "Resolved account status across all source systems"
+      - name: custodian_code
+        description: "Resolved custodian: SCHW, PERS, or FIDL"
+      - name: inception_date
+        description: "Resolved account open date"
+      - name: market_value
+        description: "Resolved total market value (Performance > FSC balance)"
+      - name: fee_rate
+        description: "Management fee rate from FSC"
+      - name: fee_schedule
+        description: "Fee schedule tier from Performance system"
+      - name: model_id
+        description: "Resolved model portfolio assignment"
+      - name: is_discretionary
+        description: "Whether the account has discretionary authority"
+      - name: client_id
+        description: "FSC account ID representing the client (household/individual)"
+      - name: client_name
+        description: "Resolved client full name"
+      - name: client_segment
+        description: "Client segment: HNW, UHNW, Mass Affluent, Institutional"
+      - name: service_model
+        description: "Service model tier assigned to the client"
+      - name: risk_tolerance
+        description: "Client risk tolerance profile"
+      - name: advisor_id
+        description: "Primary advisor FSC identifier"
+      - name: advisor_name
+        description: "Resolved advisor full name"
+      - name: advisor_rep_code
+        description: "Resolved advisor rep code"
+      - name: advisor_team
+        description: "Advisor team name"
+      - name: advisor_region
+        description: "Advisor team region"
+      - name: account_match_status
+        description: "Cross-system match quality: ALL_MATCHED, FSC_PERF, FSC_CUST, FSC_ONLY"

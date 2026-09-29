@@ -1,0 +1,22 @@
+select
+    {{ generate_pk(['advisor_id']) }} as advisor_key,
+    advisor_id,
+    advisor_name,
+    first_name,
+    last_name,
+    email,
+    role,
+    crd_number,
+    rep_code,
+    branch,
+    is_active,
+    hire_date,
+    termination_date,
+    team_id,
+    team_name,
+    region,
+    client_count,
+    account_count,
+    total_aum,
+    canonical_at as loaded_at
+from {{ ref('can_advisor') }}

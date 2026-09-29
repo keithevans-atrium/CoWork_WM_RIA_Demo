@@ -1,0 +1,49 @@
+version: 2
+models:
+  - name: can_advisor
+    description: "Canonical advisor entity. One row per advisor enriched with team info and aggregate book metrics (client count, account count, total AUM). Draws from res_advisor_book, res_client_advisor, res_client_account, and res_account_value."
+    config:
+      domain: 'Advisor'
+    columns:
+      - name: canonical_advisor_id
+        description: "Surrogate key for this canonical row"
+        tests: [unique, not_null]
+      - name: advisor_id
+        description: "FSC advisor identifier (natural key)"
+        tests: [unique, not_null]
+      - name: advisor_name
+        description: "Resolved advisor full name"
+      - name: first_name
+        description: "Advisor first name"
+      - name: last_name
+        description: "Advisor last name"
+      - name: email
+        description: "Resolved advisor email"
+      - name: role
+        description: "Advisor role: Lead Advisor, Senior Advisor, etc."
+      - name: crd_number
+        description: "FINRA Central Registration Depository number"
+      - name: rep_code
+        description: "Resolved rep code (FSC > Custodian)"
+      - name: branch
+        description: "Resolved branch name"
+      - name: is_active
+        description: "Whether the advisor is currently active"
+      - name: hire_date
+        description: "Advisor hire date"
+      - name: termination_date
+        description: "Advisor termination date, NULL if active"
+      - name: team_id
+        description: "Team identifier"
+      - name: team_name
+        description: "Team display name"
+      - name: region
+        description: "Team region"
+      - name: client_count
+        description: "Number of active clients assigned to this advisor"
+      - name: account_count
+        description: "Number of active accounts across all clients"
+      - name: total_aum
+        description: "Total assets under management across all client accounts"
+      - name: advisor_match_status
+        description: "Cross-system match quality: FSC_CUST_MATCHED, FSC_ONLY"

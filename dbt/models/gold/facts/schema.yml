@@ -1,0 +1,52 @@
+version: 2
+models:
+  - name: fct_portfolio_return
+    description: "Portfolio return fact. One row per account per month with portfolio returns, benchmark comparison, and excess returns. Grain: account_number x as_of_date."
+    config:
+      domain: 'Return'
+    columns:
+      - name: return_key
+        description: "Surrogate key (account_number + as_of_date)"
+        tests: [unique, not_null]
+      - name: account_number
+        description: "Account FK"
+        tests: [not_null]
+      - name: as_of_date
+        description: "Return period end date"
+        tests: [not_null]
+      - name: mtd_return
+        description: "Month-to-date return"
+      - name: ytd_return
+        description: "Year-to-date return"
+      - name: one_year_return
+        description: "Trailing 1-year return"
+      - name: benchmark_name
+        description: "Comparison benchmark"
+      - name: mtd_excess_return
+        description: "MTD alpha vs benchmark"
+      - name: ytd_excess_return
+        description: "YTD alpha vs benchmark"
+
+  - name: fct_account_value
+    description: "Account value fact. Current snapshot per financial account with market value, model allocation, latest returns, and holdings summary. Grain: one row per financial account."
+    config:
+      domain: 'Account'
+    columns:
+      - name: account_value_key
+        description: "Surrogate key"
+        tests: [unique, not_null]
+      - name: financial_account_id
+        description: "Account FK"
+        tests: [unique, not_null]
+      - name: market_value
+        description: "Current total market value"
+      - name: holding_count
+        description: "Number of distinct holdings"
+      - name: holdings_market_value
+        description: "Sum of position market values"
+      - name: total_unrealized_gain_loss
+        description: "Sum of unrealized gain/loss"
+      - name: mtd_return
+        description: "Latest month-to-date return"
+      - name: ytd_return
+        description: "Latest year-to-date return"

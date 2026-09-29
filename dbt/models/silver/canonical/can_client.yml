@@ -1,0 +1,59 @@
+version: 2
+models:
+  - name: can_client
+    description: "Canonical client entity. One row per client (FSC account) enriched with primary advisor details and aggregate account metrics (total AUM, account count). Draws from res_client, res_client_advisor, res_advisor_book, res_client_account, and res_account_value."
+    config:
+      domain: 'Client'
+    columns:
+      - name: canonical_client_id
+        description: "Surrogate key for this canonical row"
+        tests: [unique, not_null]
+      - name: client_id
+        description: "FSC account ID representing the client household/individual"
+        tests: [unique, not_null]
+      - name: client_name
+        description: "Resolved full name (first + last)"
+      - name: first_name
+        description: "Resolved first name"
+      - name: last_name
+        description: "Resolved last name"
+      - name: email
+        description: "Resolved client email"
+      - name: phone
+        description: "Resolved client phone"
+      - name: state
+        description: "Resolved client state"
+      - name: city
+        description: "Resolved client city"
+      - name: zip
+        description: "Resolved client zip code"
+      - name: account_type
+        description: "FSC account type: Individual, Household, Trust, etc."
+      - name: client_segment
+        description: "Client segment: HNW, UHNW, Mass Affluent, Institutional"
+      - name: service_model
+        description: "Service model tier assigned to the client"
+      - name: risk_tolerance
+        description: "Client risk tolerance profile"
+      - name: investment_experience
+        description: "Client investment experience level"
+      - name: date_of_birth
+        description: "Client date of birth"
+      - name: relationship_start_date
+        description: "Date the client relationship began"
+      - name: account_count
+        description: "Number of active financial accounts for this client"
+      - name: total_aum
+        description: "Total assets under management across all accounts"
+      - name: advisor_id
+        description: "Primary advisor FSC identifier"
+      - name: advisor_name
+        description: "Primary advisor full name"
+      - name: advisor_rep_code
+        description: "Primary advisor rep code"
+      - name: advisor_team
+        description: "Primary advisor team name"
+      - name: advisor_region
+        description: "Primary advisor team region"
+      - name: client_match_status
+        description: "Cross-system match quality: ALL_MATCHED, FSC_PERF, FSC_CUST, FSC_ONLY"

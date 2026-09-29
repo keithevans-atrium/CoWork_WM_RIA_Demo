@@ -46,7 +46,7 @@ sources:
         description: "Performance-tracked accounts with model and custodian linkage"
         columns:
           - name: account_number
-            tests: [unique, not_null]
+            tests: [not_null]
       - name: portfolio_return
         description: "Monthly TWR/IRR returns by account vs benchmark"
       - name: portfolio_holdings
@@ -68,7 +68,7 @@ sources:
       - name: custodial_account
         description: "Custodial account registrations with rep and branch codes"
         columns:
-          - name: account_number
+          - name: custodial_account_id
             tests: [unique, not_null]
       - name: position
         description: "Daily security positions with cost basis"

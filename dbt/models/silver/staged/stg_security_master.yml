@@ -1,0 +1,13 @@
+version: 2
+models:
+  - name: stg_security_master
+    description: "Staged security master with SCD2 versioning. One row per security per version with is_current flag."
+    config:
+      domain: 'Security'
+    columns:
+      - name: record_pk
+        description: "MD5 surrogate key from ticker"
+        tests: [not_null]
+      - name: ticker
+        description: "Ticker symbol"
+        tests: [not_null]

@@ -1,0 +1,18 @@
+version: 2
+models:
+  - name: raw_security_master
+    description: "Raw security master reference data. Comprehensive security attributes sourced from the seed_security_master CSV. One row per security (ticker)."
+    config:
+      domain: 'Security'
+    columns:
+      - name: record_pk
+        description: "MD5 surrogate key from ticker"
+        tests: [unique, not_null]
+      - name: ticker
+        description: "Ticker symbol (natural key)"
+        tests: [unique, not_null]
+      - name: cusip
+        description: "CUSIP identifier"
+      - name: change_key
+        description: "MD5 hash of business columns for SCD2 change detection"
+        tests: [not_null]

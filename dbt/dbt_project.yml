@@ -39,13 +39,12 @@ models:
         +materialized: table
         +schema: SILVER_CANONICAL
     gold:
-      cortex_ready:
-        dims:
-          +materialized: table
-          +schema: GOLD
-        facts:
-          +materialized: table
-          +schema: GOLD
+      dims:
+        +materialized: table
+        +schema: GOLD
+      facts:
+        +materialized: table
+        +schema: GOLD
       cortex_agent:
         +materialized: table
         +schema: GOLD_AGENT

@@ -82,3 +82,15 @@ seeds:
   - name: seed_return_method
     description: "Portfolio return calculation methodology (TWR, IRR)"
     columns: *seed_columns
+
+  - name: seed_security_master
+    description: "Security master reference data - comprehensive attributes for all traded securities"
+    columns:
+      - name: ticker
+        tests: [unique, not_null]
+      - name: security_name
+        tests: [not_null]
+      - name: asset_class
+        tests: [not_null]
+      - name: is_active
+        tests: [not_null]

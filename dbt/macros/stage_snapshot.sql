@@ -11,7 +11,7 @@ select
         order by dbt_valid_from desc
     ) as reverse_version_number,
     case
-        when dbt_valid_to is null and coalesce(dbt_is_deleted, false) = false
+        when dbt_valid_to is null and coalesce(dbt_is_deleted::boolean, false) = false
         then true
         else false
     end as is_current
