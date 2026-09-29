@@ -2,6 +2,8 @@ version: 2
 models:
   - name: res_opportunity
     description: "Attribution-resolved opportunity entity. Single-source from FSC with resolved golden values for opportunity name and stage. Enriched with client and advisor references."
+    config:
+      domain: 'Opportunity'
     columns:
       - name: opportunity_id
         description: "Salesforce Opportunity ID"

@@ -2,6 +2,8 @@ version: 2
 models:
   - name: stg_fsc_advisor
     description: "Staged SCD2 history of Salesforce FSC Advisor records. Tracks historical changes to advisor details — roles, branch assignments, CRD numbers, and employment status."
+    config:
+      domain: 'Advisor'
     columns:
       - name: record_pk
         description: "MD5 surrogate key generated from advisor_id"
@@ -10,14 +12,24 @@ models:
         description: "Salesforce User ID for the advisor"
       - name: first_name
         description: "Advisor's first/given name"
+        meta:
+          pii: 'Name'
       - name: last_name
         description: "Advisor's last/family name"
+        meta:
+          pii: 'Name'
       - name: advisor_name
         description: "Concatenated first_name + last_name"
+        meta:
+          pii: 'Name'
       - name: email
         description: "Business email address"
+        meta:
+          pii: 'Email'
       - name: phone
         description: "Business phone number"
+        meta:
+          pii: 'Phone'
       - name: role
         description: "Functional role: Lead Advisor, Associate Advisor, or Paraplanner"
       - name: crd_number

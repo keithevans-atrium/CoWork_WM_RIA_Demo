@@ -2,6 +2,8 @@ version: 2
 models:
   - name: res_financial_goal
     description: "Attribution-resolved financial goal entity. Single-source from FSC. Tracks client goals (retirement, education, major purchase) with target amounts, current progress, and status."
+    config:
+      domain: 'Goal'
     columns:
       - name: goal_id
         description: "Financial goal identifier from FSC"

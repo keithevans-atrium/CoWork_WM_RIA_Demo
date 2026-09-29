@@ -2,6 +2,8 @@ version: 2
 models:
   - name: raw_advisor_team
     description: "Raw Salesforce FSC Advisor Team records. Represents organizational groupings of advisors into teams with a designated lead. Used for production reporting, branch management, and team-level AUM rollups."
+    config:
+      domain: 'Team'
     columns:
       - name: record_pk
         description: "MD5 surrogate key generated from team_id"

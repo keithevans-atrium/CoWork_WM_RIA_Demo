@@ -2,6 +2,8 @@ version: 2
 models:
   - name: raw_opportunity
     description: "Raw Salesforce FSC Opportunity records. Represents sales pipeline items — new accounts, rollovers, plan conversions, and additional investments. Tracks stage progression, probability, and expected revenue for AUM growth forecasting."
+    config:
+      domain: 'Opportunity'
     columns:
       - name: record_pk
         description: "MD5 surrogate key generated from opportunity_id"

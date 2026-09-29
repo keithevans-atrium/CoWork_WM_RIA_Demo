@@ -2,6 +2,8 @@ version: 2
 models:
   - name: raw_perf_account
     description: "Raw Performance System account records. Represents the performance-tracking view of investment accounts — portfolio assignments, model allocations, market values, and fee schedules. Joined to FSC Financial Account via account_number."
+    config:
+      domain: 'Account'
     columns:
       - name: record_pk
         description: "MD5 surrogate key generated from account_number"

@@ -2,6 +2,8 @@ version: 2
 models:
   - name: stg_cust_fee_billing
     description: "Staged SCD2 history of Custodian fee billing records. Tracks historical advisory fee calculations per billing period with status changes from calculated through debited."
+    config:
+      domain: 'Fee'
     columns:
       - name: record_pk
         description: "MD5 surrogate key generated from fee_id"

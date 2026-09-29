@@ -2,6 +2,8 @@ version: 2
 models:
   - name: res_fee_detail
     description: "Attribution-resolved fee detail entity. Reconciles Custodian fee billing records with FSC fee rates and account names. Exposes each system's fee type, rate, and amount alongside resolved golden values."
+    config:
+      domain: 'Fee'
     columns:
       - name: fee_id
         description: "Custodian's fee billing record identifier"

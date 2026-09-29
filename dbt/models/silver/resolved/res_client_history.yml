@@ -2,6 +2,8 @@ version: 2
 models:
   - name: res_client_history
     description: "Resolved client history. SCD2 temporal tracking of client attribute changes over time — segment upgrades/downgrades, service model changes, risk tolerance updates, state relocations. Derived from staged snapshot versions."
+    config:
+      domain: 'Client'
     columns:
       - name: client_history_id
         description: "Surrogate key for this history row"
@@ -16,6 +18,8 @@ models:
         description: "Risk tolerance at this point in time"
       - name: state
         description: "Client state at this point in time"
+        meta:
+          pii: 'Address'
       - name: is_active
         description: "Whether the client was active during this period"
       - name: version_number

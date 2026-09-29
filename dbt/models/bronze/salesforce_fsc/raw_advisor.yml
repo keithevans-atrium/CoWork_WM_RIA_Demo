@@ -2,6 +2,8 @@ version: 2
 models:
   - name: raw_advisor
     description: "Raw Salesforce FSC Advisor records. Represents registered investment advisors and their professional details — CRD numbers, rep codes, branch assignments, and employment dates. Central to advisor-book attribution."
+    config:
+      domain: 'Advisor'
     columns:
       - name: record_pk
         description: "MD5 surrogate key generated from advisor_id"
@@ -11,14 +13,24 @@ models:
         tests: [unique, not_null]
       - name: first_name
         description: "Advisor's first/given name"
+        meta:
+          pii: 'Name'
       - name: last_name
         description: "Advisor's last/family name"
+        meta:
+          pii: 'Name'
       - name: advisor_name
         description: "Concatenated first_name + last_name for display"
+        meta:
+          pii: 'Name'
       - name: email
         description: "Advisor's business email address"
+        meta:
+          pii: 'Email'
       - name: phone
         description: "Advisor's business phone number"
+        meta:
+          pii: 'Phone'
       - name: role
         description: "Advisor's functional role: Lead Advisor, Associate Advisor, or Paraplanner"
       - name: crd_number

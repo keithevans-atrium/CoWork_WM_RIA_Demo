@@ -26,7 +26,7 @@ select
 
     -- account_type: FSC only
     fsc.account_type                        as fsc_account_type,
-    coalesce(fsc.account_type)              as resolved_account_type,
+    fsc.account_type                         as resolved_account_type,
 
     -- balance / market_value: FSC vs Performance
     fsc.balance                             as fsc_balance,

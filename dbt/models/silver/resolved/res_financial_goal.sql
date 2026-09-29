@@ -8,10 +8,10 @@ select
     fsc.contact_id,
 
     fsc.goal_name                           as fsc_goal_name,
-    coalesce(fsc.goal_name)                 as resolved_goal_name,
+    fsc.goal_name                            as resolved_goal_name,
 
     fsc.goal_type                           as fsc_goal_type,
-    coalesce(fsc.goal_type)                 as resolved_goal_type,
+    fsc.goal_type                            as resolved_goal_type,
 
     fsc.target_amount,
     fsc.current_amount,

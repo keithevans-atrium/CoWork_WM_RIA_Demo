@@ -2,6 +2,8 @@ version: 2
 models:
   - name: raw_account
     description: "Raw Salesforce FSC Account records. Represents client households, individuals, trusts, and business entities. Central CRM entity linking contacts, financial accounts, opportunities, and advisor assignments."
+    config:
+      domain: 'Client'
     columns:
       - name: record_pk
         description: "MD5 surrogate key generated from account_id"
@@ -11,6 +13,8 @@ models:
         tests: [unique, not_null]
       - name: account_name
         description: "Display name of the account (e.g. 'Smith Household', 'Jones Family Trust')"
+        meta:
+          pii: 'Name'
         tests: [not_null]
       - name: account_type
         description: "Entity classification: Individual, Household, Joint, Trust, or Business"
@@ -33,14 +37,24 @@ models:
         description: "Assets Under Management in USD. Aggregated balance across all financial accounts."
       - name: billing_state
         description: "Two-letter US state code from the billing address (e.g. 'CA', 'NY', 'TX')"
+        meta:
+          pii: 'Address'
       - name: billing_city
         description: "City from the billing address"
+        meta:
+          pii: 'Address'
       - name: billing_zip
         description: "ZIP/postal code from the billing address"
+        meta:
+          pii: 'Address'
       - name: phone
         description: "Primary phone number for the account"
+        meta:
+          pii: 'Phone'
       - name: email
         description: "Primary email address for the account"
+        meta:
+          pii: 'Email'
       - name: client_segment
         description: "Wealth tier segmentation based on AUM: UHNW (>$5M), HNW ($1M-$5M), Mass Affluent ($250K-$1M), Emerging (<$250K)"
         tests:

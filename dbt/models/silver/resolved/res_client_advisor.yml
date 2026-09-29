@@ -2,6 +2,8 @@ version: 2
 models:
   - name: res_client_advisor
     description: "Resolved client-to-advisor relationship. Temporal M:N mapping between clients and advisors. Tracks primary vs secondary advisor assignments with effective dating for book transfers."
+    config:
+      domain: 'Client'
     columns:
       - name: client_advisor_id
         description: "Surrogate key for this client-advisor relationship"

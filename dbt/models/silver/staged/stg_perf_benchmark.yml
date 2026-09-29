@@ -2,6 +2,8 @@ version: 2
 models:
   - name: stg_perf_benchmark
     description: "Staged SCD2 history of Performance System benchmark reference records. Tracks changes to benchmark definitions, types, and active status over time."
+    config:
+      domain: 'Benchmark'
     columns:
       - name: record_pk
         description: "MD5 surrogate key generated from benchmark_id"

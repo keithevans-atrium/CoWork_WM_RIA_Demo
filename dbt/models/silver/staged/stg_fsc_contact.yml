@@ -2,6 +2,8 @@ version: 2
 models:
   - name: stg_fsc_contact
     description: "Staged SCD2 history of Salesforce FSC Contact records. Tracks all historical versions of client demographics, employment, and risk profiles with version numbering."
+    config:
+      domain: 'Client'
     columns:
       - name: record_pk
         description: "MD5 surrogate key generated from contact_id"
@@ -12,26 +14,48 @@ models:
         description: "Salesforce Account ID of the owning client household"
       - name: first_name
         description: "Contact's first/given name"
+        meta:
+          pii: 'Name'
       - name: last_name
         description: "Contact's last/family name"
+        meta:
+          pii: 'Name'
       - name: full_name
         description: "Concatenated first_name + last_name"
+        meta:
+          pii: 'Name'
       - name: email
         description: "Personal email address"
+        meta:
+          pii: 'Email'
       - name: phone
         description: "Primary phone number"
+        meta:
+          pii: 'Phone'
       - name: mobile_phone
         description: "Mobile phone number"
+        meta:
+          pii: 'Phone'
       - name: mailing_state
         description: "Two-letter US state code from mailing address"
+        meta:
+          pii: 'Address'
       - name: mailing_city
         description: "City from the mailing address"
+        meta:
+          pii: 'Address'
       - name: mailing_zip
         description: "ZIP/postal code from the mailing address"
+        meta:
+          pii: 'Address'
       - name: date_of_birth
         description: "Contact's date of birth"
+        meta:
+          pii: 'Date of Birth'
       - name: ssn_last_four
         description: "Last four digits of SSN"
+        meta:
+          pii: 'SSN'
       - name: employment_status
         description: "Employment status: Employed, Self-Employed, Retired, or Business Owner"
       - name: employer_name

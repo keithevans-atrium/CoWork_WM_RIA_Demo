@@ -2,6 +2,8 @@ version: 2
 models:
   - name: raw_transaction
     description: "Raw Custodian transaction records. Trade-level activity including buys, sells, dividends, interest, transfers, and fees. Authoritative source for trade confirmations and regulatory audit trail."
+    config:
+      domain: 'Transaction'
     columns:
       - name: record_pk
         description: "MD5 surrogate key generated from transaction_id"

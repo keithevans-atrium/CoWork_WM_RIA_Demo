@@ -2,6 +2,8 @@ version: 2
 models:
   - name: stg_fsc_opportunity
     description: "Staged SCD2 history of Salesforce FSC Opportunity records. Tracks pipeline stage progression, probability changes, and amount updates over time."
+    config:
+      domain: 'Opportunity'
     columns:
       - name: record_pk
         description: "MD5 surrogate key generated from opportunity_id"

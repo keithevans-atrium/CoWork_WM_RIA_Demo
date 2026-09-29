@@ -2,6 +2,8 @@ version: 2
 models:
   - name: raw_benchmark
     description: "Raw Performance System benchmark reference records. Master list of market benchmarks used for portfolio performance comparison — S&P 500, Bloomberg Agg, MSCI EAFE, etc. Linked to portfolios via benchmark_id."
+    config:
+      domain: 'Benchmark'
     columns:
       - name: record_pk
         description: "MD5 surrogate key generated from benchmark_id"

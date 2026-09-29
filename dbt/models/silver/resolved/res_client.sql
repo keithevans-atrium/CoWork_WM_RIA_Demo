@@ -26,13 +26,13 @@ select
     fsc_contact.first_name                          as fsc_first_name,
     null                                            as perf_first_name,
     null                                            as cust_first_name,
-    coalesce(fsc_contact.first_name)                as resolved_first_name,
+    fsc_contact.first_name                          as resolved_first_name,
 
     -- last_name: source attribution + resolved
     fsc_contact.last_name                           as fsc_last_name,
     null                                            as perf_last_name,
     null                                            as cust_last_name,
-    coalesce(fsc_contact.last_name)                 as resolved_last_name,
+    fsc_contact.last_name                            as resolved_last_name,
 
     -- email: source attribution + resolved
     fsc_contact.email                               as fsc_contact_email,
@@ -50,10 +50,10 @@ select
     coalesce(fsc_account.billing_state, fsc_contact.mailing_state) as resolved_state,
 
     fsc_account.billing_city                        as fsc_city,
-    coalesce(fsc_account.billing_city)              as resolved_city,
+    fsc_account.billing_city                         as resolved_city,
 
     fsc_account.billing_zip                         as fsc_zip,
-    coalesce(fsc_account.billing_zip)               as resolved_zip,
+    fsc_account.billing_zip                          as resolved_zip,
 
     -- account_name: FSC vs custodian
     fsc_account.account_name                        as fsc_account_name,

@@ -2,6 +2,8 @@ version: 2
 models:
   - name: res_return_record
     description: "Attribution-resolved return record entity. Enriches Performance System return data with benchmark details and computes excess returns (portfolio minus benchmark). Links to FSC client context for segment-based analysis."
+    config:
+      domain: 'Return'
     columns:
       - name: return_id
         description: "Unique return record identifier"

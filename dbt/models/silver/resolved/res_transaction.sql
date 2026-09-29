@@ -28,15 +28,15 @@ select
     cust.settle_date,
 
     cust.transaction_type                   as cust_transaction_type,
-    coalesce(cust.transaction_type)         as resolved_transaction_type,
+    cust.transaction_type                    as resolved_transaction_type,
 
     cust.ticker                             as cust_ticker,
     cust.cusip                              as cust_cusip,
-    coalesce(cust.ticker)                   as resolved_ticker,
-    coalesce(cust.cusip)                    as resolved_cusip,
+    cust.ticker                              as resolved_ticker,
+    cust.cusip                               as resolved_cusip,
 
     cust.security_description               as cust_security_description,
-    coalesce(cust.security_description)     as resolved_security_description,
+    cust.security_description                as resolved_security_description,
 
     cust.quantity,
     cust.price,

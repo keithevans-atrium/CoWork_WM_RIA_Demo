@@ -2,6 +2,8 @@ version: 2
 models:
   - name: stg_fsc_account
     description: "Staged SCD2 history of Salesforce FSC Account records. Adds version tracking (version_number, is_current) on top of the raw_account snapshot. Each row represents one version of an account record."
+    config:
+      domain: 'Client'
     columns:
       - name: record_pk
         description: "MD5 surrogate key generated from account_id. Shared across all versions of the same account."
@@ -10,6 +12,8 @@ models:
         description: "Salesforce 18-character Account ID"
       - name: account_name
         description: "Display name of the account"
+        meta:
+          pii: 'Name'
       - name: account_type
         description: "Entity classification: Individual, Household, Joint, Trust, or Business"
       - name: record_type
@@ -24,14 +28,24 @@ models:
         description: "Assets Under Management in USD"
       - name: billing_state
         description: "Two-letter US state code from billing address"
+        meta:
+          pii: 'Address'
       - name: billing_city
         description: "City from the billing address"
+        meta:
+          pii: 'Address'
       - name: billing_zip
         description: "ZIP/postal code from the billing address"
+        meta:
+          pii: 'Address'
       - name: phone
         description: "Primary phone number"
+        meta:
+          pii: 'Phone'
       - name: email
         description: "Primary email address"
+        meta:
+          pii: 'Email'
       - name: client_segment
         description: "Wealth tier: UHNW, HNW, Mass Affluent, or Emerging"
       - name: service_model

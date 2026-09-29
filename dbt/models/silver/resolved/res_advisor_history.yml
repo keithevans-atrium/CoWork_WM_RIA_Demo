@@ -2,6 +2,8 @@ version: 2
 models:
   - name: res_advisor_history
     description: "Resolved advisor history. SCD2 temporal tracking of advisor attribute changes — role promotions, rep code changes, branch transfers, and activation/deactivation events."
+    config:
+      domain: 'Advisor'
     columns:
       - name: advisor_history_id
         description: "Surrogate key for this history row"

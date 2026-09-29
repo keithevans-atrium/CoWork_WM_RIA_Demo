@@ -2,6 +2,8 @@ version: 2
 models:
   - name: stg_cust_transaction
     description: "Staged SCD2 history of Custodian transaction records. Tracks historical trade activity including buys, sells, dividends, and fees with cancellation tracking."
+    config:
+      domain: 'Transaction'
     columns:
       - name: record_pk
         description: "MD5 surrogate key generated from transaction_id"

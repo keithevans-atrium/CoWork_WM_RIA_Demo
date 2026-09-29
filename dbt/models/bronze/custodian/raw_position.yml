@@ -2,6 +2,8 @@ version: 2
 models:
   - name: raw_position
     description: "Raw Custodian position records. Official custodian-reported security-level positions with quantities, prices, market values, and cost basis. Authoritative source for tax lot accounting and regulatory reporting."
+    config:
+      domain: 'Position'
     columns:
       - name: record_pk
         description: "MD5 surrogate key generated from position_id"

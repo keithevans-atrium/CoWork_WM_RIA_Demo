@@ -8,10 +8,10 @@ select
     fsc.advisor_id,
 
     fsc.opportunity_name                    as fsc_opportunity_name,
-    coalesce(fsc.opportunity_name)          as resolved_opportunity_name,
+    fsc.opportunity_name                     as resolved_opportunity_name,
 
     fsc.stage                               as fsc_stage,
-    coalesce(fsc.stage)                     as resolved_stage,
+    fsc.stage                                as resolved_stage,
 
     fsc.opportunity_type,
     fsc.amount,

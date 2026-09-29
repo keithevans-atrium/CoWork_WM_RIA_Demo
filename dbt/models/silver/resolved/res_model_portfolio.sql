@@ -6,7 +6,7 @@ select
     perf.model_id,
 
     perf.model_name                         as perf_model_name,
-    coalesce(perf.model_name)               as resolved_model_name,
+    perf.model_name                          as resolved_model_name,
 
     perf.model_description,
     perf.risk_profile,

@@ -2,6 +2,8 @@ version: 2
 models:
   - name: raw_financial_account
     description: "Raw Salesforce FSC Financial Account records. Represents investment accounts (IRA, brokerage, trust, etc.) held at custodians. Links clients to their custodial and performance-tracked accounts via financial_account_number."
+    config:
+      domain: 'Account'
     columns:
       - name: record_pk
         description: "MD5 surrogate key generated from financial_account_id"

@@ -2,6 +2,8 @@ version: 2
 models:
   - name: res_position
     description: "Attribution-resolved position entity. Reconciles security-level holdings from Performance System and Custodian. Exposes each system's quantities, market values, and cost basis with resolved golden values. Performance System provides asset class/sector; Custodian provides authoritative cost basis."
+    config:
+      domain: 'Position'
     columns:
       - name: holding_id
         description: "Performance System holding identifier"

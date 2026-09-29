@@ -26,7 +26,7 @@ select
 
     -- fee_type: Custodian only
     cust_fee.fee_type                       as cust_fee_type,
-    coalesce(cust_fee.fee_type)             as resolved_fee_type,
+    cust_fee.fee_type                        as resolved_fee_type,
 
     -- fee_rate: Custodian vs FSC
     cust_fee.fee_rate                       as cust_fee_rate,
@@ -35,11 +35,11 @@ select
 
     -- fee_amount: Custodian only
     cust_fee.fee_amount                     as cust_fee_amount,
-    coalesce(cust_fee.fee_amount)           as resolved_fee_amount,
+    cust_fee.fee_amount                      as resolved_fee_amount,
 
     -- billable_aum: Custodian only
     cust_fee.billable_aum                   as cust_billable_aum,
-    coalesce(cust_fee.billable_aum)         as resolved_billable_aum,
+    cust_fee.billable_aum                    as resolved_billable_aum,
 
     -- billing period
     cust_fee.billing_period_start,
@@ -48,7 +48,7 @@ select
 
     -- status: Custodian only
     cust_fee.status                         as cust_fee_status,
-    coalesce(cust_fee.status)               as resolved_fee_status,
+    cust_fee.status                          as resolved_fee_status,
 
     -- custodian context
     cust_acct.custodian_code                as cust_custodian_code,

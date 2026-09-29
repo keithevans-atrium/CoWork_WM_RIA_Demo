@@ -40,7 +40,7 @@ select
 
     -- price: Custodian is source of truth
     cust.price                              as cust_price,
-    coalesce(cust.price)                    as resolved_price,
+    cust.price                               as resolved_price,
 
     -- market_value: Performance vs Custodian
     perf.market_value                       as perf_market_value,

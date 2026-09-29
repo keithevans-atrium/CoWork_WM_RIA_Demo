@@ -2,6 +2,8 @@ version: 2
 models:
   - name: res_team
     description: "Attribution-resolved team entity. Single-source from FSC Advisor Team with resolved golden values for team name, lead, branch, and region."
+    config:
+      domain: 'Team'
     columns:
       - name: team_id
         description: "Salesforce Team ID"

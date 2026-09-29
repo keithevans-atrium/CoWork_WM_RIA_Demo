@@ -2,6 +2,8 @@ version: 2
 models:
   - name: stg_perf_portfolio_return
     description: "Staged SCD2 history of Performance System portfolio return records. Tracks historical return snapshots across multiple periods with benchmark comparisons."
+    config:
+      domain: 'Return'
     columns:
       - name: record_pk
         description: "MD5 surrogate key generated from return_id"

@@ -2,6 +2,8 @@ version: 2
 models:
   - name: res_client_account
     description: "Resolved client-to-account relationship. Temporal M:N mapping between clients and financial accounts with ownership details. Supports effective dating for tracking account ownership changes over time."
+    config:
+      domain: 'Client'
     columns:
       - name: client_account_id
         description: "Surrogate key for this client-account relationship"

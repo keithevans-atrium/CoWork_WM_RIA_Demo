@@ -2,6 +2,8 @@ version: 2
 models:
   - name: raw_portfolio_return
     description: "Raw Performance System portfolio return records. Contains time-weighted return calculations across multiple periods (MTD, QTD, YTD, 1/3/5-year, ITD) alongside benchmark comparisons. One row per account per reporting date."
+    config:
+      domain: 'Return'
     columns:
       - name: record_pk
         description: "MD5 surrogate key generated from return_id"

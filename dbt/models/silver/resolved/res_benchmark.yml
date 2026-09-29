@@ -2,6 +2,8 @@ version: 2
 models:
   - name: res_benchmark
     description: "Attribution-resolved benchmark entity. Single-source from Performance System with resolved golden values for benchmark name, ticker, and type."
+    config:
+      domain: 'Benchmark'
     columns:
       - name: benchmark_id
         description: "Unique benchmark identifier from Performance System"

@@ -2,6 +2,8 @@ version: 2
 models:
   - name: res_model_portfolio
     description: "Attribution-resolved model portfolio entity. Single-source from Performance System. Contains model definitions including risk profile, target asset allocation percentages, and benchmark assignments."
+    config:
+      domain: 'Model Portfolio'
     columns:
       - name: model_id
         description: "Model portfolio identifier from Performance System"

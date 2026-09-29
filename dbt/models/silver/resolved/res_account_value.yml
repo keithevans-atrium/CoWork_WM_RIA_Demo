@@ -2,6 +2,8 @@ version: 2
 models:
   - name: res_account_value
     description: "Attribution-resolved account value entity. Merges FSC Financial Account, Performance System account, and Custodian account into a unified investment account view. Reconciles balances, fees, statuses, and operational details across all three systems."
+    config:
+      domain: 'Account'
     columns:
       - name: financial_account_id
         description: "Salesforce Financial Account ID"

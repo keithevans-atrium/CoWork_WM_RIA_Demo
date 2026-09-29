@@ -3,7 +3,6 @@ select
     account_id as client_id,
     client_segment,
     service_model,
-    risk_tolerance,
     billing_state as state,
     is_active,
     version_number,

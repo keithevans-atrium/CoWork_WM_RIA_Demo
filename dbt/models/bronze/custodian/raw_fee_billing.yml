@@ -2,6 +2,8 @@ version: 2
 models:
   - name: raw_fee_billing
     description: "Raw Custodian fee billing records. Advisory fee calculations per billing period — billable AUM, fee rates, computed amounts, and debit dates. Used for revenue recognition, fee reconciliation, and billing disputes."
+    config:
+      domain: 'Fee'
     columns:
       - name: record_pk
         description: "MD5 surrogate key generated from fee_id"

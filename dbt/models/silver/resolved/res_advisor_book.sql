@@ -35,11 +35,11 @@ select
 
     -- email: FSC only
     fsc_advisor.email                       as fsc_email,
-    coalesce(fsc_advisor.email)             as resolved_email,
+    fsc_advisor.email                        as resolved_email,
 
     -- role: FSC only
     fsc_advisor.role                        as fsc_role,
-    coalesce(fsc_advisor.role)              as resolved_role,
+    fsc_advisor.role                         as resolved_role,
 
     -- crd_number: FSC only
     fsc_advisor.crd_number,
@@ -52,7 +52,7 @@ select
     -- branch: FSC vs Custodian
     fsc_advisor.branch_name                 as fsc_branch_name,
     cust_reps.branch_code                   as cust_branch_code,
-    coalesce(fsc_advisor.branch_name)       as resolved_branch,
+    fsc_advisor.branch_name                  as resolved_branch,
 
     -- custodian linkage
     cust_reps.custodian_code,

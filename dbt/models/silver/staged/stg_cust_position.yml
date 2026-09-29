@@ -2,6 +2,8 @@ version: 2
 models:
   - name: stg_cust_position
     description: "Staged SCD2 history of Custodian position records. Tracks historical security-level positions with quantities, prices, market values, and cost basis over time."
+    config:
+      domain: 'Position'
     columns:
       - name: record_pk
         description: "MD5 surrogate key generated from position_id"

@@ -18,21 +18,26 @@ vars:
   source_database: KEVANS_WH_RIA
   target_database: KEVANS_WH_RIA_AI_READY
 
+on-run-start:
+  - "{{ create_tags() }}"
+
 models:
   cowork_wm_ria:
+    +post-hook:
+      - "{{ apply_tags() }}"
     bronze:
-      +materialized: view
+      +materialized: table
       +schema: BRONZE
     silver:
       staged:
         +materialized: table
-        +schema: SILVER
+        +schema: SILVER_STAGED
       resolved:
         +materialized: table
-        +schema: SILVER
+        +schema: SILVER_RESOLVED
       canonical:
         +materialized: table
-        +schema: SILVER
+        +schema: SILVER_CANONICAL
     gold:
       cortex_ready:
         dims:

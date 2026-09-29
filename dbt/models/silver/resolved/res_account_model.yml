@@ -2,6 +2,8 @@ version: 2
 models:
   - name: res_account_model
     description: "Resolved account-to-model portfolio relationship. Temporal mapping tracking which model portfolio is assigned to each investment account. Effective dating captures model changes over time."
+    config:
+      domain: 'Account'
     columns:
       - name: account_model_id
         description: "Surrogate key for this account-model assignment"

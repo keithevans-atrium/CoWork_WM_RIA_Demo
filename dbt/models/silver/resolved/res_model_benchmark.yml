@@ -2,6 +2,8 @@ version: 2
 models:
   - name: res_model_benchmark
     description: "Resolved model-to-benchmark relationship. Temporal mapping tracking which benchmark is assigned to each model portfolio. Effective dating captures benchmark reassignment over time."
+    config:
+      domain: 'Model Portfolio'
     columns:
       - name: model_benchmark_id
         description: "Surrogate key for this model-benchmark assignment"

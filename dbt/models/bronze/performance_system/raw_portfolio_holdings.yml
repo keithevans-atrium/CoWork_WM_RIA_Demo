@@ -2,6 +2,8 @@ version: 2
 models:
   - name: raw_portfolio_holdings
     description: "Raw Performance System portfolio holdings records. Point-in-time security-level positions with market values, cost basis, and unrealized gains. Used for asset allocation analysis, sector exposure, and portfolio construction reporting."
+    config:
+      domain: 'Position'
     columns:
       - name: record_pk
         description: "MD5 surrogate key generated from holding_id"

@@ -2,6 +2,8 @@ version: 2
 models:
   - name: res_client
     description: "Attribution-resolved client entity. Combines Salesforce FSC Account/Contact, Performance System account, and Custodian account into a single client record. Exposes each source system's attribute values side by side (fsc_, perf_, cust_ prefixes) with resolved_* golden values using priority-based coalesce. match_status indicates cross-system linkage quality."
+    config:
+      domain: 'Client'
     columns:
       - name: account_id
         description: "Salesforce Account ID. Primary identifier from FSC."
@@ -10,46 +12,88 @@ models:
         description: "Custodian account number. Cross-system join key linking FSC, Performance, and Custodian."
       - name: fsc_first_name
         description: "First name from Salesforce FSC Contact"
+        meta:
+          pii: 'Name'
       - name: perf_first_name
         description: "First name from Performance System (NULL — not stored in perf)"
+        meta:
+          pii: 'Name'
       - name: cust_first_name
         description: "First name from Custodian (NULL — not stored in custodian)"
+        meta:
+          pii: 'Name'
       - name: resolved_first_name
         description: "Golden first name: coalesce(fsc, perf, cust)"
+        meta:
+          pii: 'Name'
       - name: fsc_last_name
         description: "Last name from Salesforce FSC Contact"
+        meta:
+          pii: 'Name'
       - name: perf_last_name
         description: "Last name from Performance System (NULL)"
+        meta:
+          pii: 'Name'
       - name: cust_last_name
         description: "Last name from Custodian (NULL)"
+        meta:
+          pii: 'Name'
       - name: resolved_last_name
         description: "Golden last name: coalesce(fsc, perf, cust)"
+        meta:
+          pii: 'Name'
       - name: fsc_contact_email
         description: "Email from FSC Contact record"
+        meta:
+          pii: 'Email'
       - name: fsc_account_email
         description: "Email from FSC Account record"
+        meta:
+          pii: 'Email'
       - name: resolved_email
         description: "Golden email: coalesce(contact email, account email)"
+        meta:
+          pii: 'Email'
       - name: fsc_contact_phone
         description: "Phone from FSC Contact record"
+        meta:
+          pii: 'Phone'
       - name: fsc_account_phone
         description: "Phone from FSC Account record"
+        meta:
+          pii: 'Phone'
       - name: resolved_phone
         description: "Golden phone: coalesce(contact phone, account phone)"
+        meta:
+          pii: 'Phone'
       - name: fsc_billing_state
         description: "State from FSC Account billing address"
+        meta:
+          pii: 'Address'
       - name: fsc_mailing_state
         description: "State from FSC Contact mailing address"
+        meta:
+          pii: 'Address'
       - name: resolved_state
         description: "Golden state: coalesce(billing, mailing)"
+        meta:
+          pii: 'Address'
       - name: fsc_city
         description: "City from FSC Account billing address"
+        meta:
+          pii: 'Address'
       - name: resolved_city
         description: "Golden city"
+        meta:
+          pii: 'Address'
       - name: fsc_zip
         description: "ZIP from FSC Account billing address"
+        meta:
+          pii: 'Address'
       - name: resolved_zip
         description: "Golden ZIP code"
+        meta:
+          pii: 'Address'
       - name: fsc_account_name
         description: "Account name from Salesforce FSC"
       - name: cust_account_name
@@ -82,6 +126,8 @@ models:
         description: "Investment knowledge level from FSC Contact"
       - name: date_of_birth
         description: "Client date of birth from FSC Contact"
+        meta:
+          pii: 'Date of Birth'
       - name: employment_status
         description: "Employment status from FSC Contact"
       - name: occupation

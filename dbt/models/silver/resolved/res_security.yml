@@ -2,6 +2,8 @@ version: 2
 models:
   - name: res_security
     description: "Attribution-resolved security master entity. Reconciles security identifiers (ticker, CUSIP, name) from Performance System and Custodian. Adds asset class, sector, and security type classifications."
+    config:
+      domain: 'Security'
     columns:
       - name: security_id
         description: "Performance System internal security identifier"

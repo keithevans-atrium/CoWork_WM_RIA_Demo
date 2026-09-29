@@ -2,6 +2,8 @@ version: 2
 models:
   - name: res_transaction
     description: "Attribution-resolved transaction entity. Enriches Custodian transaction records with FSC client context (account name, segment, advisor). Exposes custodian-source values alongside resolved golden values for transaction type, security identifiers, and descriptions."
+    config:
+      domain: 'Transaction'
     columns:
       - name: transaction_id
         description: "Custodian's unique transaction identifier"

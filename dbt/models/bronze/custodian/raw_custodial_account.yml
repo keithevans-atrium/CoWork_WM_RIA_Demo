@@ -2,6 +2,8 @@ version: 2
 models:
   - name: raw_custodial_account
     description: "Raw Custodian account records. Represents the custodian's official view of investment accounts — registration details, rep codes, margin approvals, and options levels. Joined to FSC and Performance via account_number."
+    config:
+      domain: 'Account'
     columns:
       - name: record_pk
         description: "MD5 surrogate key generated from custodial_account_id"
@@ -17,6 +19,8 @@ models:
         description: "Legal registration: Individual, Joint, Trust, or Custodial"
       - name: tax_id_last_four
         description: "Last four digits of the account's tax ID (SSN or EIN) for verification"
+        meta:
+          pii: 'Tax ID'
       - name: custodian_code
         description: "Custodian identifier: SCHWAB, PERSHING, or FIDELITY"
       - name: rep_code

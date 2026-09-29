@@ -2,6 +2,8 @@ version: 2
 models:
   - name: res_advisor_team
     description: "Resolved advisor-to-team relationship. Temporal M:N mapping between advisors and teams. Tracks role within team (Lead, Member, Support) with effective dating."
+    config:
+      domain: 'Advisor'
     columns:
       - name: advisor_team_id
         description: "Surrogate key for this advisor-team relationship"

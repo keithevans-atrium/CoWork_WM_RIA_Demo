@@ -2,6 +2,8 @@ version: 2
 models:
   - name: res_account_history
     description: "Resolved account history. SCD2 temporal tracking of investment account changes — market value fluctuations, status transitions, fee schedule adjustments, and model portfolio reassignments."
+    config:
+      domain: 'Account'
     columns:
       - name: account_history_id
         description: "Surrogate key for this history row"

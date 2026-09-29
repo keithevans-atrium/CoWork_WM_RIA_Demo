@@ -2,6 +2,8 @@ version: 2
 models:
   - name: res_position_history
     description: "Resolved position history. SCD2 temporal tracking of security-level position changes — quantity adjustments, market value fluctuations, cost basis updates, and unrealized gain/loss movements over time."
+    config:
+      domain: 'Position'
     columns:
       - name: position_history_id
         description: "Surrogate key for this history row"
