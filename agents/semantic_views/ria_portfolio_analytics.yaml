@@ -1,0 +1,701 @@
+name: RIA_PORTFOLIO_ANALYTICS
+description: 'RIA Portfolio Analytics semantic view for wealth management. Covers client demographics and segmentation, advisor book of business, investment account details, security reference data, portfolio
+  performance returns with benchmark comparison, and current account valuations including holdings and model allocations. Designed for RIA compliance, client reporting, and advisor productivity analysis.
+
+  '
+tables:
+- name: dim_client
+  base_table:
+    database: KEVANS_WH_RIA_AI_READY
+    schema: GOLD
+    table: DIM_CLIENT
+  description: 'Client dimension. One row per client household or individual with demographics, wealth segmentation, contact information, risk profile, and primary advisor linkage.
+
+    '
+  primary_key:
+    columns:
+    - client_id
+  dimensions:
+  - name: client_id
+    expr: CLIENT_ID
+    data_type: VARCHAR
+    description: Unique client identifier from Salesforce FSC
+    unique: true
+  - name: client_name
+    expr: CLIENT_NAME
+    data_type: VARCHAR
+    description: Full name of the client
+  - name: first_name
+    expr: FIRST_NAME
+    data_type: VARCHAR
+    description: Client first name
+  - name: last_name
+    expr: LAST_NAME
+    data_type: VARCHAR
+    description: Client last name
+  - name: email
+    expr: EMAIL
+    data_type: VARCHAR
+    description: Client email address
+  - name: phone
+    expr: PHONE
+    data_type: VARCHAR
+    description: Client phone number
+  - name: state
+    expr: STATE
+    data_type: VARCHAR
+    description: Client state of residence
+  - name: city
+    expr: CITY
+    data_type: VARCHAR
+    description: Client city of residence
+  - name: zip
+    expr: ZIP
+    data_type: VARCHAR
+    description: Client zip code
+  - name: account_type
+    expr: ACCOUNT_TYPE
+    data_type: VARCHAR
+    description: Account entity type such as Individual, Household, Joint, Trust, or Business
+  - name: client_segment
+    expr: CLIENT_SEGMENT
+    data_type: VARCHAR
+    description: Wealth segmentation tier such as HNW, UHNW, Mass Affluent, or Institutional
+  - name: service_model
+    expr: SERVICE_MODEL
+    data_type: VARCHAR
+    description: Service delivery tier assigned to the client
+  - name: risk_tolerance
+    expr: RISK_TOLERANCE
+    data_type: VARCHAR
+    description: Client risk tolerance profile such as Conservative, Moderate, or Aggressive
+  - name: investment_experience
+    expr: INVESTMENT_EXPERIENCE
+    data_type: VARCHAR
+    description: Client investment knowledge level
+  - name: date_of_birth
+    expr: DATE_OF_BIRTH
+    data_type: DATE
+    description: Client date of birth
+  - name: employment_status
+    expr: EMPLOYMENT_STATUS
+    data_type: VARCHAR
+    description: Client employment status
+  - name: occupation
+    expr: OCCUPATION
+    data_type: VARCHAR
+    description: Client occupation
+  - name: relationship_start_date
+    expr: RELATIONSHIP_START_DATE
+    data_type: DATE
+    description: Date the advisory relationship began
+  metrics:
+  - name: total_clients
+    expr: CLIENT_ID
+    data_type: NUMBER
+    description: Count of distinct clients
+    default_aggregation: count_distinct
+  - name: client_total_aum
+    expr: TOTAL_AUM
+    data_type: NUMBER
+    description: Total assets under management across all of the client accounts
+    default_aggregation: sum
+  - name: client_account_count
+    expr: ACCOUNT_COUNT
+    data_type: NUMBER
+    description: Number of financial accounts per client
+    default_aggregation: sum
+- name: dim_advisor
+  base_table:
+    database: KEVANS_WH_RIA_AI_READY
+    schema: GOLD
+    table: DIM_ADVISOR
+  description: 'Advisor dimension. One row per financial advisor with role, team assignment, region, credentials, and aggregate book metrics including client count and total AUM.
+
+    '
+  primary_key:
+    columns:
+    - advisor_id
+  dimensions:
+  - name: advisor_id
+    expr: ADVISOR_ID
+    data_type: VARCHAR
+    description: Unique advisor identifier from Salesforce FSC
+    unique: true
+  - name: advisor_name
+    expr: ADVISOR_NAME
+    data_type: VARCHAR
+    description: Full name of the financial advisor
+  - name: advisor_email
+    expr: EMAIL
+    data_type: VARCHAR
+    description: Advisor email address
+  - name: advisor_role
+    expr: ROLE
+    data_type: VARCHAR
+    description: Advisor role such as Lead Advisor or Senior Advisor
+  - name: crd_number
+    expr: CRD_NUMBER
+    data_type: VARCHAR
+    description: FINRA Central Registration Depository number
+  - name: rep_code
+    expr: REP_CODE
+    data_type: VARCHAR
+    description: Advisor rep code used across custodian platforms
+  - name: branch
+    expr: BRANCH
+    data_type: VARCHAR
+    description: Office branch name
+  - name: advisor_is_active
+    expr: IS_ACTIVE
+    data_type: BOOLEAN
+    description: Whether the advisor is currently active
+  - name: hire_date
+    expr: HIRE_DATE
+    data_type: DATE
+    description: Advisor hire date
+  - name: termination_date
+    expr: TERMINATION_DATE
+    data_type: DATE
+    description: Advisor termination date or NULL if active
+  - name: team_name
+    expr: TEAM_NAME
+    data_type: VARCHAR
+    description: Name of the advisory team
+  - name: region
+    expr: REGION
+    data_type: VARCHAR
+    description: Geographic region of the advisory team
+  metrics:
+  - name: total_advisors
+    expr: ADVISOR_ID
+    data_type: NUMBER
+    description: Count of distinct advisors
+    default_aggregation: count_distinct
+  - name: advisor_client_count
+    expr: CLIENT_COUNT
+    data_type: NUMBER
+    description: Number of active clients managed by the advisor
+    default_aggregation: sum
+  - name: advisor_total_aum
+    expr: TOTAL_AUM
+    data_type: NUMBER
+    description: Total assets under management across the advisor book of business
+    default_aggregation: sum
+- name: dim_account
+  base_table:
+    database: KEVANS_WH_RIA_AI_READY
+    schema: GOLD
+    table: DIM_ACCOUNT
+  description: 'Account dimension. One row per financial account with registration type, custodian, model portfolio assignment, fee schedule, and status.
+
+    '
+  primary_key:
+    columns:
+    - financial_account_id
+  dimensions:
+  - name: financial_account_id
+    expr: FINANCIAL_ACCOUNT_ID
+    data_type: VARCHAR
+    description: Unique financial account identifier
+    unique: true
+  - name: account_number
+    expr: ACCOUNT_NUMBER
+    data_type: VARCHAR
+    description: Custodian-assigned account number
+  - name: account_name
+    expr: ACCOUNT_NAME
+    data_type: VARCHAR
+    description: Display name of the account
+  - name: registration_type
+    expr: REGISTRATION_TYPE
+    data_type: VARCHAR
+    description: Legal registration type such as Individual, Joint, Trust, or Custodial
+  - name: dim_account_type
+    expr: ACCOUNT_TYPE
+    data_type: VARCHAR
+    description: Account type such as Brokerage, IRA, 401k, Trust
+  - name: account_status
+    expr: STATUS
+    data_type: VARCHAR
+    description: Current account status such as Open or Closed
+  - name: custodian_code
+    expr: CUSTODIAN_CODE
+    data_type: VARCHAR
+    description: Custodian platform code such as SCHW, PERS, or FIDL
+  - name: inception_date
+    expr: INCEPTION_DATE
+    data_type: DATE
+    description: Date the account was opened
+  - name: fee_schedule
+    expr: FEE_SCHEDULE
+    data_type: VARCHAR
+    description: Fee schedule tier such as Standard, Premium, or Custom
+  - name: model_id
+    expr: MODEL_ID
+    data_type: VARCHAR
+    description: Assigned model portfolio identifier
+  - name: account_is_discretionary
+    expr: IS_DISCRETIONARY
+    data_type: BOOLEAN
+    description: Whether the account has discretionary management authority
+  metrics:
+  - name: total_accounts
+    expr: FINANCIAL_ACCOUNT_ID
+    data_type: NUMBER
+    description: Count of distinct financial accounts
+    default_aggregation: count_distinct
+  - name: fee_rate
+    expr: FEE_RATE
+    data_type: NUMBER
+    description: Management fee rate as a decimal
+    default_aggregation: avg
+- name: dim_security
+  base_table:
+    database: KEVANS_WH_RIA_AI_READY
+    schema: GOLD
+    table: DIM_SECURITY
+  description: 'Security dimension. One row per traded security with ticker, CUSIP, ISIN, asset classification, exchange, issuer, expense ratio, and ESG flag.
+
+    '
+  primary_key:
+    columns:
+    - ticker
+  dimensions:
+  - name: ticker
+    expr: TICKER
+    data_type: VARCHAR
+    description: Ticker symbol
+    unique: true
+  - name: cusip
+    expr: CUSIP
+    data_type: VARCHAR
+    description: CUSIP identifier
+  - name: isin
+    expr: ISIN
+    data_type: VARCHAR
+    description: ISIN identifier
+  - name: security_name
+    expr: SECURITY_NAME
+    data_type: VARCHAR
+    description: Display name of the security
+  - name: asset_class
+    expr: ASSET_CLASS
+    data_type: VARCHAR
+    description: Asset class such as US Equity, Fixed Income, Alternatives, Cash
+  - name: sub_asset_class
+    expr: SUB_ASSET_CLASS
+    data_type: VARCHAR
+    description: Sub-asset class such as Large Cap Growth, Broad Market, Sector
+  - name: sector
+    expr: SECTOR
+    data_type: VARCHAR
+    description: Market sector such as Technology, Healthcare, Financials
+  - name: security_type
+    expr: SECURITY_TYPE
+    data_type: VARCHAR
+    description: Instrument type such as Equity, ETF, or Cash
+  - name: exchange
+    expr: EXCHANGE
+    data_type: VARCHAR
+    description: Primary exchange such as NYSE, NASDAQ, NYSE Arca
+  - name: issuer
+    expr: ISSUER
+    data_type: VARCHAR
+    description: Security issuer or fund manager
+  - name: country
+    expr: COUNTRY
+    data_type: VARCHAR
+    description: Country of domicile
+  - name: security_is_esg
+    expr: IS_ESG
+    data_type: BOOLEAN
+    description: Whether the security is ESG-screened
+  - name: risk_rating
+    expr: RISK_RATING
+    data_type: NUMBER
+    description: Risk rating from 1 (low) to 5 (high)
+  metrics:
+  - name: total_securities
+    expr: TICKER
+    data_type: NUMBER
+    description: Count of distinct securities
+    default_aggregation: count_distinct
+  - name: expense_ratio
+    expr: EXPENSE_RATIO
+    data_type: FLOAT
+    description: Annual expense ratio for ETFs and funds
+    default_aggregation: avg
+  - name: dividend_yield
+    expr: DIVIDEND_YIELD
+    data_type: FLOAT
+    description: Current dividend yield
+    default_aggregation: avg
+- name: fct_account_value
+  base_table:
+    database: KEVANS_WH_RIA_AI_READY
+    schema: GOLD
+    table: FCT_ACCOUNT_VALUE
+  description: 'Account value fact. Current snapshot per financial account with market value, model portfolio allocation targets, latest period returns and benchmark comparison, and aggregated holdings
+    summary including cost basis and unrealized gain/loss.
+
+    '
+  primary_key:
+    columns:
+    - financial_account_id
+  dimensions:
+  - name: fct_financial_account_id
+    expr: FINANCIAL_ACCOUNT_ID
+    data_type: VARCHAR
+    description: Financial account identifier foreign key
+  - name: fct_account_number
+    expr: ACCOUNT_NUMBER
+    data_type: VARCHAR
+    description: Custodian-assigned account number
+  - name: fct_client_id
+    expr: CLIENT_ID
+    data_type: VARCHAR
+    description: Client identifier foreign key
+  - name: fct_advisor_id
+    expr: ADVISOR_ID
+    data_type: VARCHAR
+    description: Advisor identifier foreign key
+  - name: fct_model_id
+    expr: MODEL_ID
+    data_type: VARCHAR
+    description: Model portfolio identifier
+  - name: model_name
+    expr: MODEL_NAME
+    data_type: VARCHAR
+    description: Display name of the assigned model portfolio
+  - name: risk_profile
+    expr: RISK_PROFILE
+    data_type: VARCHAR
+    description: Model risk profile such as Conservative, Moderate, Growth, or Aggressive
+  - name: fct_is_discretionary
+    expr: IS_DISCRETIONARY
+    data_type: BOOLEAN
+    description: Whether the account has discretionary authority
+  - name: benchmark_name
+    expr: BENCHMARK_NAME
+    data_type: VARCHAR
+    description: Name of the benchmark used for performance comparison
+  - name: return_as_of_date
+    expr: RETURN_AS_OF_DATE
+    data_type: DATE
+    description: Date of the most recent return calculation
+  - name: positions_as_of_date
+    expr: POSITIONS_AS_OF_DATE
+    data_type: DATE
+    description: Date of the most recent position snapshot
+  metrics:
+  - name: market_value
+    expr: MARKET_VALUE
+    data_type: NUMBER
+    description: Total market value of the account
+    default_aggregation: sum
+  - name: avg_market_value
+    expr: MARKET_VALUE
+    data_type: NUMBER
+    description: Average market value per account
+    default_aggregation: avg
+  - name: equity_target_pct
+    expr: EQUITY_TARGET_PCT
+    data_type: NUMBER
+    description: Model target equity allocation percentage
+    default_aggregation: avg
+  - name: fixed_income_target_pct
+    expr: FIXED_INCOME_TARGET_PCT
+    data_type: NUMBER
+    description: Model target fixed income allocation percentage
+    default_aggregation: avg
+  - name: alternative_target_pct
+    expr: ALTERNATIVE_TARGET_PCT
+    data_type: NUMBER
+    description: Model target alternative allocation percentage
+    default_aggregation: avg
+  - name: cash_target_pct
+    expr: CASH_TARGET_PCT
+    data_type: NUMBER
+    description: Model target cash allocation percentage
+    default_aggregation: avg
+  - name: mtd_return
+    expr: MTD_RETURN
+    data_type: NUMBER
+    description: Month-to-date portfolio return
+    default_aggregation: avg
+  - name: qtd_return
+    expr: QTD_RETURN
+    data_type: NUMBER
+    description: Quarter-to-date portfolio return
+    default_aggregation: avg
+  - name: ytd_return
+    expr: YTD_RETURN
+    data_type: NUMBER
+    description: Year-to-date portfolio return
+    default_aggregation: avg
+  - name: one_year_return
+    expr: ONE_YEAR_RETURN
+    data_type: NUMBER
+    description: Trailing 1-year portfolio return
+    default_aggregation: avg
+  - name: three_year_return
+    expr: THREE_YEAR_RETURN
+    data_type: NUMBER
+    description: Trailing 3-year annualized portfolio return
+    default_aggregation: avg
+  - name: five_year_return
+    expr: FIVE_YEAR_RETURN
+    data_type: NUMBER
+    description: Trailing 5-year annualized portfolio return
+    default_aggregation: avg
+  - name: mtd_excess_return
+    expr: MTD_EXCESS_RETURN
+    data_type: NUMBER
+    description: Month-to-date return minus benchmark return
+    default_aggregation: avg
+  - name: ytd_excess_return
+    expr: YTD_EXCESS_RETURN
+    data_type: NUMBER
+    description: Year-to-date return minus benchmark return
+    default_aggregation: avg
+  - name: one_year_excess_return
+    expr: ONE_YEAR_EXCESS_RETURN
+    data_type: NUMBER
+    description: Trailing 1-year return minus benchmark return
+    default_aggregation: avg
+  - name: holding_count
+    expr: HOLDING_COUNT
+    data_type: NUMBER
+    description: Number of distinct securities held in the account
+    default_aggregation: sum
+  - name: holdings_market_value
+    expr: HOLDINGS_MARKET_VALUE
+    data_type: NUMBER
+    description: Sum of all position market values
+    default_aggregation: sum
+  - name: holdings_cost_basis
+    expr: HOLDINGS_COST_BASIS
+    data_type: NUMBER
+    description: Sum of all position cost basis values
+    default_aggregation: sum
+  - name: total_unrealized_gain_loss
+    expr: TOTAL_UNREALIZED_GAIN_LOSS
+    data_type: NUMBER
+    description: Sum of unrealized gain or loss across all positions
+    default_aggregation: sum
+- name: fct_portfolio_return
+  base_table:
+    database: KEVANS_WH_RIA_AI_READY
+    schema: GOLD
+    table: FCT_PORTFOLIO_RETURN
+  description: 'Portfolio return fact. One row per account per month with portfolio returns at multiple horizons, benchmark comparison, and excess returns. Use this table for time-series analysis of portfolio
+    performance.
+
+    '
+  primary_key:
+    columns:
+    - return_key
+  dimensions:
+  - name: ret_account_number
+    expr: ACCOUNT_NUMBER
+    data_type: VARCHAR
+    description: Account number foreign key for joining to dim_account
+  - name: as_of_date
+    expr: AS_OF_DATE
+    data_type: DATE
+    description: Return period end date, typically month-end
+  - name: ret_client_id
+    expr: CLIENT_ID
+    data_type: VARCHAR
+    description: Client identifier foreign key
+  - name: ret_advisor_id
+    expr: ADVISOR_ID
+    data_type: VARCHAR
+    description: Advisor identifier foreign key
+  - name: ret_benchmark_name
+    expr: BENCHMARK_NAME
+    data_type: VARCHAR
+    description: Benchmark used for this return period
+  - name: return_method
+    expr: RETURN_METHOD
+    data_type: VARCHAR
+    description: Return calculation methodology such as TWR or IRR
+  - name: ret_client_segment
+    expr: CLIENT_SEGMENT
+    data_type: VARCHAR
+    description: Client wealth segment at the time of the return
+  metrics:
+  - name: ret_mtd_return
+    expr: MTD_RETURN
+    data_type: NUMBER
+    description: Month-to-date portfolio return
+    default_aggregation: avg
+  - name: ret_qtd_return
+    expr: QTD_RETURN
+    data_type: NUMBER
+    description: Quarter-to-date portfolio return
+    default_aggregation: avg
+  - name: ret_ytd_return
+    expr: YTD_RETURN
+    data_type: NUMBER
+    description: Year-to-date portfolio return
+    default_aggregation: avg
+  - name: ret_itd_return
+    expr: ITD_RETURN
+    data_type: NUMBER
+    description: Inception-to-date portfolio return
+    default_aggregation: avg
+  - name: ret_one_year_return
+    expr: ONE_YEAR_RETURN
+    data_type: NUMBER
+    description: Trailing 1-year portfolio return
+    default_aggregation: avg
+  - name: ret_three_year_return
+    expr: THREE_YEAR_RETURN
+    data_type: NUMBER
+    description: Trailing 3-year annualized portfolio return
+    default_aggregation: avg
+  - name: ret_five_year_return
+    expr: FIVE_YEAR_RETURN
+    data_type: NUMBER
+    description: Trailing 5-year annualized portfolio return
+    default_aggregation: avg
+  - name: ret_benchmark_mtd_return
+    expr: BENCHMARK_MTD_RETURN
+    data_type: NUMBER
+    description: Benchmark month-to-date return
+    default_aggregation: avg
+  - name: ret_benchmark_ytd_return
+    expr: BENCHMARK_YTD_RETURN
+    data_type: NUMBER
+    description: Benchmark year-to-date return
+    default_aggregation: avg
+  - name: ret_benchmark_one_year_return
+    expr: BENCHMARK_ONE_YEAR_RETURN
+    data_type: NUMBER
+    description: Benchmark trailing 1-year return
+    default_aggregation: avg
+  - name: ret_mtd_excess_return
+    expr: MTD_EXCESS_RETURN
+    data_type: NUMBER
+    description: Month-to-date alpha vs benchmark
+    default_aggregation: avg
+  - name: ret_ytd_excess_return
+    expr: YTD_EXCESS_RETURN
+    data_type: NUMBER
+    description: Year-to-date alpha vs benchmark
+    default_aggregation: avg
+  - name: ret_one_year_excess_return
+    expr: ONE_YEAR_EXCESS_RETURN
+    data_type: NUMBER
+    description: Trailing 1-year alpha vs benchmark
+    default_aggregation: avg
+relationships:
+- name: fct_account_value_to_dim_client
+  left_table: fct_account_value
+  right_table: dim_client
+  relationship_columns:
+  - left_column: fct_client_id
+    right_column: client_id
+  join_type: left_outer
+  relationship_type: many_to_one
+- name: fct_account_value_to_dim_advisor
+  left_table: fct_account_value
+  right_table: dim_advisor
+  relationship_columns:
+  - left_column: fct_advisor_id
+    right_column: advisor_id
+  join_type: left_outer
+  relationship_type: many_to_one
+- name: fct_account_value_to_dim_account
+  left_table: fct_account_value
+  right_table: dim_account
+  relationship_columns:
+  - left_column: fct_financial_account_id
+    right_column: financial_account_id
+  join_type: left_outer
+  relationship_type: many_to_one
+- name: fct_portfolio_return_to_dim_account
+  left_table: fct_portfolio_return
+  right_table: dim_account
+  relationship_columns:
+  - left_column: ret_account_number
+    right_column: account_number
+  join_type: left_outer
+  relationship_type: many_to_one
+- name: fct_portfolio_return_to_dim_client
+  left_table: fct_portfolio_return
+  right_table: dim_client
+  relationship_columns:
+  - left_column: ret_client_id
+    right_column: client_id
+  join_type: left_outer
+  relationship_type: many_to_one
+- name: fct_portfolio_return_to_dim_advisor
+  left_table: fct_portfolio_return
+  right_table: dim_advisor
+  relationship_columns:
+  - left_column: ret_advisor_id
+    right_column: advisor_id
+  join_type: left_outer
+  relationship_type: many_to_one
+- name: dim_client_to_dim_advisor
+  left_table: dim_client
+  right_table: dim_advisor
+  relationship_columns:
+  - left_column: advisor_id
+    right_column: advisor_id
+  join_type: left_outer
+  relationship_type: many_to_one
+verified_queries:
+- name: top_clients_by_aum
+  question: Who are the top 10 clients by market value?
+  sql: 'SELECT c.client_name, c.client_segment, f.market_value, f.ytd_return, f.model_name
+
+    FROM KEVANS_WH_RIA_AI_READY.GOLD.FCT_ACCOUNT_VALUE f
+
+    JOIN KEVANS_WH_RIA_AI_READY.GOLD.DIM_CLIENT c ON c.client_id = f.client_id
+
+    ORDER BY f.market_value DESC NULLS LAST
+
+    LIMIT 10
+
+    '
+  verified_at: 1727600000
+  verified_by: keith.evans@atrium.ai
+- name: advisors_ranked_by_aum
+  question: Show all advisors ranked by total AUM
+  sql: 'SELECT advisor_name, team_name, region, client_count, total_aum
+
+    FROM KEVANS_WH_RIA_AI_READY.GOLD.DIM_ADVISOR
+
+    ORDER BY total_aum DESC
+
+    '
+  verified_at: 1727600000
+  verified_by: keith.evans@atrium.ai
+- name: aum_by_client_segment
+  question: What is the total AUM and average YTD return by client segment?
+  sql: "SELECT c.client_segment,\n       COUNT(DISTINCT c.client_id) AS client_count,\n       SUM(f.market_value) AS total_aum,\n       AVG(f.ytd_return) AS avg_ytd_return\nFROM KEVANS_WH_RIA_AI_READY.GOLD.FCT_ACCOUNT_VALUE\
+    \ f\nJOIN KEVANS_WH_RIA_AI_READY.GOLD.DIM_CLIENT c ON c.client_id = f.client_id\nGROUP BY c.client_segment\nORDER BY total_aum DESC\n"
+  verified_at: 1727600000
+  verified_by: keith.evans@atrium.ai
+- name: monthly_return_vs_benchmark
+  question: Show me the monthly average portfolio return vs benchmark over time
+  sql: "SELECT r.as_of_date,\n       AVG(r.mtd_return) AS avg_mtd_return,\n       AVG(r.benchmark_mtd_return) AS avg_benchmark_return,\n       AVG(r.mtd_excess_return) AS avg_excess_return\nFROM KEVANS_WH_RIA_AI_READY.GOLD.FCT_PORTFOLIO_RETURN\
+    \ r\nGROUP BY r.as_of_date\nORDER BY r.as_of_date\n"
+  verified_at: 1727600000
+  verified_by: keith.evans@atrium.ai
+- name: performance_by_risk_profile
+  question: How are accounts performing by risk profile?
+  sql: "SELECT f.risk_profile,\n       COUNT(*) AS account_count,\n       AVG(f.market_value) AS avg_market_value,\n       AVG(f.ytd_return) AS avg_ytd_return,\n       AVG(f.ytd_excess_return) AS avg_excess\n\
+    FROM KEVANS_WH_RIA_AI_READY.GOLD.FCT_ACCOUNT_VALUE f\nGROUP BY f.risk_profile\nORDER BY avg_market_value DESC\n"
+  verified_at: 1727600000
+  verified_by: keith.evans@atrium.ai
+- name: worst_ytd_accounts
+  question: Which accounts have the worst YTD performance?
+  sql: "SELECT a.account_name, a.registration_type, a.custodian_code,\n       f.market_value, f.ytd_return, f.holding_count\nFROM KEVANS_WH_RIA_AI_READY.GOLD.FCT_ACCOUNT_VALUE f\nJOIN KEVANS_WH_RIA_AI_READY.GOLD.DIM_ACCOUNT\
+    \ a ON a.financial_account_id = f.financial_account_id\nWHERE f.ytd_return < 0\nORDER BY f.ytd_return ASC\nLIMIT 20\n"
+  verified_at: 1727600000
+  verified_by: keith.evans@atrium.ai

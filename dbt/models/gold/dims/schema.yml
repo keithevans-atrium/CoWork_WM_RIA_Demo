@@ -13,6 +13,31 @@ models:
         tests: [unique, not_null]
       - name: client_name
         description: "Full name"
+        meta: { pii: 'Name' }
+      - name: first_name
+        description: "Client first name"
+        meta: { pii: 'Name' }
+      - name: last_name
+        description: "Client last name"
+        meta: { pii: 'Name' }
+      - name: email
+        description: "Client email address"
+        meta: { pii: 'Email' }
+      - name: phone
+        description: "Client phone number"
+        meta: { pii: 'Phone' }
+      - name: state
+        description: "Client state of residence"
+        meta: { pii: 'Address' }
+      - name: city
+        description: "Client city"
+        meta: { pii: 'Address' }
+      - name: zip
+        description: "Client zip code"
+        meta: { pii: 'Address' }
+      - name: date_of_birth
+        description: "Client date of birth"
+        meta: { pii: 'Date of Birth' }
       - name: client_segment
         description: "HNW, UHNW, Mass Affluent, Institutional"
       - name: service_model
@@ -37,6 +62,19 @@ models:
         tests: [unique, not_null]
       - name: advisor_name
         description: "Full name"
+        meta: { pii: 'Name' }
+      - name: first_name
+        description: "Advisor first name"
+        meta: { pii: 'Name' }
+      - name: last_name
+        description: "Advisor last name"
+        meta: { pii: 'Name' }
+      - name: email
+        description: "Advisor email"
+        meta: { pii: 'Email' }
+      - name: crd_number
+        description: "FINRA CRD number"
+        meta: { pii: 'Tax ID' }
       - name: role
         description: "Advisor role"
       - name: team_name
@@ -63,6 +101,7 @@ models:
         description: "Custodian account number"
       - name: account_name
         description: "Display name"
+        meta: { pii: 'Name' }
       - name: registration_type
         description: "Individual, Joint, Trust, Custodial"
       - name: account_type
